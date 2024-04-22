@@ -1,0 +1,168 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal2 {
+  width: 50px;
+  /* height: 100%; */
+  background: red(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  position: fixed;
+  background: white;
+  /* width: 80%; */
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-main2 {
+  padding: 30px;
+  position: fixed;
+  background: white;
+  /* width: 80%; */
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-main3 {
+  padding: 30px;
+  position: fixed;
+  background: white;
+  width: 50%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.display-block {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  /* max-width: 100%; */
+  /* display: none; */
+  /* position: absolute; */
+  /* top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  border: 16px solid orange;
+  background-color: white; */
+  z-index: 1002;
+  overflow: auto;
+}
+
+.display-none {
+  display: none;
+}
+
+.image {
+  max-width: 320px;
+  height: auto;
+  /* transform: translate(-50%, -50%); */
+}
+
+/* .content img {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  cursor: pointer;
+} */
+
+.click img {
+  position: absolute;
+  opacity: 0;
+  background-color: aliceblue;
+  top: 448px;
+  right: 19px;
+  cursor: pointer;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  /* ทำให้คอนเทนเนอร์เป็นพื้นที่ของเนื้อหาเท่านั้น */
+}
+
+.bottom-right-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  /* ตั้งค่าขอบของปุ่ม */
+  padding: 4px 47px;
+  /* ตั้งค่าขนาดของปุ่ม */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+
+}
+
+.top-right-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  /* ตั้งค่าขอบของปุ่ม */
+
+  /* background-color: #3498db; */
+  /* color: #fff; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-main2 {
+  padding:11px;
+  font-size: 9px;
+  position: fixed;
+  background: white;
+  width: 96%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* line-height: 9px; */
+}
+
+/* .form-group input {
+  height: 8px;
+} */
+@media only screen and (min-width: 768px) {
+  .image {
+    max-width: 500px;
+    height: auto;
+    /* transform: translate(-50%, -50%); */
+  }
+  .modal-main2 {
+    padding: 30px;
+    position: fixed;
+    font-size: 12px;
+    background: white;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  
+}

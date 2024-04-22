@@ -1,0 +1,30 @@
+.all-row-register {
+  background: url("/assets/img/mainbg.jpg") no-repeat center bottom;
+  padding:10% 10%;
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 25px;
+  
+  /* .image-side-register {
+    width: 35%;
+    background: url("/assets/img/loginprofile.jpg") no-repeat center top;
+    background-size: cover;
+  } */
+
+  .form-side-register {
+    padding: 10px;
+  }
+
+}
+
+.form-group1{
+  width: 47%;
+}
+
+.form-group2{
+  width: 100%;
+}

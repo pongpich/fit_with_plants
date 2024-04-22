@@ -1,0 +1,32 @@
+.paymentLabel {
+  position: absolute; 
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.paymentRadioButton {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 42%; 
+  transform: translate(-50%, -50%)
+}
+
+.paymentCard {
+  height: 70px;
+  cursor: pointer;
+}
+
+span { 
+  font-size: 1.25rem;
+}
+span b { 
+  font-size: 80%; 
+  font-weight: normal;
+  color: #828282;
+}
+
+.pay-slip-Img {
+  display: none;
+}

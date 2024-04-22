@@ -1,0 +1,40 @@
+.all-row-login {
+  background: url("/assets/img/group37321.png") no-repeat center bottom;
+  padding:10% 10%;
+  background-size: cover; /* สำหรับปรับขนาด background ให้เต็มพื้นที่ */
+
+}
+
+.auth-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.6); /* ใช้ alpha channel เพื่อทำให้โปร่งใส */
+
+  padding: 25px;
+
+  
+  // .image-side-login {
+  //   width: 40%;
+  //   background-size: cover;
+  //   padding: 80px 40px;
+  // }
+
+  .form-side-login {
+    padding: 10px;
+  }
+
+}
+
+.btn-login{
+  width: 100%;
+}
+
+.underline-on-hover:hover {
+  text-decoration: underline;
+}
+.welcome-program {
+  text-align: center;
+  font-size: 24px;
+  color: #000000;
+}

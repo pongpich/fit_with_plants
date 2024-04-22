@@ -1,0 +1,26 @@
+/* .all-row {
+  background: url("/assets/img/mainbg.jpg") no-repeat center bottom;
+} */
+
+.auth-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 25px;
+  
+ /*  .image-side-login {
+    width: 40%;
+    background-size: cover;
+    padding: 80px 40px;
+  } */
+
+  .form-side {
+    padding: 100px;
+  }
+
+}
+
+.btn-login{
+  width: 100%;
+}
