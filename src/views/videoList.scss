@@ -223,7 +223,7 @@
   top:20px;
   width:30px;
   height:30px;
-  background:#F45197;
+  background:#059669;
   color:#fff;
   font-size:25px;
   font-weight:600;
@@ -283,7 +283,7 @@ button {
 .randomVideoBtn {
   margin-left: -30px;
   font-size: 18px;  
-  background-color: #F45197;
+  background-color: #059669;
   color: white;
   border: 0px;
   cursor: pointer;
@@ -378,7 +378,7 @@ button {
   top: 50%; 
   left: 65%; 
   transform: translate(-50%,0%);
-  border-left: 0.1px solid #F45197;
+  border-left: 0.1px solid #059669;
   height: 114%;
 }
 
@@ -391,10 +391,10 @@ button {
   width: 40px;
   z-index: 1;
   background-color:white;
-  color: #F45197;
+  color: #059669;
   border-style: solid;
   border-width: 0.1px;
-  border-color: #F45197;
+  border-color: #059669;
   border-radius: 50%;
   display: inline-block;
 }
@@ -404,7 +404,7 @@ button {
   top: 30%;
   left: 65%;
   transform: translate(-50%,-50%);
-  color: #F45197;
+  color: #059669;
 }
 
 .lastVideoEndText {
@@ -412,7 +412,7 @@ button {
   bottom: 20%;
   left: 65%;
   transform: translate(-50%,-50%);
-  color: #F45197;
+  color: #059669;
 }
 
 @media (max-width: 769px) {
@@ -486,7 +486,7 @@ button {
 }
 
 input.danger:checked + .slider {
-  background-color: #F45197;
+  background-color: #059669;
 }
 
 input:focus + .slider {
@@ -515,7 +515,7 @@ input:checked + .slider:before {
   margin: 0px 10% 20px;
 }
 .hrPink {
-  border-bottom: 1px solid #E25E96;
+  border-bottom: 1px solid #059669;
   width: 80%;
   padding: 0 10%;
   margin: 0px 10% 20px;
@@ -594,14 +594,14 @@ input:checked + .slider:before {
   
 }
 .box-random {
-  color: #E25E96;
+  color: #059669;
   width: auto;
   height: auto;
   max-height: 44px;
   align-items: center;
   justify-content: center;
   display: flex;
-  border: 1px solid #E25E96;
+  border: 1px solid #059669;
   border-radius: 50px;
   padding: 10px 24px;
   margin-right: 16px;
@@ -658,7 +658,7 @@ color: #000;
   text-align: center;
   font-size: 24px;
   font-weight: 600;
-  color: #EF60A3;
+  color: #059669;
 }
 .snack-point {
   margin-top: -16px;
@@ -671,7 +671,7 @@ color: #000;
   font-size: 16px;
   width: 120px;
   height: 44px;
-  background-color: #EF60A3;
+  background-color: #059669;
   color: #FFFFFF;
   display: flex;
   justify-content: center;

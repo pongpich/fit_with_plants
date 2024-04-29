@@ -407,7 +407,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-        statusPostDailyWeighChallenge &&
+      statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -499,7 +499,7 @@ class VideoList extends Component {
       if (!this.state.autoPlayCheck) {
         this.state.selectedVDO = null;
       }
-      
+
     }
     if (
       user &&
@@ -963,7 +963,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-        completeVideoPlayPercentage
+      completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1746,8 +1746,8 @@ class VideoList extends Component {
                         item.category !== "Challenge" &&
                         ((item.category === "Warm Up" ||
                           item.category === "Cool Down") &&
-                        member_info &&
-                        member_info.program_level === "bfr_lv1" ? (
+                          member_info &&
+                          member_info.program_level === "bfr_lv1" ? (
                           <div></div>
                         ) : (
                           <div
@@ -2667,17 +2667,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                        this.setState({
-                          step4WeeksPrompt: step4WeeksPrompt + 1,
-                        })
+                      this.setState({
+                        step4WeeksPrompt: step4WeeksPrompt + 1,
+                      })
                     : () =>
-                        this.props.updateProgramPromptLog(
-                          user.user_id,
-                          !statusCheckRenewPrompt
-                            ? "4 weeks prompt"
-                            : "renew prompt",
-                          "level up"
-                        )
+                      this.props.updateProgramPromptLog(
+                        user.user_id,
+                        !statusCheckRenewPrompt
+                          ? "4 weeks prompt"
+                          : "renew prompt",
+                        "level up"
+                      )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -3047,8 +3047,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                          item.duration &&
-                          item.play_time / item.duration >=
+                            item.duration &&
+                            item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3597,8 +3597,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                          item.duration &&
-                          item.play_time / item.duration >=
+                            item.duration &&
+                            item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3892,7 +3892,7 @@ class VideoList extends Component {
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-            // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+          // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
           >
             <div
               className="tab-pane fade show active"
@@ -3920,40 +3920,38 @@ class VideoList extends Component {
 
               <nav
                 className="nav p-2 d-flex align-items-center"
-                style={{ background: "#FFF8FB" }}
+                style={{ background: "#fffaf5" }}
               >
-                <div className="w-100 d-block d-md-flex align-items-center mt-3 flex-md-wrap">
+                <div className="w-100 d-block d-md-flex align-items-center mt-3 pb-3 flex-md-wrap">
                   {numbDayExercise && numbDayExercise >= 1 && (
                     <a
                       className="nav-link"
                       style={{
-                        color: `${
-                          !showBarveAndBurn && focusDay === 0
-                            ? "#F45197"
+                        color: `${!showBarveAndBurn && focusDay === 0
+                            ? "#059669"
                             : "grey"
-                        }`,
+                          }`,
                         cursor: "pointer",
+                        // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
                       }}
                       onClick={() => this.onDayChange(0)}
                     >
-                      <h5>
-                        <b>DAY 1</b>
-                      </h5>
+                      <h5><b>DAY 1</b></h5>
                     </a>
                   )}
                   {numbDayExercise && numbDayExercise >= 2 && (
                     <a
-                      className="nav-link"
-                      style={{
-                        color: `${
-                          !showBarveAndBurn && focusDay === 1
-                            ? "#F45197"
-                            : "grey"
+                    className="nav-link"
+                    style={{
+                      color: `${!showBarveAndBurn && focusDay === 1
+                          ? "#059669"
+                          : "grey"
                         }`,
-                        cursor: "pointer",
-                      }}
-                      onClick={() => this.onDayChange(1)}
-                    >
+                      cursor: "pointer",
+                      // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                    }}
+                    onClick={() => this.onDayChange(1)}
+                  >
                       <h5>
                         <b>DAY 2</b>
                       </h5>
@@ -3962,17 +3960,17 @@ class VideoList extends Component {
                   {this.props.member_info &&
                     this.props.member_info.exercise_day != 2 && (
                       <a
-                        className="nav-link"
-                        style={{
-                          color: `${
-                            !showBarveAndBurn && focusDay === 2
-                              ? "#F45197"
-                              : "grey"
+                      className="nav-link"
+                      style={{
+                        color: `${!showBarveAndBurn && focusDay === 2
+                            ? "#059669"
+                            : "grey"
                           }`,
-                          cursor: "pointer",
-                        }}
-                        onClick={() => this.onDayChange(2)}
-                      >
+                        cursor: "pointer",
+                        // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                      }}
+                      onClick={() => this.onDayChange(2)}
+                    >
                         <h5>
                           <b>DAY 3</b>
                         </h5>
@@ -4028,7 +4026,7 @@ class VideoList extends Component {
                       className="nav-link"
                       onClick={() => this.onChallengeChange()}
                       style={{
-                        color: `${showchallenge ? "#F45197" : "grey"}`,
+                        color: `${showchallenge ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                     >
@@ -4042,7 +4040,7 @@ class VideoList extends Component {
                       className="nav-link"
                       onClick={() => this.onNutritionChange()}
                       style={{
-                        color: `${shownutrition ? "#F45197" : "grey"}`,
+                        color: `${shownutrition ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                     >
@@ -4055,7 +4053,7 @@ class VideoList extends Component {
                   {this.props.week > 1 && (
                     <a
                       className="nav-link ml-auto"
-                      style={{ cursor: "pointer", color: "#F45197" }}
+                      style={{ cursor: "pointer", color: "#059669" }}
                       onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
                     >
                       <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
@@ -4172,7 +4170,7 @@ class VideoList extends Component {
                                   style={{
                                     fontSize: "16px",
                                     cursor: "pointer",
-                                    color: "#F45197",
+                                    color: "#059669",
                                     textDecoration: "underline",
                                   }}
                                   onClick={() => this.editVDO()}
@@ -4238,8 +4236,8 @@ class VideoList extends Component {
                                 </h6>
                               )}
                               {item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage ? (
                                 <span
                                   className="dot"
@@ -4349,11 +4347,11 @@ class VideoList extends Component {
                                       {item.category}{" "}
                                     </p>
                                     {item.name.length < 17 ? (
-                                      <h4 style={{ color: "#F45197" }}>
+                                      <h4 style={{ color: "#059669" }}>
                                         <b>{item.name}</b>
                                       </h4>
                                     ) : (
-                                      <h6 style={{ color: "#F45197" }}>
+                                      <h6 style={{ color: "#059669" }}>
                                         <b>{item.name}</b>
                                       </h6>
                                     )}
@@ -4600,21 +4598,21 @@ class VideoList extends Component {
               <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
 
               {this.props.user &&
-              this.props.user.other_attributes &&
-              this.props.statusVideoList !== "no_video"
+                this.props.user.other_attributes &&
+                this.props.statusVideoList !== "no_video"
                 ? editVDO_click === "show"
                   ? this.renderEditVDO()
                   : lastWeekVDO_click === "show"
-                  ? lastWeekVDOAll === true
-                    ? this.renderVideoListLastWeekAll()
-                    : this.renderVideoListLastWeek()
-                  : this.renderVideoList()
+                    ? lastWeekVDOAll === true
+                      ? this.renderVideoListLastWeekAll()
+                      : this.renderVideoListLastWeek()
+                    : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                  statusGetCheckRenewPrompt !== "loading" &&
-                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                statusGetCheckRenewPrompt !== "loading" &&
+                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                    ? this.render4WeeksPrompt()
-                    : this.renderOtherAttribute())}
+                  ? this.render4WeeksPrompt()
+                  : this.renderOtherAttribute())}
             </div>
           </div>
         </div>

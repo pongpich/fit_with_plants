@@ -216,7 +216,7 @@ class VideoListLastWeekAll extends Component {
                                                     }
                                                     {
                                                         (item.play_time && item.duration && item.play_time / item.duration >= completeVideoPlayPercentage) ?
-                                                            <span className="dot" style={{ backgroundColor: "#F45197" }}>
+                                                            <span className="dot" style={{ backgroundColor: "#059669" }}>
                                                                 <h5 style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", color: "white" }}><i className="fa fa-check fa-lg" ></i></h5>
                                                             </span>
                                                             :
