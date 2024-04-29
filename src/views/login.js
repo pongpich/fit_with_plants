@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { CardTitle, Form, Label, Input, Button } from "reactstrap";
 import { connect } from "react-redux";
+import Bg_Login from "../assets/img/bg_login.png";
+import Banner_login from "../assets/img/banner_login.png";
 
 import { loginUser } from "../redux/auth";
 import "./login.scss";
@@ -23,12 +25,13 @@ class Login extends Component {
 
   componentDidUpdate(prevProps) {
     const { status } = this.props;
+
     if (prevProps.status !== status) {
-      if (status === "success") {
+      if (this.props.user) {
         if (this.props.user.authorization === "admin") {
           this.props.history.push("/import-members");
         } else {
-          this.props.history.push("/VideoList");
+          this.props.history.push("/videolist");
         }
       }
       if (
@@ -74,7 +77,12 @@ class Login extends Component {
   render() {
     const { statusLogin } = this.state;
     return (
-      <div className="all-row-login">
+      <div
+        className="all-row-login"
+        style={{
+          backgroundImage: `url(${Bg_Login})`,
+        }}
+      >
         <div className="row container">
           <div
             className="auth-card shadow col-lg-10 offset-lg-1 col-md-12 col-12"
@@ -82,33 +90,15 @@ class Login extends Component {
           >
             <div className="position-relative image-side-login col-lg-6 col-12">
               <p className="welcome-program mt-3">ยินดีต้อนรับเข้าสู่โปรแกรม</p>
-              <img
-                className="mb-4 col-12"
-                src="/assets/img/group37592.png"
-                alt=""
-              />
-              {/*  <div className="description">
-                <h3 className="mb-3" style={{ color: "#F45197" }}>
-                  <center>
-                    <b>BEBE FIT ROUTINE </b>
-                  </center>
-                </h3>
-                <h6>
-                  <center>คอร์สออกกำลังกายสนุกๆ ที่สามารถฝึกได้</center>
-                </h6>
-                <h6>
-                  <center>จากที่บ้าน ไม่ต้องมีอุปกรณ์ก็เสียเหงื่อได้</center>
-                </h6>
-              </div> */}
+              <img className="mb-4 col-12" src={Banner_login} alt="" />
             </div>
 
-            <div className="form-side-login col-lg-6 col-12">
-              <CardTitle className="h3 mb-4 mt-5" style={{ color: "#F45197" }}>
-                {"เข้าสู่ระบบ"}
-              </CardTitle>
-              <Form onSubmit={(e) => this.onUserLogin(e)}>
+            <div className="form-side-login col-lg-6 col-12 w-100 d-flex flex-column align-items-center justify-content-center">
+              <CardTitle className="h3 mb-4 mt-5">{"เข้าสู่ระบบ"}</CardTitle>
+              <Form onSubmit={(e) => this.onUserLogin(e)} className="w-100">
                 <Label className="form-group2 has-float-label mb-4">
-                  {"Email"}
+                  {"อีเมลเข้าใช้งาน"}
+                  <span style={{ color: "red" }}>*</span>
                   <Input
                     type="email"
                     id="email"
@@ -132,7 +122,6 @@ class Login extends Component {
                     }}
                     className="btn-shadow"
                     size="lg"
-                    // onClick={() => this.onUserLogin()}
                     type="submit"
                     block
                   >
@@ -155,17 +144,6 @@ class Login extends Component {
                     </span>
                   </Button>
                 </div>
-                {/* <div className="d-flex justify-content-between align-items-center mb-3">
-                  <Button
-                    color="light"
-                    className="btn-shadow"
-                    size="lg"
-                    onClick={() => this.props.history.push('/register')}
-                    block
-                  >
-                    {"สมัครสมาชิก"}
-                  </Button>
-                </div> */}
               </Form>
             </div>
           </div>

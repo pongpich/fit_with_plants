@@ -83,12 +83,6 @@ export const types = {
   CREATE_EVENT_LOG_SNACK_SUCCESS: "CREATE_EVENT_LOG_SNACK_SUCCESS",
   CREATE_EVENT_LOG_SNACK_FALE: "CREATE_EVENT_LOG_SNACK_FALE",
   SNACK_COUNT: "SNACK_COUNT",
-  GET_SCORE_SNACK: "GET_SCORE_SNACK",
-  GET_SCORE_SNACK_SUCCESS: "GET_SCORE_SNACK_SUCCESS",
-  GET_SCORE_SNACK_FALE: "GET_SCORE_SNACK_FALE",
-  GET_VIDEO_SNACK_ALL: "GET_VIDEO_SNACK_ALL",
-  GET_VIDEO_SNACK_SUCCESS_ALL: "GET_VIDEO_SNACK_SUCCESS_ALL",
-  GET_VIDEO_SNACK_FALE_ALL: "GET_VIDEO_SNACK_FALE_ALL",
 };
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
@@ -101,12 +95,6 @@ export const snacksCount = (number) => ({
   type: types.SNACK_COUNT,
   payload: {
     number,
-  },
-});
-export const getScoreSnacks = (user_id) => ({
-  type: types.GET_SCORE_SNACK,
-  payload: {
-    user_id,
   },
 });
 
@@ -394,12 +382,11 @@ export const createExerciseSnack = (user_id) => ({
     user_id,
   },
 });
-export const createEventLogSnacks = (user_id, snacks_number, week) => ({
+export const createEventLogSnacks = (user_id, snacks_number) => ({
   type: types.CREATE_EVENT_LOG_SNACK, //createExerciseSnacksChallenge
   payload: {
     user_id,
     snacks_number,
-    week,
   },
 });
 
@@ -429,29 +416,9 @@ export const clearExerciseSnack = () => ({
   payload: {},
 });
 
-export const getVideoSnackAll = (user_id) => ({
-  type: types.GET_VIDEO_SNACK_ALL,
-  payload: {
-    user_id,
-  },
-});
-
 /* END OF ACTION Section */
 
 /* SAGA Section */
-
-const getVideoSnackAllSagaAsync = async (user_id) => {
-  try {
-    const apiResult = await API.get("bebe", "/getExerciseSnacksChallengeAll", {
-      queryStringParameters: {
-        user_id,
-      },
-    });
-    return apiResult;
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-};
 
 const getBraveAndBurnChallengeSagaAsync = async (user_id) => {
   try {
@@ -837,18 +804,6 @@ const getVideoSnackSagaAsync = async (user_id, week) => {
     return { error, messsage: error.message };
   }
 };
-const getScoreSnacksSagaAsync = async (user_id) => {
-  try {
-    const apiResult = await API.get("bebe", "/getExerciseSnacksChallengeLog", {
-      queryStringParameters: {
-        user_id,
-      },
-    });
-    return apiResult;
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-};
 
 const createExerciseSnackSagaAsync = async (user_id) => {
   try {
@@ -862,13 +817,12 @@ const createExerciseSnackSagaAsync = async (user_id) => {
     return { error, messsage: error.message };
   }
 };
-const createEventLogSnacksSagaAsync = async (user_id, snacks_number, week) => {
+const createEventLogSnacksSagaAsync = async (user_id, snacks_number) => {
   try {
     const apiResult = await API.post("bebe", "/createEventLogSnacks", {
       body: {
         user_id,
         snacks_number,
-        week,
       },
     });
     console.log("apiResult", apiResult);
@@ -923,27 +877,6 @@ function* updateFbShareStatusBraveAndBurnSaga({ payload }) {
     if (apiResult.results.message === "success") {
       yield put({
         type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN_SUCCESS,
-      });
-    }
-  } catch (error) {
-    return { error, messsage: error.message };
-  }
-}
-
-function* getVideoSnackAllSaga({ payload }) {
-  const { user_id } = payload;
-
-  try {
-    const apiResult = yield call(getVideoSnackAllSagaAsync, user_id);
-    if (apiResult.results.message === "success") {
-      yield put({
-        type: types.GET_VIDEO_SNACK_SUCCESS_ALL,
-        payload: apiResult.results.exerciseSnack,
-      });
-    }
-    if (apiResult.results.message === "fail") {
-      yield put({
-        type: types.GET_VIDEO_SNACK_FALE_ALL,
       });
     }
   } catch (error) {
@@ -1171,27 +1104,6 @@ function* getAllExerciseActivitySaga({ payload }) {
     } else {
       yield put({
         type: types.GET_ALL_EXERCISE_ACTIVITY_FAIL,
-      });
-    }
-
-    return apiResult;
-  } catch (error) {
-    console.log("error from getAllExerciseActivitySaga :", error);
-  }
-}
-function* getScoreSnacksSaga({ payload }) {
-  const { user_id } = payload;
-  try {
-    const apiResult = yield call(getScoreSnacksSagaAsync, user_id);
-
-    if (apiResult.results && apiResult.results.exerciseSnack) {
-      yield put({
-        type: types.GET_SCORE_SNACK_SUCCESS,
-        payload: apiResult.results.exerciseSnack,
-      });
-    } else {
-      yield put({
-        type: types.GET_SCORE_SNACK_FALE,
       });
     }
 
@@ -1453,12 +1365,11 @@ function* createExerciseSnackSaga({ payload }) {
   }
 }
 function* createEventLogSnacksSaga({ payload }) {
-  const { user_id, snacks_number, week } = payload;
+  const { user_id, snacks_number } = payload;
   const apiResult = yield call(
     createEventLogSnacksSagaAsync,
     user_id,
-    snacks_number,
-    week
+    snacks_number
   );
 
   try {
@@ -1510,10 +1421,6 @@ function* getVideoSnackSaga({ payload }) {
   } catch (error) {
     console.log("error from updateDisplayNameSaga :", error);
   }
-}
-
-export function* watchGetVideoSnackAll() {
-  yield takeEvery(types.GET_VIDEO_SNACK_ALL, getVideoSnackAllSaga);
 }
 
 export function* watchUpdatePlaytime() {
@@ -1628,9 +1535,6 @@ export function* watchGetVideoSnackSaga() {
 export function* watchUpdateVideoSnackSaga() {
   yield takeEvery(types.UPDATE_VIDEO_SNACK, updateVideoSnackSaga);
 }
-export function* watchGetScoreSnacksSaga() {
-  yield takeEvery(types.GET_SCORE_SNACK, getScoreSnacksSaga);
-}
 
 export function* saga() {
   yield all([
@@ -1658,8 +1562,6 @@ export function* saga() {
     fork(watchUpdateVideoSnackSaga),
     fork(watchGetVideoSnackSaga),
     fork(watchCreateEventLogSnacksSaga),
-    fork(watchGetScoreSnacksSaga),
-    fork(watchGetVideoSnackAll),
   ]);
 }
 
@@ -1700,10 +1602,6 @@ const INIT_STATE = {
   statsVideoExerciseSnackAll: "default",
   videoExerciseSnackAll: null,
   snackNumber: 0,
-  scoreSnack: [],
-  statsScoreSnack: "default",
-  exerciseSnackAll: [],
-  statsExerciseSnackAll: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1743,22 +1641,6 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statusGetBraveAndBurn: "fail",
-      };
-    case types.GET_VIDEO_SNACK_ALL:
-      return {
-        ...state,
-        statsExerciseSnackAll: "loading",
-      };
-    case types.GET_VIDEO_SNACK_SUCCESS_ALL:
-      return {
-        ...state,
-        statsExerciseSnackAll: "success",
-        exerciseSnackAll: action.payload,
-      };
-    case types.GET_VIDEO_SNACK_FALE_ALL:
-      return {
-        ...state,
-        statsExerciseSnackAll: "fail",
       };
     case types.CREATE_BRAVE_AND_BURN_CHALLENGE:
       return {
@@ -1993,22 +1875,6 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statsEventLogSnack: "fail",
-      };
-    case types.GET_SCORE_SNACK:
-      return {
-        ...state,
-        statsScoreSnack: "loading",
-      };
-    case types.GET_SCORE_SNACK_SUCCESS:
-      return {
-        ...state,
-        scoreSnack: action.payload,
-        statsScoreSnack: "success",
-      };
-    case types.GET_SCORE_SNACK_FALE:
-      return {
-        ...state,
-        statsScoreSnack: "fail",
       };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {

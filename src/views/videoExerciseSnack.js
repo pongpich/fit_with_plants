@@ -49,8 +49,6 @@ const VideoExerciseSnack = () => {
 
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
-    dispatch(getExerciseSnack(user.user_id, week));
-    dispatch(getVideoSnack(user && user.user_id, week));
   }, []);
 
   useEffect(() => {
@@ -101,6 +99,7 @@ const VideoExerciseSnack = () => {
         document.getElementById("btn-close").click();
       dispatch(getExerciseSnack(user.user_id, week));
       dispatch(getVideoSnack(user.user_id, week));
+      
     }
   }, [statsUpdateVideoSnack]);
 
@@ -181,19 +180,13 @@ const VideoExerciseSnack = () => {
     }
   }, []);
 
-  const renewId = (index, id) => {
+  const renewId = (index) => {
     setRe_id(index);
-
-    const result = videoExerciseSnackAll.filter((video) => {
-      return video.video_id != id;
-    });
-    setVideoAll(result);
-
     document.getElementById("example-snack") &&
       document.getElementById("example-snack").click();
   };
 
-  console.log("videoExerciseSnack", videoExerciseSnack);
+
 
   return (
     <>
@@ -366,7 +359,7 @@ const VideoExerciseSnack = () => {
                           </div>
                           <div
                             className="box-random"
-                            onClick={() => renewId(index, item.video_id)}
+                            onClick={() => renewId(index)}
                           >
                             <img
                               src="../assets/img/renew.png"

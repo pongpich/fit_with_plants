@@ -7,6 +7,7 @@ import { saga as challenges} from './challenges';
 import { saga as dashboard} from './dashboard';
 import { saga as get } from './get';
 import { saga as update } from './update';
+import { saga as nutrition } from './nutrition';
 
 export default function* rootSaga(getState) {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga(getState) {
     dashboard(),
     get(),
     update(),
+    nutrition()
   ]);
 }

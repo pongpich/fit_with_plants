@@ -1,0 +1,58 @@
+.btn_pink {
+  background: #ef60a3;
+  width: 300px;
+  border: none;
+  outline: none;
+  border-radius: 1.5rem;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_gray {
+  background: rgb(215, 215, 215);
+  width: 300px;
+  border: none;
+  outline: none;
+  border-radius: 1.5rem;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_calculate {
+  border: 1px solid #ef60a3;
+  padding: 100px;
+  width: 800px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1rem;
+  margin: 50px 0;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
+}
+.title {
+  @media (max-width: 576px) {
+    width: 300px;
+    font-size: 1.6rem;
+  }
+}
+
+.progress2 {
+  display: flex !important;
+  height: 3px !important;
+  overflow: hidden !important;
+  font-size: .75rem !important;
+  background-color: #e9ecef !important;
+  border-radius: 20px !important;
+  margin-left: 60px !important;
+  margin-right: 60px !important;
+  margin-top: -10px !important;
+}

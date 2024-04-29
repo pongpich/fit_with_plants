@@ -26,7 +26,7 @@ import TestGPS_GG from "./views/test_gps_gg";
 import TestGPS_Permission from "./views/test_gps_permission";
 import BonusChallenge from "./views/bonus_challenge";
 import Footer from "./views/footer";
-import Header from "./assets/img/header.png";
+import Header from "./assets/img/header_preem.png";
 import Header_icon from "./assets/img/header_icon.png";
 
 import { awsConfig } from "./constants/defaultValues";
@@ -45,17 +45,37 @@ class App extends Component {
       statusNews: "default",
       overlay: false,
       overlay2: false,
-      showPopupIntro: false
+      showPopupIntro: false,
     };
   }
 
   async componentDidMount() {
-    const { user } = this.props;
+    const { user, status } = this.props;
     this.props.checkQuestionnaireLog(
       user && user.user_id,
       "satisfaction_assessment"
     );
     this.props.checkNewsLog(user && user.user_id, "backup_video_player ");
+
+    if (this.props.user) {
+      if (this.props.user.authorization === "admin") {
+        this.props.history.push("/import-members");
+      } else {
+        this.props.history.push("/videolist");
+      }
+    }
+
+    /* const urlParams = new URLSearchParams(window.location.search);
+
+    // ดึงค่า encodedParams จาก query string
+    const encodedParams = urlParams.get("encodedParams");
+    const decodedParams = encodedParams && JSON.parse(atob(encodedParams));
+
+     const url = "http://localhost:3001/#/login";
+    window.location.href = url;
+    console.log("urlParams", urlParams);
+    console.log("encodedParams", encodedParams);
+    console.log("decodedParams", decodedParams); */
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -88,7 +108,7 @@ class App extends Component {
 
     if (
       prevProps.statusGetCheckQuestionnaireLog !==
-      statusGetCheckQuestionnaireLog &&
+        statusGetCheckQuestionnaireLog &&
       statusGetCheckQuestionnaireLog === "success"
     ) {
       let week;
@@ -130,7 +150,11 @@ class App extends Component {
     this.props.logoutUser();
     this.props.clearVideoList();
     this.props.clearChallenges();
-    this.props.history.push("/platform");
+    // this.props.history.push("/platform");
+    /*
+   logout เเล้วไป pynk
+     const baseUrl = "http://localhost:3000/#/home";
+    window.location.href = baseUrl; */
   }
 
   renderNavbar() {
@@ -234,16 +258,18 @@ class App extends Component {
               </li>
             } */}
             {this.props.user !== null && (
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="/#"
-                  onClick={() => this.onUserLogout()}
-                  style={{ color: "#F45197", cursor: "pointer" }}
-                >
-                  ออกจากระบบ
-                </a>
-              </li>
+              <>
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    href="/#"
+                    onClick={() => this.onUserLogout()}
+                    style={{ color: "#F45197", cursor: "pointer" }}
+                  >
+                    ออกจากระบบ
+                  </a>
+                </li>
+              </>
             )}
           </ul>
         </div>
@@ -279,8 +305,8 @@ class App extends Component {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
       this.setState({
-        showPopupIntro: true
-      })
+        showPopupIntro: true,
+      });
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -298,8 +324,8 @@ class App extends Component {
     if (popupName === "popupIntroVDO") {
       document.getElementById("popupIntroVDO").classList.toggle("active");
       this.setState({
-        showPopupIntro: false
-      })
+        showPopupIntro: false,
+      });
     }
     if (popupName === "popupQuestionnaire") {
       document.getElementById("popupQuestionnaire").classList.toggle("active");
@@ -315,18 +341,33 @@ class App extends Component {
     const { overlay, overlay2 } = this.state;
     return (
       <div className="header">
-         <header>
-        <img src={Header} alt="Header Image" className="header2" />
-        <img src={Header_icon} alt="Header Image" className="header-button"   onClick={() => this.toggle("popupIntroVDO")}/>
-        {/* <img src={Header_icon} className="header-button">Click Me</img> */}
-      </header>
+        <header>
+          <img src={Header} alt="Header Image" className="header2" />
+          <img
+            src={Header_icon}
+            alt="Header Image"
+            className="header-button"
+            onClick={() => this.toggle("popupIntroVDO")}
+          />
+          {/* <img src={Header_icon} className="header-button">Click Me</img> */}
+        </header>
         <div className="popupIntroVDO" id={`popupIntroVDO`}>
-          <img alt="" src="./assets/img/thumb/close.png" className="close" onClick={() => this.closeToggle('popupIntroVDO')}></img>
-          {
-            showPopupIntro &&
+          <img
+            alt=""
+            src="./assets/img/thumb/close.png"
+            className="close"
+            onClick={() => this.closeToggle("popupIntroVDO")}
+          ></img>
+          {showPopupIntro && (
             <iframe
-              src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U2YLrVDY1YYs" width="560" height="320" frameborder="0" allowfullscreen referrerpolicy="origin">
-            </iframe>}
+              src="https://stream-player.byteark.com/players/6540b05c1524da29c9b6843b/videos/U5f576D95TPk"
+              width="560"
+              height="320"
+              frameborder="0"
+              allowfullscreen
+              referrerpolicy="origin"
+            ></iframe>
+          )}
         </div>
 
         {overlay && (
@@ -419,7 +460,7 @@ class App extends Component {
           </div>
         </div> */}
         {/* <p className="with-carrot">
-          Get Fit With Carrot <span className="with-week">IN 8 WEEK</span>
+          Preem Better Shape in 60 Days <span className="with-week">IN 8 WEEK</span>
         </p> */}
         {/* <div className="box-play">
           <img
@@ -434,25 +475,27 @@ class App extends Component {
   }
 
   render() {
+    console.log("this.props.user", this.props.user);
     return (
       <div className="App" style={{ backgroundColor: "#F0EEF3" }}>
         {/* {this.renderTopbar()} */}
         {this.renderNavbar()}
         {this.props.user && this.renderHeader()}
-        
+
         <Switch>
           <Route exact path="/">
-            <Redirect to="/login" />
+            <Redirect to="/VideoList" />
           </Route>
-          <Route path="/login" component={Login} />
+          {<Route path="/login" component={Login} />}
+
           <Route path="/test_gps" component={TestGPS_Permission} />
           <Route path="/test_gps_success" component={TestGPS} />
           {/* <Route path='/register' component={Register} />
           <Route path='/forgot-password' component={ForgotPassword} /> */}
           <Route path="/import-Members" component={ImportMembers} />
-          <Route path="/Challenges" component={Challenges} />
+          {/* <Route path="/Challenges" component={Challenges} /> */}
           <Route path="/Dashboard" component={Dashboard} />
-          <Route path="/VideoList" component={VideoList} />
+          <Route path="/VideoList" component={VideoList} refresh="true" />
           <Route path="/VideoList2" component={VideoList2} />
           <Route path="/BonusChallenge" component={BonusChallenge} />
           {/* <Route path='/platform' component={Platform} />
@@ -504,4 +547,3 @@ const mapActionsToProps = {
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(App);
-

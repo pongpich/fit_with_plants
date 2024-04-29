@@ -1,7 +1,12 @@
 //ByteArk Version
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Button } from "reactstrap";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+} from "reactstrap";
 import { connect } from "react-redux";
 import {
   updateProfile,
@@ -46,7 +51,6 @@ import {
   getExerciseSnack,
   getVideoSnack,
   clearExerciseSnack,
-  getVideoSnackAll,
 } from "../redux/exerciseVideos";
 import {
   completeVideoPlayPercentage,
@@ -69,8 +73,9 @@ import VideoExerciseSnack from "./videoExerciseSnack";
 import Modal from "../modals/modal";
 import Modal_Form from "../modals/modal_form";
 import Success_Modal from "../modals/success_modal";
-import VideoPlayerSnack from "../components/VideoPlayerSnack";
-import VideosSnackAll from "./videosSnackAll";
+import Challenges from "./challenges";
+import Nutrition from "./nutrition/nutrition";
+import Bg_login from "../assets/img/bg_login.png";
 
 class VideoList extends Component {
   constructor(props) {
@@ -121,7 +126,9 @@ class VideoList extends Component {
       modal_show: false,
       success_modal_show: false,
       exerciseSnack: false,
-      exerciseVideosSnackAll: [],
+      showchallenge: false,
+      shownutrition: false,
+      dropdownOpen: false,
     };
 
     this.prevPlayTime = 0;
@@ -170,6 +177,10 @@ class VideoList extends Component {
     this.setState({ success_modal_show: false });
   };
 
+  toggleDropdown = () => {
+    this.setState((prevState) => ({ dropdownOpen: !prevState.dropdownOpen }));
+  };
+
   handlePlayerDropdownChange = (event) => {
     const selectedOption = event.target.value;
     if (selectedOption === "main") {
@@ -191,27 +202,17 @@ class VideoList extends Component {
   }
 
   async componentDidMount() {
-    const {
-      user,
-      statsCreateExerciseSnack,
-      week,
-      exerciseSnackAll,
-      statsExerciseSnackAll,
-    } = this.props;
+    const { user, statsCreateExerciseSnack, week } = this.props;
 
     this.props.setEndedVideoPlayerList(false);
 
     if (user) {
-      this.props.getVideoSnackAll(user.user_id);
       this.props.getMemberInfo(user.user_id);
       this.props.checkProgramLevel(user.user_id);
       this.props.check4WeeksPrompt(user.user_id);
       this.props.checkRenewPrompt(user.user_id);
 
       this.props.getAllExerciseActivity(user.user_id);
-      this.props.getExerciseSnack(user.user_id, week);
-      this.props.createExerciseSnack(user && user.user_id);
-      /* this.props.getVideoSnack(user && user.user_id, week); */
 
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
@@ -293,18 +294,7 @@ class VideoList extends Component {
       statsGetExerciseSnack,
       week,
       exercise_day,
-      exerciseSnackAll,
-      statsExerciseSnackAll,
     } = this.props;
-
-    if (statsCreateExerciseSnack == "success") {
-      this.props.getExerciseSnack(user.user_id, week);
-      /*    this.props.getVideoSnack(user.user_id, week); */
-    }
-
-    if (statsGetExerciseSnack == "success") {
-      this.props.clearExerciseSnack();
-    }
 
     if (
       prevProps.statusGetBraveAndBurn !== statusGetBraveAndBurn &&
@@ -377,7 +367,7 @@ class VideoList extends Component {
     if (prevState.lastWeekStart !== lastWeekStart) {
       // ทำสิ่งที่คุณต้องการเมื่อ lastWeekStart เปลี่ยนค่า
       this.selectVideoLastWeek(lastWeekStart);
-      this.selectVideoSnackAllLastWeek(lastWeekStart);
+
       //this.props.getAllExerciseActivity(user.user_id);
     }
 
@@ -506,6 +496,10 @@ class VideoList extends Component {
     }
     if (prevState.autoPlayCheck !== this.state.autoPlayCheck) {
       this.addEventToVideo();
+      if (!this.state.autoPlayCheck) {
+        this.state.selectedVDO = null;
+      }
+      
     }
     if (
       user &&
@@ -575,24 +569,6 @@ class VideoList extends Component {
     }
   }
 
-  selectVideoSnackAllLastWeek(lastWeekStart) {
-    const { exerciseSnackAll } = this.props;
-
-    const currentWeekExerciseSnackAll =
-      exerciseSnackAll &&
-      exerciseSnackAll.filter((val) => {
-        if (val.week == lastWeekStart) {
-          return val;
-        }
-      });
-
-    this.setState({
-      exerciseVideosSnackAll:
-        currentWeekExerciseSnackAll.length > 0 &&
-        JSON.parse(currentWeekExerciseSnackAll[0].video),
-    });
-  }
-
   selectVideoLastWeek(lastWeekStart) {
     const { all_exercise_activity } = this.props;
 
@@ -624,6 +600,7 @@ class VideoList extends Component {
   }
 
   toggleListLastWeek(index) {
+    console.log("OPEN VIDEO", index);
     const { focusDay, lastWeekVDOAll } = this.state;
 
     if (!lastWeekVDOAll) {
@@ -769,12 +746,30 @@ class VideoList extends Component {
       exerciseSnack: false,
       focusDay: day,
       showBarveAndBurn: false,
+      showchallenge: false,
+      shownutrition: false,
     });
   };
 
   onExerciseSnackChange = () => {
     this.setState({
       exerciseSnack: true,
+      showBarveAndBurn: true,
+    });
+  };
+
+  onChallengeChange = () => {
+    this.setState({
+      shownutrition: false,
+      showchallenge: true,
+      showBarveAndBurn: true,
+    });
+  };
+
+  onNutritionChange = () => {
+    this.setState({
+      showchallenge: false,
+      shownutrition: true,
       showBarveAndBurn: true,
     });
   };
@@ -1734,6 +1729,14 @@ class VideoList extends Component {
                                       ></img>
                                     );
                                   }
+                                  if (muItem == "cardio") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/cardio_preem.png`}
+                                      ></img>
+                                    );
+                                  }
                                 })}
                             </div>
                           </div>
@@ -1799,7 +1802,7 @@ class VideoList extends Component {
       <div>
         <div
           className="card shadow mb-4 col-lg-6 offset-lg-3 col-md-12 col-12"
-          style={{ borderRadius: "20px" }}
+          style={{ borderRadius: "20px", background: "rgba(255,255,255,0.6)" }}
         >
           <div className="mb-3 col-lg-12  col-md-12 col-12">
             <center>
@@ -2031,6 +2034,7 @@ class VideoList extends Component {
         style={{
           borderRadius: "8px",
           padding: window.innerWidth >= 922 ? "5px 50px 5px" : "5px",
+          background: "rgba(255,255,255,0.6)",
         }}
       >
         <div className="mt-5 mb-5 col-lg-12  col-md-12 col-12">
@@ -2073,10 +2077,10 @@ class VideoList extends Component {
             }}
           >
             <div className="mb-2">
-              {<img src="../assets/img/male2.png" width="314" alt="" />}
+              {<img src="../assets/img/women2.png" width="314" alt="" />}
             </div>
             <div className="mb-2">
-              {<img src="../assets/img/female2.png" width="314" alt="" />}
+              {<img src="../assets/img/male2.png" width="314" alt="" />}
             </div>
 
             <div className="">
@@ -2149,11 +2153,65 @@ class VideoList extends Component {
                   <h6 style={{ color: "red" }}>กรุณากรอกข้อมูล</h6>
                 </small>
               )}
+              <div className="form-group mb-5" style={{ padding: "0 20px" }}>
+                <div className="text-center">
+                  <div
+                    className="row"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div className="mb-2 mr-2">
+                      <button
+                        className="btn-shadow"
+                        onClick={() =>
+                          this.setState({ otherAttributesPage: "basicInfo" })
+                        }
+                        style={{
+                          backgroundColor: "white",
+                          borderColor: "#F45197",
+                          color: "#F45197",
+                          borderRadius: "50px",
+                          width: "200px",
+                          height: "40px",
+                          padding: "0px",
+                        }}
+                      >
+                        ย้อนกลับ
+                      </button>
+                    </div>
+                    <div className="mb-2 ml-lg-2">
+                      <button
+                        className="btn-shadow"
+                        onClick={() =>
+                          this.setState({
+                            otherAttributesPage: "renderBasicBodyInfo",
+                          })
+                        }
+                        style={{
+                          backgroundColor: "#F45197",
+                          borderColor: "#F45197",
+                          color: "white",
+                          borderRadius: "50px",
+                          width: "200px",
+                          height: "40px",
+                          padding: "0px",
+                        }}
+                      >
+                        ยืนยัน
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="space-70 mb-5"></div>
+        {/* <div className="space-70 mb-5"></div>
         <div className="form-group mb-5">
           <div className="text-center">
             <div
@@ -2207,7 +2265,7 @@ class VideoList extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -2221,7 +2279,7 @@ class VideoList extends Component {
       <>
         <div
           className="card shadow mb-4 col-lg-8 offset-lg-2 col-md-12 col-12"
-          style={{ borderRadius: "20px" }}
+          style={{ borderRadius: "20px", background: "rgba(255,255,255,0.6)" }}
         >
           <div className="mb-3 col-lg-12  col-md-12 col-12">
             <center>
@@ -2752,7 +2810,10 @@ class VideoList extends Component {
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-            style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+            style={{
+              borderBottom: "3px solid #4F4F4F",
+              paddingBottom: "0px",
+            }}
           >
             <div
               className="tab-pane fade show active"
@@ -2806,7 +2867,7 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )}
-                {/*  {exerciseVideoLastWeek.length >= 4 && (
+                {exerciseVideoLastWeek.length >= 4 && (
                   <a
                     className="nav-link"
                     style={{
@@ -2819,7 +2880,7 @@ class VideoList extends Component {
                       <b>DAY 4</b>
                     </h5>
                   </a>
-                )} */}
+                )}
 
                 <a
                   className="nav-link ml-auto"
@@ -3200,6 +3261,14 @@ class VideoList extends Component {
                                         ></img>
                                       );
                                     }
+                                    if (muItem == "cardio") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/cardio_preem.png`}
+                                        ></img>
+                                      );
+                                    }
                                   })}
                               </div>
                             </div>
@@ -3347,19 +3416,21 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   )}
-
-                <a
-                  className="nav-link"
-                  style={{
-                    color: `${focusDay === 3 ? "#F45197" : "grey"}`,
-                    cursor: "pointer",
-                  }}
-                  onClick={() => this.onDayChange(3)}
-                >
-                  <h5>
-                    <b>Random Exercise Snack</b>
-                  </h5>
-                </a>
+                {selectExerciseVideoLastWeek &&
+                  selectExerciseVideoLastWeek.length >= 4 && (
+                    <a
+                      className="nav-link"
+                      style={{
+                        color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => this.onDayChange(3)}
+                    >
+                      <h5>
+                        <b>DAY 4</b>
+                      </h5>
+                    </a>
+                  )}
 
                 <a
                   className="nav-link ml-auto"
@@ -3466,56 +3537,51 @@ class VideoList extends Component {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="">
-                        {focusDay < 3 && (
+                        <span
+                          className="mr-5 ml-3"
+                          style={{
+                            fontSize: "16px",
+                            float: "left",
+                            color: "grey",
+                          }}
+                        >
+                          {" "}
+                          รวมเวลาฝึกทั้งหมด {timesExercise} นาที
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="col-lg-12 col-md-4 col-12">
+                        <div className="mt-1" style={{ float: "right" }}>
                           <span
-                            className="mr-5 ml-3"
+                            className="mr-2"
                             style={{
-                              fontSize: "16px",
-                              float: "left",
+                              fontSize: "18px",
+                              fontWeight: "bold",
                               color: "grey",
                             }}
                           >
-                            {" "}
-                            รวมเวลาฝึกทั้งหมด {timesExercise} นาที
+                            เล่นอัตโนมัติ
                           </span>
-                        )}
-                      </div>
-                    </div>
-                    {focusDay < 3 && (
-                      <div className="col-lg-6">
-                        <div className="col-lg-12 col-md-4 col-12">
-                          <div className="mt-1" style={{ float: "right" }}>
-                            <span
-                              className="mr-2"
-                              style={{
-                                fontSize: "18px",
-                                fontWeight: "bold",
-                                color: "grey",
-                              }}
-                            >
-                              เล่นอัตโนมัติ
-                            </span>
-                            <label
-                              className="switch"
-                              onClick={() => this.autoPlayCheck()}
-                            >
-                              <input
-                                type="checkbox"
-                                className="danger"
-                                id="autoPlayCheck"
-                              ></input>
-                              <span className="slider round"></span>
-                            </label>
-                          </div>
+                          <label
+                            className="switch"
+                            onClick={() => this.autoPlayCheck()}
+                          >
+                            <input
+                              type="checkbox"
+                              className="danger"
+                              id="autoPlayCheck"
+                            ></input>
+                            <span className="slider round"></span>
+                          </label>
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
               <tbody>
-                {focusDay < 3 ? (
-                  selectExerciseVideoLastWeek &&
+                {selectExerciseVideoLastWeek &&
                   todayExercise.map((item, index) => {
                     const itemsArray = item.muscle.split(",");
                     const minuteLabel =
@@ -3609,6 +3675,14 @@ class VideoList extends Component {
                                     alt=""
                                   />
                                 )}
+                                {/* <div className="overlay" onClick={() => this.toggle(item)}>
+                                <i className="fa fa-play fa-4x" aria-hidden="true"></i>
+                                <div className="videoDuration" style={{ position: "absolute", right: "5%", bottom: "0", color: "white" }}>
+                                  <h6>
+                                    <b>{(item.duration + "").split(".")[0]}:{(item.duration + "").split(".")[1]} นาที</b>
+                                  </h6>
+                                </div>
+                              </div> */}
                               </div>
                             </div>
                             <div className="videoDetail">
@@ -3737,6 +3811,14 @@ class VideoList extends Component {
                                         ></img>
                                       );
                                     }
+                                    if (muItem == "cardio") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/cardio_preem.png`}
+                                        ></img>
+                                      );
+                                    }
                                   })}
                               </div>
                             </div>
@@ -3744,12 +3826,7 @@ class VideoList extends Component {
                         </div>
                       </div>
                     );
-                  })
-                ) : (
-                  <VideosSnackAll
-                    exerciseVideosSnackAll={this.state.exerciseVideosSnackAll}
-                  />
-                )}
+                  })}
               </tbody>
             </table>
           </div>
@@ -3769,6 +3846,8 @@ class VideoList extends Component {
       selectExerciseVideoLastWeek,
       showBarveAndBurn,
       exerciseSnack,
+      showchallenge,
+      shownutrition,
     } = this.state;
 
     const { exerciseVideo } = this.props;
@@ -3808,12 +3887,12 @@ class VideoList extends Component {
     }
 
     return (
-      <div className="card-body d-flex justify-content-center">
+      <div className="card-body">
         <form>
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-            style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+            // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
           >
             <div
               className="tab-pane fade show active"
@@ -3821,7 +3900,7 @@ class VideoList extends Component {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <div
+              {/* <div
                 className="row"
                 style={{
                   display: "flex",
@@ -3837,61 +3916,69 @@ class VideoList extends Component {
                     <span></span>
                   )}
                 </h4>
-              </div>
+              </div> */}
 
-              <nav className="nav">
-                {numbDayExercise && numbDayExercise >= 1 && (
-                  <a
-                    className="nav-link"
-                    style={{
-                      color: `${
-                        !showBarveAndBurn && focusDay === 0 ? "#F45197" : "grey"
-                      }`,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => this.onDayChange(0)}
-                  >
-                    <h5>
-                      <b>DAY 1</b>
-                    </h5>
-                  </a>
-                )}
-                {numbDayExercise && numbDayExercise >= 2 && (
-                  <a
-                    className="nav-link"
-                    style={{
-                      color: `${
-                        !showBarveAndBurn && focusDay === 1 ? "#F45197" : "grey"
-                      }`,
-                      cursor: "pointer",
-                    }}
-                    onClick={() => this.onDayChange(1)}
-                  >
-                    <h5>
-                      <b>DAY 2</b>
-                    </h5>
-                  </a>
-                )}
-                {this.props.member_info &&
-                  this.props.member_info.exercise_day != 2 && (
+              <nav
+                className="nav p-2 d-flex align-items-center"
+                style={{ background: "#FFF8FB" }}
+              >
+                <div className="w-100 d-block d-md-flex align-items-center mt-3 flex-md-wrap">
+                  {numbDayExercise && numbDayExercise >= 1 && (
                     <a
                       className="nav-link"
                       style={{
                         color: `${
-                          !showBarveAndBurn && focusDay === 2
+                          !showBarveAndBurn && focusDay === 0
                             ? "#F45197"
                             : "grey"
                         }`,
                         cursor: "pointer",
                       }}
-                      onClick={() => this.onDayChange(2)}
+                      onClick={() => this.onDayChange(0)}
                     >
                       <h5>
-                        <b>DAY 3</b>
+                        <b>DAY 1</b>
                       </h5>
                     </a>
                   )}
-                {/* {numbDayExercise >= 3 && (
+                  {numbDayExercise && numbDayExercise >= 2 && (
+                    <a
+                      className="nav-link"
+                      style={{
+                        color: `${
+                          !showBarveAndBurn && focusDay === 1
+                            ? "#F45197"
+                            : "grey"
+                        }`,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => this.onDayChange(1)}
+                    >
+                      <h5>
+                        <b>DAY 2</b>
+                      </h5>
+                    </a>
+                  )}
+                  {this.props.member_info &&
+                    this.props.member_info.exercise_day != 2 && (
+                      <a
+                        className="nav-link"
+                        style={{
+                          color: `${
+                            !showBarveAndBurn && focusDay === 2
+                              ? "#F45197"
+                              : "grey"
+                          }`,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => this.onDayChange(2)}
+                      >
+                        <h5>
+                          <b>DAY 3</b>
+                        </h5>
+                      </a>
+                    )}
+                  {/* {numbDayExercise >= 3 && (
                   <a
                     className="nav-link"
                     style={{
@@ -3907,7 +3994,7 @@ class VideoList extends Component {
                   </a>
                 )} */}
 
-                {/* {numbDayExercise >= 4 && (
+                  {/* {numbDayExercise >= 4 && (
                   <a
                     className="nav-link"
                     style={{
@@ -3922,7 +4009,7 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )} */}
-                {
+                  {/* {
                   <a
                     className="nav-link"
                     onClick={() => this.onExerciseSnackChange()}
@@ -3935,17 +4022,46 @@ class VideoList extends Component {
                       <b> Random Exercise Snack</b>
                     </h5>
                   </a>
-                }
+                } */}
+                  {
+                    <a
+                      className="nav-link"
+                      onClick={() => this.onChallengeChange()}
+                      style={{
+                        color: `${showchallenge ? "#F45197" : "grey"}`,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <h5>
+                        <b> CHALLENGE</b>
+                      </h5>
+                    </a>
+                  }
+                  {
+                    <a
+                      className="nav-link"
+                      onClick={() => this.onNutritionChange()}
+                      style={{
+                        color: `${shownutrition ? "#F45197" : "grey"}`,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <h5>
+                        <b> NUTRITION</b>
+                      </h5>
+                    </a>
+                  }
 
-                {this.props.week > 1 && (
-                  <a
-                    className="nav-link ml-auto"
-                    style={{ cursor: "pointer", color: "#F45197" }}
-                    onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
-                  >
-                    <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
-                  </a>
-                )}
+                  {this.props.week > 1 && (
+                    <a
+                      className="nav-link ml-auto"
+                      style={{ cursor: "pointer", color: "#F45197" }}
+                      onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
+                    >
+                      <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
+                    </a>
+                  )}
+                </div>
               </nav>
             </div>
             <div
@@ -3966,9 +4082,9 @@ class VideoList extends Component {
             </div>
           </div>
 
-          {exerciseSnack ? (
-            <VideoExerciseSnack />
-          ) : (
+          {showchallenge ? <Challenges /> : null}
+          {shownutrition ? <Nutrition /> : null}
+          {!showBarveAndBurn ? (
             <div className="">
               {this.state.autoPlayCheck ? (
                 <div className="trailer" id={`popupVDOList`}>
@@ -4334,6 +4450,14 @@ class VideoList extends Component {
                                             ></img>
                                           );
                                         }
+                                        if (muItem == "cardio") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/cardio_preem.png`}
+                                            ></img>
+                                          );
+                                        }
                                       })}
                                   </div>
                                 </div>
@@ -4346,7 +4470,7 @@ class VideoList extends Component {
                 </table>
               )}
             </div>
-          )}
+          ) : null}
         </form>
       </div>
     );
@@ -4455,53 +4579,11 @@ class VideoList extends Component {
       statusCheckRenewPrompt,
       statusGetCheckRenewPrompt,
     } = this.props;
-
     return (
       <div>
         {dailyWeighChallenge &&
           this.props.user &&
           this.renderPopupDailyWeighChallenge()}
-
-        <div className="nav mt-5 mb-4 ml-5" id="myTab" role="tablist">
-          <div className="mr-4 mb-3">
-            <a
-              className="workout Routine"
-              id="home-tab"
-              data-toggle="tab"
-              href="/#/Videdivst"
-              role="tab"
-              aria-controls="home"
-              aria-selected="true"
-              style={{
-                color: "#F45197",
-                borderBottom: "5px solid #F45197",
-                paddingBottom: "2px",
-                textDecorationColor: "white",
-              }}
-            >
-              Workout Routine
-            </a>
-          </div>
-          {/* <li className="nav-item">
-              <a className="nav-link disabled" id="profile-tab" data-toggle="tab" href="/#/VideoList" role="tab" aria-controls="profile" aria-selected="false">รวมคลิปออกกำลังกาย</a>
-            </li> */}
-          {this.props.user && (
-            <div className="">
-              <a
-                className="challenges-cursor"
-                id="contact-tab"
-                data-toggle="tab"
-                onClick={() => this.props.history.push("/challenges")}
-                role="tab"
-                aria-controls="contact"
-                aria-selected="false"
-                style={{ color: "grey", textDecorationColor: "white" }}
-              >
-                ชาเลนจ์
-              </a>
-            </div>
-          )}
-        </div>
         <div
           className="main main-raised"
           style={{
@@ -4582,8 +4664,6 @@ const mapStateToProps = ({
     statsCreateExerciseSnack,
     videoExerciseSnack,
     statsGetExerciseSnack,
-    exerciseSnackAll,
-    statsExerciseSnackAll,
   } = exerciseVideos;
   return {
     user,
@@ -4619,8 +4699,6 @@ const mapStateToProps = ({
     statsCreateExerciseSnack,
     videoExerciseSnack,
     statsGetExerciseSnack,
-    exerciseSnackAll,
-    statsExerciseSnackAll,
   };
 };
 
@@ -4659,7 +4737,6 @@ const mapActionsToProps = {
   getExerciseSnack,
   getVideoSnack,
   clearExerciseSnack,
-  getVideoSnackAll,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(VideoList);

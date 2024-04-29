@@ -50,9 +50,7 @@ const VideoPlayerListByteArk = ({
 
   useEffect(() => {
     addEventListenerVideo();
-
     setVideoCurrDuration(0);
-    setVideoEnded(false);
     dispatch(setEndedVideoPlayerList(false));
   }, [selectedVDO]);
 
@@ -60,6 +58,13 @@ const VideoPlayerListByteArk = ({
     const video = videoRef.current;
 
     if (video && selectedVDO) {
+      const filterVideoAutoPlayEachDay = exerciseVideo
+        .filter((innerArray) =>
+          innerArray.some((obj) =>
+            obj.name.toLowerCase().includes(selectedVDO.name.toLowerCase())
+          )
+        )
+        .flat();
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(selectedVDO.url); // ใช้ URL ที่ถูกส่งเข้ามาใน props
@@ -75,7 +80,8 @@ const VideoPlayerListByteArk = ({
       }
 
       video.addEventListener("ended", () => {
-        // setVideoEnded(true); // กำหนดว่าวีดีโอถูกดูจบ
+        setVideoEnded(true); // กำหนดว่าวีดีโอถูกดูจบ
+        dispatch(setEndedVideoPlayerList(true));
       });
 
       video.addEventListener("loadedmetadata", () => {

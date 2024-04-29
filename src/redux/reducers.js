@@ -10,6 +10,7 @@ import { reducer as payment} from './payment';
 import { reducer as challenges} from './challenges';
 import { reducer as dashboard} from './dashboard';
 import { reducer as update} from './update';
+import { reducer as nutrition} from './nutrition';
 
 
 
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   dashboard,
   get,
   update,
+  nutrition
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers)
