@@ -41,8 +41,8 @@
     "start:local": "export REACT_APP_STAGE=local && npm start",
     "start:dev": "export REACT_APP_STAGE=dev && npm start",
     "start:prod": "export REACT_APP_STAGE=prod && npm start",
-    "deploy:staging": "REACT_APP_STAGE=dev npm run build && scp -i carrotKey.pem -r build/* dev@139.59.100.23:/var/www/staging.preemworkout.pynk.co/html",
-    "deploy:prod": "REACT_APP_STAGE=prod npm run build && scp -i carrotKey.pem -r build/* dev@139.59.100.23:/var/www/preemworkout.pynk.co/html",
+    "deploy:staging": "REACT_APP_STAGE=dev npm run build && scp -i ~/.ssh/carrotKey.pem -r build/* dev@139.59.100.23:/var/www/staging.fitwithplant.pynk.co/html",
+    "deploy:prod": "REACT_APP_STAGE=prod npm run build && scp -i ~/.ssh/carrotKey.pem -r build/* dev@139.59.100.23:/var/www/fitwithplant.pynk.co/html",
     "deploy:all": "npm run deploy:staging && npm run deploy:prod"
   },
   "eslintConfig": {

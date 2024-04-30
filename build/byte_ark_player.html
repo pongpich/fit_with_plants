@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div id="the-video-player"></div>
+    <script src="https://byteark-sdk.cdn.byteark.com/player/v2/byteark-player.min.js"></script>
+    <script>
+        function handleVideoEnd() {
+            console.log("video end");
+        }
+        function time_update(ts) {
+            console.log(ts);
+        }
+
+        var player = bytearkPlayer("the-video-player", {
+            fluid: true,
+            poster: "/assets/samples/player/images/poster-big-buck-bunny.jpg",
+            sources: [
+                {
+                    title: "Planforfit clip1",
+                    src:
+                        "https://planforfittufqepu.stream-playlist.byteark.com/streams/TuFSWQUUyDB2/playlist.m3u8",
+                    type: "application/x-mpegURL"
+                }
+            ]
+        });
+        player.on("ended", handleVideoEnd);
+        setInterval(function () {
+            time_update(player.currentTime());
+        }, 5000);
+    </script>
+</body>
+
+</html>
