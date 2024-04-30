@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { CardTitle, Form, Label, Input, Button } from "reactstrap";
 import { connect } from "react-redux";
 import Bg_Login from "../assets/img/bg_login.png";
+import Bg_Login_Head from "../assets/img/head_login.png";
 import Banner_login from "../assets/img/banner_login.png";
 
 import { loginUser } from "../redux/auth";
@@ -89,8 +90,8 @@ class Login extends Component {
             style={{ borderRadius: "16px" }}
           >
             <div className="position-relative image-side-login col-lg-6 col-12">
-              <p className="welcome-program mt-3">ยินดีต้อนรับเข้าสู่โปรแกรม</p>
-              <img className="mb-4 col-12" src={Banner_login} alt="" />
+              {/* <p className="welcome-program mt-3">ยินดีต้อนรับเข้าสู่โปรแกรม</p> */}
+              <img className="mb-4 col-12" src={Bg_Login_Head} alt="" />
             </div>
 
             <div className="form-side-login col-lg-6 col-12 w-100 d-flex flex-column align-items-center justify-content-center">

@@ -2,10 +2,12 @@
 import React, { Component } from "react";
 import {
   Button,
+  Col,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  Row,
 } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -407,7 +409,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-      statusPostDailyWeighChallenge &&
+        statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -499,7 +501,6 @@ class VideoList extends Component {
       if (!this.state.autoPlayCheck) {
         this.state.selectedVDO = null;
       }
-
     }
     if (
       user &&
@@ -754,6 +755,7 @@ class VideoList extends Component {
   onExerciseSnackChange = () => {
     this.setState({
       exerciseSnack: true,
+      showchallenge: false,
       showBarveAndBurn: true,
     });
   };
@@ -761,8 +763,9 @@ class VideoList extends Component {
   onChallengeChange = () => {
     this.setState({
       shownutrition: false,
-      showchallenge: true,
+      exerciseSnack: false,
       showBarveAndBurn: true,
+      showchallenge: true,
     });
   };
 
@@ -963,7 +966,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-      completeVideoPlayPercentage
+        completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1746,8 +1749,8 @@ class VideoList extends Component {
                         item.category !== "Challenge" &&
                         ((item.category === "Warm Up" ||
                           item.category === "Cool Down") &&
-                          member_info &&
-                          member_info.program_level === "bfr_lv1" ? (
+                        member_info &&
+                        member_info.program_level === "bfr_lv1" ? (
                           <div></div>
                         ) : (
                           <div
@@ -2667,17 +2670,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                      this.setState({
-                        step4WeeksPrompt: step4WeeksPrompt + 1,
-                      })
+                        this.setState({
+                          step4WeeksPrompt: step4WeeksPrompt + 1,
+                        })
                     : () =>
-                      this.props.updateProgramPromptLog(
-                        user.user_id,
-                        !statusCheckRenewPrompt
-                          ? "4 weeks prompt"
-                          : "renew prompt",
-                        "level up"
-                      )
+                        this.props.updateProgramPromptLog(
+                          user.user_id,
+                          !statusCheckRenewPrompt
+                            ? "4 weeks prompt"
+                            : "renew prompt",
+                          "level up"
+                        )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -3047,12 +3050,12 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
-                              style={{ backgroundColor: "#F45197" }}
+                              style={{ backgroundColor: "#FFF6EE" }}
                             >
                               <h5
                                 style={{
@@ -3060,7 +3063,7 @@ class VideoList extends Component {
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
-                                  color: "white",
+                                  color: "#059669",
                                 }}
                               >
                                 <i className="fa fa-check fa-lg"></i>
@@ -3081,9 +3084,28 @@ class VideoList extends Component {
                             </span>
                           )}
                           {index === todayExercise.length - 1 ? (
-                            <div className="vl" style={{ height: "0%" }}></div>
+                            <div
+                              className={
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage
+                                  ? `vl`
+                                  : `vl_done`
+                              }
+                              style={{ height: "0%" }}
+                            ></div>
                           ) : (
-                            <div className="vl"></div>
+                            <div
+                              className={
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage
+                                  ? `vl`
+                                  : `vl_done`
+                              }
+                            ></div>
                           )}
                           {index === todayExercise.length - 1 && (
                             <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
@@ -3597,12 +3619,12 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
-                              style={{ backgroundColor: "#F45197" }}
+                              style={{ backgroundColor: "#FFF6EE" }}
                             >
                               <h5
                                 style={{
@@ -3610,7 +3632,7 @@ class VideoList extends Component {
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
-                                  color: "white",
+                                  color: "#059669",
                                 }}
                               >
                                 <i className="fa fa-check fa-lg"></i>
@@ -3631,9 +3653,28 @@ class VideoList extends Component {
                             </span>
                           )}
                           {index === todayExercise.length - 1 ? (
-                            <div className="vl" style={{ height: "0%" }}></div>
+                            <div
+                              className={
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage
+                                  ? `vl`
+                                  : `vl_done`
+                              }
+                              style={{ height: "0%" }}
+                            ></div>
                           ) : (
-                            <div className="vl"></div>
+                            <div
+                              className={
+                                item.play_time &&
+                                item.duration &&
+                                item.play_time / item.duration >=
+                                  completeVideoPlayPercentage
+                                  ? `vl`
+                                  : `vl_done`
+                              }
+                            ></div>
                           )}
                           {index === todayExercise.length - 1 && (
                             <h6 className="lastVideoEndText">สำเร็จแล้ว!</h6>
@@ -3892,7 +3933,7 @@ class VideoList extends Component {
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-          // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+            // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
           >
             <div
               className="tab-pane fade show active"
@@ -3927,31 +3968,35 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${!showBarveAndBurn && focusDay === 0
+                        color: `${
+                          !showBarveAndBurn && focusDay === 0
                             ? "#059669"
                             : "grey"
-                          }`,
+                        }`,
                         cursor: "pointer",
                         // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
                       }}
                       onClick={() => this.onDayChange(0)}
                     >
-                      <h5><b>DAY 1</b></h5>
+                      <h5>
+                        <b>DAY 1</b>
+                      </h5>
                     </a>
                   )}
                   {numbDayExercise && numbDayExercise >= 2 && (
                     <a
-                    className="nav-link"
-                    style={{
-                      color: `${!showBarveAndBurn && focusDay === 1
-                          ? "#059669"
-                          : "grey"
+                      className="nav-link"
+                      style={{
+                        color: `${
+                          !showBarveAndBurn && focusDay === 1
+                            ? "#059669"
+                            : "grey"
                         }`,
-                      cursor: "pointer",
-                      // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
-                    }}
-                    onClick={() => this.onDayChange(1)}
-                  >
+                        cursor: "pointer",
+                        // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                      }}
+                      onClick={() => this.onDayChange(1)}
+                    >
                       <h5>
                         <b>DAY 2</b>
                       </h5>
@@ -3960,17 +4005,18 @@ class VideoList extends Component {
                   {this.props.member_info &&
                     this.props.member_info.exercise_day != 2 && (
                       <a
-                      className="nav-link"
-                      style={{
-                        color: `${!showBarveAndBurn && focusDay === 2
-                            ? "#059669"
-                            : "grey"
+                        className="nav-link"
+                        style={{
+                          color: `${
+                            !showBarveAndBurn && focusDay === 2
+                              ? "#059669"
+                              : "grey"
                           }`,
-                        cursor: "pointer",
-                        // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
-                      }}
-                      onClick={() => this.onDayChange(2)}
-                    >
+                          cursor: "pointer",
+                          // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                        }}
+                        onClick={() => this.onDayChange(2)}
+                      >
                         <h5>
                           <b>DAY 3</b>
                         </h5>
@@ -4007,20 +4053,20 @@ class VideoList extends Component {
                     </h5>
                   </a>
                 )} */}
-                  {/* {
-                  <a
-                    className="nav-link"
-                    onClick={() => this.onExerciseSnackChange()}
-                    style={{
-                      color: `${showBarveAndBurn ? "#F45197" : "grey"}`,
-                      cursor: "pointer",
-                    }}
-                  >
-                    <h5>
-                      <b> Random Exercise Snack</b>
-                    </h5>
-                  </a>
-                } */}
+                  {
+                    <a
+                      className="nav-link"
+                      onClick={() => this.onExerciseSnackChange()}
+                      style={{
+                        color: `${exerciseSnack ? "#059669" : "grey"}`,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <h5>
+                        <b> Random Exercise Snack</b>
+                      </h5>
+                    </a>
+                  }
                   {
                     <a
                       className="nav-link"
@@ -4035,7 +4081,7 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   }
-                  {
+                  {/* {
                     <a
                       className="nav-link"
                       onClick={() => this.onNutritionChange()}
@@ -4048,7 +4094,7 @@ class VideoList extends Component {
                         <b> NUTRITION</b>
                       </h5>
                     </a>
-                  }
+                  } */}
 
                   {this.props.week > 1 && (
                     <a
@@ -4081,7 +4127,7 @@ class VideoList extends Component {
           </div>
 
           {showchallenge ? <Challenges /> : null}
-          {shownutrition ? <Nutrition /> : null}
+          {exerciseSnack ? <VideoExerciseSnack /> : null}
           {!showBarveAndBurn ? (
             <div className="">
               {this.state.autoPlayCheck ? (
@@ -4143,7 +4189,7 @@ class VideoList extends Component {
 
               {showBarveAndBurn ? (
                 <div>
-                  <BraveAndBurn></BraveAndBurn>
+                  <BraveAndBurn />
                 </div>
               ) : (
                 <table className="table table-responsive">
@@ -4182,7 +4228,7 @@ class VideoList extends Component {
                                     width="30px"
                                     height="30px"
                                   />
-                                  แก้ไขวีดีโอ
+                                  แก้ไขวิดีโอ55
                                 </div>
                               )}
                           </div>
@@ -4236,12 +4282,12 @@ class VideoList extends Component {
                                 </h6>
                               )}
                               {item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage ? (
                                 <span
                                   className="dot"
-                                  style={{ backgroundColor: "#F45197" }}
+                                  style={{ backgroundColor: "#FFF6EE" }}
                                 >
                                   <h5
                                     style={{
@@ -4249,7 +4295,7 @@ class VideoList extends Component {
                                       top: "50%",
                                       left: "50%",
                                       transform: "translate(-50%,-50%)",
-                                      color: "white",
+                                      color: "#059669",
                                     }}
                                   >
                                     <i className="fa fa-check fa-lg"></i>
@@ -4271,11 +4317,27 @@ class VideoList extends Component {
                               )}
                               {index === todayExercise.length - 1 ? (
                                 <div
-                                  className="vl"
+                                  className={
+                                    item.play_time &&
+                                    item.duration &&
+                                    item.play_time / item.duration >=
+                                      completeVideoPlayPercentage
+                                      ? `vl`
+                                      : `vl_done`
+                                  }
                                   style={{ height: "0%" }}
                                 ></div>
                               ) : (
-                                <div className="vl"></div>
+                                <div
+                                  className={
+                                    item.play_time &&
+                                    item.duration &&
+                                    item.play_time / item.duration >=
+                                      completeVideoPlayPercentage
+                                      ? `vl`
+                                      : `vl_done`
+                                  }
+                                ></div>
                               )}
                               {index === todayExercise.length - 1 && (
                                 <h6 className="lastVideoEndText">
@@ -4284,7 +4346,7 @@ class VideoList extends Component {
                               )}
                             </div>
                             <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10 mb-5">
-                              <div className="videoItem border shadow">
+                              <div className="videoItem_new">
                                 {this.state.autoPlayCheck && (
                                   <img
                                     className="play_button"
@@ -4293,14 +4355,14 @@ class VideoList extends Component {
                                     onClick={() => this.toggleList(index)}
                                   ></img>
                                 )}
-                                {!this.state.autoPlayCheck && (
+                                {/* {!this.state.autoPlayCheck && (
                                   <img
                                     className="play_button"
                                     src="../assets/img/thumb/play_button2.png"
                                     width="100px"
                                     onClick={() => this.toggle(item)}
                                   ></img>
-                                )}
+                                )} */}
                                 <div className="videoThumb">
                                   <div className="containerThumb">
                                     {item.thumbnail ? (
@@ -4322,30 +4384,29 @@ class VideoList extends Component {
                                   </div>
                                 </div>
                                 <div className="videoDetail">
-                                  <div className="videoDuration mt-3">
-                                    <h6>
-                                      <i
-                                        className="fa fa-clock-o fa-1x mr-2"
-                                        aria-hidden="true"
-                                      ></i>
-                                      {minuteLabel} นาที
-                                    </h6>
-                                  </div>
-                                  <hr
+                                  {/* <hr
                                     className=""
                                     style={{ width: "100%", marginTop: "40px" }}
-                                  ></hr>
+                                  ></hr> */}
                                   <div className="videoName">
-                                    <p
+                                    <div className="">
+                                      <h6 style={{ color: "#828282" }}>
+                                        <i
+                                          className="fa fa-clock-o fa-1x mr-2"
+                                          aria-hidden="true"
+                                        ></i>
+                                        {minuteLabel} นาที
+                                      </h6>
+                                    </div>
+                                    {/* <p
                                       style={{
                                         color: "grey",
                                         marginBottom: "0px",
                                         marginTop: "0px",
                                       }}
                                     >
-                                      {" "}
-                                      {item.category}{" "}
-                                    </p>
+                                      {item.category}
+                                    </p> */}
                                     {item.name.length < 17 ? (
                                       <h4 style={{ color: "#059669" }}>
                                         <b>{item.name}</b>
@@ -4598,21 +4659,21 @@ class VideoList extends Component {
               <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
 
               {this.props.user &&
-                this.props.user.other_attributes &&
-                this.props.statusVideoList !== "no_video"
+              this.props.user.other_attributes &&
+              this.props.statusVideoList !== "no_video"
                 ? editVDO_click === "show"
                   ? this.renderEditVDO()
                   : lastWeekVDO_click === "show"
-                    ? lastWeekVDOAll === true
-                      ? this.renderVideoListLastWeekAll()
-                      : this.renderVideoListLastWeek()
-                    : this.renderVideoList()
+                  ? lastWeekVDOAll === true
+                    ? this.renderVideoListLastWeekAll()
+                    : this.renderVideoListLastWeek()
+                  : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                statusGetCheckRenewPrompt !== "loading" &&
-                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                  statusGetCheckRenewPrompt !== "loading" &&
+                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                  ? this.render4WeeksPrompt()
-                  : this.renderOtherAttribute())}
+                    ? this.render4WeeksPrompt()
+                    : this.renderOtherAttribute())}
             </div>
           </div>
         </div>
