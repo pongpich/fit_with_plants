@@ -209,7 +209,7 @@ function BonusChallenge() {
                 className="btn d-flex justify-content-center align-items-center"
                 style={{
                   color: "white",
-                  backgroundColor: "#EF60A3",
+                  backgroundColor: "#059669",
                   width: 386,
                   height: 82,
                   borderRadius: 50,

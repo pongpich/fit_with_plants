@@ -511,30 +511,30 @@ class Challenges extends Component {
           {this.renderPopupScoreDetail()}
 
           {/* เปิดปิด event ตรงนี้อย่าลืม เอา challengePeriod2 ออกเปลี่ยนเป็น challengePeriod ธรรมดา */}
-          {!this.state.challengePeriod2 ? (
+          {!this.state.challengePeriod ? (
             <>
               <div
                 className="card shadow col-lg-4 col-md-12"
-                style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+                style={{ borderRadius: "25px", border: "1px solid #059669" }}
               >
                 <div className="card-body">
                   <div className="row">
                     <div className="col-12 mb-3">
                       <h5
                         className="card-title mb-4"
-                        style={{ color: "#F45197" }}
+                        style={{ color: "#059669" }}
                       >
                         <b>รายการชาเลนจ์แบบทีม</b>
                       </h5>
                       <p className="card-text">
                         ทีมชั่งน้ำหนักครบ {numberOfMembers * 2} ครั้ง{" "}
-                        <span style={{ float: "right", color: "#F45197" }}>
+                        <span style={{ float: "right", color: "#059669" }}>
                           {logWeightTeamCount}/{numberOfMembers * 2}
                         </span>
                       </p>
                       <p className="card-text">
                         ทีมชั่งน้ำหนักครบ 7 วัน
-                        <span style={{ float: "right", color: "#F45197" }}>
+                        <span style={{ float: "right", color: "#059669" }}>
                           {dailyTeamWeightBonusCount}/7
                         </span>
                       </p>
@@ -542,31 +542,31 @@ class Challenges extends Component {
                     {/* <div className="col-lg-6 mb-3" style={{ float: "right" }}>
                     <h5
                       className="card-title mb-4"
-                      style={{ color: "#F45197" }}
+                      style={{ color: "#059669" }}
                     >
                       <b>รายการชาเลนจ์แบบเดี่ยว</b>
                     </h5>
                     <p className="card-text">
                       ชั่งน้ำหนักครบ 2 ครั้ง{" "}
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {logWeightCount}/2
                       </span>
                     </p>
                     <p className="card-text">
                       น้ำหนักลดลงจากสัปดาห์ก่อน
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {isReducedWeight ? 1 : 0}/1
                       </span>
                     </p>
                     <p className="card-text">
                       รอบเอวลดลงจากสัปดาห์ก่อน
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {waistInWeekResult}/1
                       </span>
                     </p>
                     <p className="card-text">
                       ออกกำลังกายครบทุกวันในสัปดาห์
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {this.props.statusVideoList !== "no_video"
                           ? isExerciseCompleted
                           : 0}
@@ -575,7 +575,7 @@ class Challenges extends Component {
                     </p>
                     <p className="card-text">
                       ทำ Random Exercise Snacks สำเร็จ
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {count ? count : 0}/4
                       </span>
                     </p>
@@ -586,33 +586,33 @@ class Challenges extends Component {
 
               <div
                 className="card shadow col-lg-4 col-md-12"
-                style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+                style={{ borderRadius: "25px", border: "1px solid #059669" }}
               >
                 <div className="card-body">
-                  <h5 className="card-title mb-4" style={{ color: "#F45197" }}>
+                  <h5 className="card-title mb-4" style={{ color: "#059669" }}>
                     <b>รายการชาเลนจ์แบบเดี่ยว</b>
                   </h5>
                   <p className="card-text">
                     ชั่งน้ำหนักครบ 2 ครั้ง{" "}
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {logWeightCount}/2
                     </span>
                   </p>
                   <p className="card-text">
                     น้ำหนักลดลงจากสัปดาห์ก่อน
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {isReducedWeight ? 1 : 0}/1
                     </span>
                   </p>
                   <p className="card-text">
                     รอบเอวลดลงจากสัปดาห์ก่อน
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {waistInWeekResult}/1
                     </span>
                   </p>
                   <p className="card-text">
                     ออกกำลังกายครบทุกวันในสัปดาห์
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {this.props.statusVideoList !== "no_video"
                         ? isExerciseCompleted
                         : 0}
@@ -628,7 +628,7 @@ class Challenges extends Component {
               style={{
                 textAlign: "center",
                 borderRadius: "25px",
-                border: "1px solid #EF60A3",
+                border: "1px solid #059669",
               }}
             >
               <div className="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 mt-4">
@@ -641,7 +641,7 @@ class Challenges extends Component {
           )}
           <div
             className="card shadow col-lg-3 col-md-12"
-            style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+            style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             <div className="card-body">
               <center>
@@ -657,7 +657,7 @@ class Challenges extends Component {
                   width="55%"
                   height="45%"
                 />
-                <h3 className="card-title" style={{ color: "#F45197" }}>
+                <h3 className="card-title" style={{ color: "#059669" }}>
                   <b>{rank}</b>
                 </h3>
                 <div
@@ -668,13 +668,13 @@ class Challenges extends Component {
                     class="progress-bar"
                     style={{
                       width: `${(scoreInWeek / 41) * 100}%`,
-                      backgroundColor: "#F45197",
+                      backgroundColor: "#059669",
                     }}
                   ></div>
                 </div>
                 <h5
                   className="card-text mt-3 mb-3"
-                  style={{ color: "#F45197" }}
+                  style={{ color: "#059669" }}
                 >
                   {scoreInWeek}/41 คะแนน
                 </h5>
@@ -693,7 +693,7 @@ class Challenges extends Component {
                 className="card-title"
                 style={{
                   cursor: "pointer",
-                  color: "#F45197",
+                  color: "#059669",
                   textDecoration: "underline",
                 }}
                 onClick={() => this.openPopupScoreDetail()}
@@ -706,7 +706,7 @@ class Challenges extends Component {
                 className="card-title"
                 style={{
                   cursor: "pointer",
-                  color: "#F45197",
+                  color: "#059669",
                   textDecoration: "underline",
                 }}
                 onClick={() => this.openPopupRulesAndPrizes()}
@@ -744,7 +744,7 @@ class Challenges extends Component {
             &times;
           </div>
           <br></br>
-          <h5 style={{ color: "#F45197", textAlign: "center" }}>
+          <h5 style={{ color: "#059669", textAlign: "center" }}>
             <b>คำชวนเข้าร่วมทีมชาเลนจ์</b>
           </h5>
           <br></br>
@@ -766,8 +766,8 @@ class Challenges extends Component {
                   className="btn btn-secondary col-4"
                   style={{
                     backgroundColor: "white",
-                    color: "#F45197",
-                    borderColor: "#F45197",
+                    color: "#059669",
+                    borderColor: "#059669",
                   }}
                   onClick={() =>
                     this.props.rejectTeamInvite(
@@ -783,7 +783,7 @@ class Challenges extends Component {
                 <button
                   type="button"
                   className="btn btn-secondary col-4"
-                  style={{ backgroundColor: "#F45197", borderColor: "#F45197" }}
+                  style={{ backgroundColor: "#059669", borderColor: "#059669" }}
                   onClick={() =>
                     this.props.acceptTeamInvite(
                       this.props.user && this.props.user.user_id,
@@ -843,7 +843,7 @@ class Challenges extends Component {
         {selectedTeamInvite ? (
           <div
             className="card shadow col-lg-7 col-md-12"
-            style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+            style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             <div className="card-body">
               <div className="row mt-4 justify-content-center">
@@ -867,7 +867,7 @@ class Challenges extends Component {
                     <button
                       type="button"
                       class="btn btn-danger mt-4 mb-4 col-12"
-                      style={{ backgroundColor: "#F45197" }}
+                      style={{ backgroundColor: "#059669" }}
                       onClick={() =>
                         this.props.sendTeamInvite(
                           user && user.user_id,
@@ -886,14 +886,14 @@ class Challenges extends Component {
         ) : (
           <div
             className="card shadow col-lg-7 col-md-12"
-            style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+            style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             {membersOfTeam.length > 0 ? ( //membersOfTeam.length > 0 คือ ผู้ใช้มีทีมแล้ว
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-12">
                     <h5 className="card-title">
-                      <b style={{ color: "#F45197" }}>{group_name}</b>{" "}
+                      <b style={{ color: "#059669" }}>{group_name}</b>{" "}
                       <span style={{ float: "right" }}>
                         สมาชิก {numberOfMembers}/10คน
                       </span>
@@ -919,7 +919,7 @@ class Challenges extends Component {
                             </div>
                             <div className="col-lg-3 col-md-3 col-6">
                               <span
-                                style={{ float: "right", color: "#F45197" }}
+                                style={{ float: "right", color: "#059669" }}
                               >
                                 {item.end_rank
                                   ? item.end_rank.charAt(0).toUpperCase() +
@@ -938,7 +938,7 @@ class Challenges extends Component {
                 <div className="row justify-content-between">
                   <h5
                     className="underline-on-hover"
-                    style={{ cursor: "pointer", color: "#F45197" }}
+                    style={{ cursor: "pointer", color: "#059669" }}
                     onClick={() => this.openPopupLeaveTeam()}
                   >
                     ออกจากทีม
@@ -946,7 +946,7 @@ class Challenges extends Component {
                   {membersOfTeam && membersOfTeam.length < 10 && (
                     <h5
                       className="underline-on-hover"
-                      style={{ cursor: "pointer", color: "#F45197" }}
+                      style={{ cursor: "pointer", color: "#059669" }}
                       onClick={() =>
                         this.setState({ selectedTeamInvite: true })
                       }
@@ -1010,7 +1010,7 @@ class Challenges extends Component {
                 <center>
                   <h4
                     className="card-title mt-3 mb-4"
-                    style={{ color: "#F45197" }}
+                    style={{ color: "#059669" }}
                   >
                     <b>ตั้งชื่อทีมของคุณ</b>
                   </h4>
@@ -1031,7 +1031,7 @@ class Challenges extends Component {
                     <button
                       type="button"
                       class="btn btn-danger mt-4 mb-4 col-12"
-                      style={{ backgroundColor: "#F45197" }}
+                      style={{ backgroundColor: "#059669" }}
                       onClick={() => this.createTeam(this.state.teamName)}
                     >
                       ยืนยัน
@@ -1047,12 +1047,12 @@ class Challenges extends Component {
 
         <div
           className="card shadow col-lg-4 col-md-12  offset-lg-1"
-          style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+          style={{ borderRadius: "25px", border: "1px solid #059669" }}
         >
           <div className="card-body">
             <center style={{ marginTop: "35%", marginBottom: "35%" }}>
               <h3 className="mb-4">คะแนนทีม</h3>
-              <h1 style={{ color: "#F45197" }}>
+              <h1 style={{ color: "#059669" }}>
                 {totalScoreOfTeam ? totalScoreOfTeam : 0} คะแนน
               </h1>
             </center>
@@ -1091,8 +1091,8 @@ class Challenges extends Component {
               className="btn btn-secondary col-4"
               style={{
                 backgroundColor: "white",
-                color: "#F45197",
-                borderColor: "#F45197",
+                color: "#059669",
+                borderColor: "#059669",
               }}
               onClick={() => this.closePopupLeaveTeam()}
             >
@@ -1102,7 +1102,7 @@ class Challenges extends Component {
             <button
               type="button"
               className="btn btn-danger col-4"
-              style={{ backgroundColor: "#F45197" }}
+              style={{ backgroundColor: "#059669" }}
               onClick={() => this.props.leaveTeam(user.user_id)}
             >
               ยืนยัน
@@ -1149,7 +1149,7 @@ class Challenges extends Component {
                     {index + 1 == "3" ? (
                       <img src="../assets/img/coin/copper.png" alt="" />
                     ) : null}
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {item.totalScoreOfTeam ? item.totalScoreOfTeam : 0} คะแนน
                     </span>
                   </p>
@@ -1167,7 +1167,7 @@ class Challenges extends Component {
                     {index + 1 == "3" ? (
                       <img src="../assets/img/coin/copper.png" alt="" />
                     ) : null}
-                    <span style={{ float: "right", color: "#F45197" }}>
+                    <span style={{ float: "right", color: "#059669" }}>
                       {item.totalScoreOfTeam ? item.totalScoreOfTeam : 0} คะแนน
                     </span>
                   </p>
@@ -1182,7 +1182,7 @@ class Challenges extends Component {
                 <hr class="w-100" />
                 <p className="card-text">
                   {index + 1}. {item.group_name}
-                  <span style={{ float: "right", color: "#F45197" }}>
+                  <span style={{ float: "right", color: "#059669" }}>
                     {item.totalScoreOfTeam ? item.totalScoreOfTeam : 0} คะแนน
                   </span>
                 </p>
@@ -1249,7 +1249,7 @@ class Challenges extends Component {
                       {index == "3" ? (
                         <img src="../assets/img/coin/copper.png" alt="" />
                       ) : null}
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {item.total_score ? item.total_score : 0} คะแนน
                       </span>
                     </p>
@@ -1267,7 +1267,7 @@ class Challenges extends Component {
                       {index == "3" ? (
                         <img src="../assets/img/coin/copper.png" alt="" />
                       ) : null}
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {item.total_score ? item.total_score : 0} คะแนน
                       </span>
                     </p>
@@ -1286,7 +1286,7 @@ class Challenges extends Component {
                 : myRank[0].facebook
                   ? myRank[0].facebook
                   : `${myRank[0].first_name} ${myRank[0].last_name}`}
-              <span style={{ float: "right", color: "#F45197" }}>
+              <span style={{ float: "right", color: "#059669" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
             </p>
@@ -1348,7 +1348,7 @@ class Challenges extends Component {
                       {index == "3" ? (
                         <img src="../assets/img/coin/copper.png" alt="" />
                       ) : null}
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {item.total_score ? item.total_score : 0} คะแนน
                       </span>
                     </p>
@@ -1364,7 +1364,7 @@ class Challenges extends Component {
                       {index == 3 ? (
                         <img src="../assets/img/coin/copper.png" alt="" />
                       ) : null}
-                      <span style={{ float: "right", color: "#F45197" }}>
+                      <span style={{ float: "right", color: "#059669" }}>
                         {item.total_score ? item.total_score : 0} คะแนน
                       </span>
                     </p>
@@ -1383,7 +1383,7 @@ class Challenges extends Component {
                 : myRank[0].facebook
                   ? myRank[0].facebook
                   : `${myRank[0].first_name} ${myRank[0].last_name}`}
-              <span style={{ float: "right", color: "#F45197" }}>
+              <span style={{ float: "right", color: "#059669" }}>
                 {myRank[0].total_score ? myRank[0].total_score : 0} คะแนน
               </span>
             </p>
@@ -1402,7 +1402,7 @@ class Challenges extends Component {
           className="card shadow col-lg-5 col-md-12 col-12"
           style={{
             borderRadius: "1rem",
-            border: "1px solid #F45197",
+            border: "1px solid #059669",
           }}
         >
           <div className="card-body">
@@ -1410,7 +1410,7 @@ class Challenges extends Component {
               <h5
                 className="ml-3 mr-4"
                 style={{
-                  color: `${selectedScoreBoard === "team" ? "#F45197" : "grey"
+                  color: `${selectedScoreBoard === "team" ? "#059669" : "grey"
                     }`,
                   textDecoration:
                     selectedScoreBoard === "team" ? "underline" : "",
@@ -1423,7 +1423,7 @@ class Challenges extends Component {
               <h5
                 className="mr-4"
                 style={{
-                  color: `${selectedScoreBoard === "individual" ? "#F45197" : "grey"
+                  color: `${selectedScoreBoard === "individual" ? "#059669" : "grey"
                     }`,
                   textDecoration:
                     selectedScoreBoard === "individual" ? "underline" : "",
@@ -1439,7 +1439,7 @@ class Challenges extends Component {
                 <h5
                   className=""
                   style={{
-                    color: `${selectedScoreBoard === "friendsRank" ? "#F45197" : "grey"
+                    color: `${selectedScoreBoard === "friendsRank" ? "#059669" : "grey"
                       }`,
                     cursor: "pointer",
                   }}
@@ -1478,7 +1478,7 @@ class Challenges extends Component {
             &times;
           </div>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>วิธีการเพิ่มจำนวนเพื่อน</b>
           </h5>
           <h6>
@@ -1498,7 +1498,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-6"
-                style={{ backgroundColor: "#F45197" }}
+                style={{ backgroundColor: "#059669" }}
                 onClick={() => this.closePopupMaxFriendsDetail()}
               >
                 ปิด
@@ -1543,7 +1543,7 @@ class Challenges extends Component {
             &times;
           </div>
           <br></br>
-          <h5 style={{ color: "#F45197", textAlign: "center" }}>
+          <h5 style={{ color: "#059669", textAlign: "center" }}>
             <b>คำขอเป็นเพื่อน</b>
           </h5>
           <br></br>
@@ -1565,8 +1565,8 @@ class Challenges extends Component {
                   className="btn btn-secondary col-4"
                   style={{
                     backgroundColor: "white",
-                    color: "#F45197",
-                    borderColor: "#F45197",
+                    color: "#059669",
+                    borderColor: "#059669",
                   }}
                   onClick={() =>
                     this.props.rejectFriend(
@@ -1582,7 +1582,7 @@ class Challenges extends Component {
                 <button
                   type="button"
                   className="btn btn-secondary col-4"
-                  style={{ backgroundColor: "#F45197", borderColor: "#F45197" }}
+                  style={{ backgroundColor: "#059669", borderColor: "#059669" }}
                   onClick={() =>
                     this.props.acceptFriend(
                       this.props.user && this.props.user.user_id,
@@ -1635,7 +1635,7 @@ class Challenges extends Component {
             &times;
           </div>
           <br></br>
-          <h5 style={{ color: "#F45197", textAlign: "center" }}>
+          <h5 style={{ color: "#059669", textAlign: "center" }}>
             <b>ยืนยันการลบเพื่อน</b>
           </h5>
           <br></br>
@@ -1657,8 +1657,8 @@ class Challenges extends Component {
                 className="btn btn-secondary col-4"
                 style={{
                   backgroundColor: "white",
-                  color: "#F45197",
-                  borderColor: "#F45197",
+                  color: "#059669",
+                  borderColor: "#059669",
                 }}
                 onClick={() => this.closePopupDeleteFriend()}
               >
@@ -1668,7 +1668,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-4"
-                style={{ backgroundColor: "#F45197", borderColor: "#F45197" }}
+                style={{ backgroundColor: "#059669", borderColor: "#059669" }}
                 onClick={() =>
                   this.props.deleteFriend(
                     this.props.user && this.props.user.user_id,
@@ -1746,7 +1746,7 @@ class Challenges extends Component {
                   <button
                     type="button"
                     class="btn btn-danger mt-4 mb-4 col-12"
-                    style={{ backgroundColor: "#F45197" }}
+                    style={{ backgroundColor: "#059669" }}
                     onClick={() =>
                       this.props.sendFriendRequest(user.user_id, emailAddFriend)
                     }
@@ -1761,13 +1761,13 @@ class Challenges extends Component {
         ) : (
           <div
             className="card shadow col-lg-7 col-md-12"
-            style={{ borderRadius: "25px", border: "1px solid #EF60A3" }}
+            style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-12">
                   <h5 className="card-title">
-                    <b style={{ color: "#F45197" }}>รายชื่อเพื่อน</b>{" "}
+                    <b style={{ color: "#059669" }}>รายชื่อเพื่อน</b>{" "}
                     <span style={{ float: "right" }}>
                       เพื่อน {friend_list && friend_list.length}/{max_friends}{" "}
                       คน
@@ -1794,7 +1794,7 @@ class Challenges extends Component {
                             </span>
                           </div>
                           <div className="col-lg-3 col-md-3 col-6">
-                            <span style={{ float: "right", color: "#F45197" }}>
+                            <span style={{ float: "right", color: "#059669" }}>
                               {item.end_rank
                                 ? item.end_rank.charAt(0).toUpperCase() +
                                 item.end_rank.substr(1).toLowerCase()
@@ -1820,7 +1820,7 @@ class Challenges extends Component {
               <div className="row justify-content-between">
                 <h5
                   className="underline-on-hover"
-                  style={{ cursor: "pointer", color: "#F45197" }}
+                  style={{ cursor: "pointer", color: "#059669" }}
                   onClick={() => this.openPopupMaxFriendsDetail()}
                 >
                   วิธีการเพิ่มจำนวนเพื่อน
@@ -1828,7 +1828,7 @@ class Challenges extends Component {
                 {friend_list.length < max_friends && (
                   <h5
                     className="underline-on-hover"
-                    style={{ cursor: "pointer", color: "#F45197" }}
+                    style={{ cursor: "pointer", color: "#059669" }}
                     onClick={() => this.setState({ selectedAddFriend: true })}
                   >
                     + เพิ่มเพื่อน
@@ -2968,12 +2968,12 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "mission" ? "#FFFFFF" : "#F45197"
+                      color: `${selectedNavLink === "mission" ? "#FFFFFF" : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
-                        selectedNavLink === "mission" ? "#EF60A3" : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                        selectedNavLink === "mission" ? "#059669" : "#FFFFFF",
+                      border: "1px solid #059669",
                       width: "150px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -2990,12 +2990,12 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "teamList" ? "#FFFFFF" : "#F45197"
+                      color: `${selectedNavLink === "teamList" ? "#FFFFFF" : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
-                        selectedNavLink === "teamList" ? "#EF60A3" : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                        selectedNavLink === "teamList" ? "#059669" : "#FFFFFF",
+                      border: "1px solid #059669",
                       width: "150px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -3016,14 +3016,14 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "scoreBoard" ? "#FFFFFF" : "#F45197"
+                      color: `${selectedNavLink === "scoreBoard" ? "#FFFFFF" : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
                         selectedNavLink === "scoreBoard"
-                          ? "#EF60A3"
+                          ? "#059669"
                           : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                      border: "1px solid #059669",
                       width: "150px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -3040,14 +3040,14 @@ class Challenges extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${selectedNavLink === "friendList" ? "#FFFFFF" : "#F45197"
+                      color: `${selectedNavLink === "friendList" ? "#FFFFFF" : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
                         selectedNavLink === "friendList"
-                          ? "#EF60A3"
+                          ? "#059669"
                           : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                      border: "1px solid #059669",
                       width: "150px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -3069,14 +3069,14 @@ class Challenges extends Component {
                     style={{
                       color: `${selectedNavLink === "achievement"
                           ? "#FFFFFF"
-                          : "#F45197"
+                          : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
                         selectedNavLink === "achievement"
-                          ? "#EF60A3"
+                          ? "#059669"
                           : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                      border: "1px solid #059669",
                       width: "150px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -3098,14 +3098,14 @@ class Challenges extends Component {
                     style={{
                       color: `${selectedNavLink === "searchMember"
                           ? "#FFFFFF"
-                          : "#F45197"
+                          : "#059669"
                         }`,
                       cursor: "pointer",
                       background:
                         selectedNavLink === "searchMember"
-                          ? "#EF60A3"
+                          ? "#059669"
                           : "#FFFFFF",
-                      border: "1px solid #EF60A3",
+                      border: "1px solid #059669",
                       width: "200px",
                       borderRadius: "1rem",
                       display: "flex",
@@ -3185,8 +3185,8 @@ class Challenges extends Component {
                   aria-controls="contact"
                   aria-selected="false"
                   style={{
-                    color: "#F45197",
-                    borderBottom: "5px solid #F45197",
+                    color: "#059669",
+                    borderBottom: "5px solid #059669",
                     paddingBottom: "2px",
                     textDecorationColor: "white",
                   }}
@@ -3201,7 +3201,7 @@ class Challenges extends Component {
                 <center>
                   <h4
                     className="card-title mt-3 mb-4"
-                    style={{ color: "#F45197" }}
+                    style={{ color: "#059669" }}
                   >
                     <b>ตั้งชื่อทีมของคุณ</b>
                   </h4>
@@ -3217,7 +3217,7 @@ class Challenges extends Component {
                     <button
                       type="button"
                       class="btn btn-danger mt-4 mb-4 col-12"
-                      style={{ backgroundColor: "#F45197" }}
+                      style={{ backgroundColor: "#059669" }}
                       onClick={() => this.createTeam(this.state.teamName)}
                     >
                       ยืนยัน
@@ -3266,8 +3266,8 @@ class Challenges extends Component {
                   aria-controls="contact"
                   aria-selected="false"
                   style={{
-                    color: "#F45197",
-                    borderBottom: "5px solid #F45197",
+                    color: "#059669",
+                    borderBottom: "5px solid #059669",
                     paddingBottom: "2px",
                     textDecorationColor: "white",
                   }}
@@ -3287,7 +3287,7 @@ class Challenges extends Component {
                     <h2 className="card-title mt-3 ">
                       <b>
                         ชาเลนจ์น้องใหม่ เอาใจสมาชิก{" "}
-                        <b style={{ color: "#F45197" }}>BEBE FIT ROUTINE</b>
+                        <b style={{ color: "#059669" }}>BEBE FIT ROUTINE</b>
                       </b>
                     </h2>
                     <h2 className="card-title mb-5">
@@ -3304,7 +3304,7 @@ class Challenges extends Component {
                         </h5>
                         <h5 className="card-text">
                           บันทึกการชั่งน้ำหนักเพื่อดูความเปลี่ยนแปลงของร่างกาย{" "}
-                          <span style={{ color: "#F45197" }}>รับ 10 คะแนน</span>
+                          <span style={{ color: "#059669" }}>รับ 10 คะแนน</span>
                         </h5>
                       </div>
                       <div className="mb-4 col-lg-4">
@@ -3317,7 +3317,7 @@ class Challenges extends Component {
                         </h5>
                         <h5 className="card-text">
                           ก้าวสู่เป้าหมายออกกำลังกายได้ครบทั้งสัปดาห์{" "}
-                          <span style={{ color: "#F45197" }}>รับ 10 คะแนน</span>
+                          <span style={{ color: "#059669" }}>รับ 10 คะแนน</span>
                         </h5>
                       </div>
                       <div className="mb-4 col-lg-4">
@@ -3330,7 +3330,7 @@ class Challenges extends Component {
                         </h5>
                         <h5 className="card-text mb-4">
                           สะสมคะแนนกับเพื่อนร่วมทีม{" "}
-                          <span style={{ color: "#F45197" }}>
+                          <span style={{ color: "#059669" }}>
                             อีกหนึ่งแรงผลักดันสู่เป้าหมายในการออกกำลังกาย
                           </span>
                         </h5>
@@ -3340,7 +3340,7 @@ class Challenges extends Component {
                       <button
                         type="button"
                         class="btn btn-danger col-6"
-                        style={{ backgroundColor: "#F45197" }}
+                        style={{ backgroundColor: "#059669" }}
                         onClick={() => this.openPopupJoinChallenge()}
                       >
                         เข้าร่วมชาเลนจ์
@@ -3351,7 +3351,7 @@ class Challenges extends Component {
                     <center>
                       <h5
                         className="card-title underline-on-hover col-6"
-                        style={{ cursor: "pointer", color: "#F45197" }}
+                        style={{ cursor: "pointer", color: "#059669" }}
                         onClick={() => this.openPopupRulesAndPrizes()}
                       >
                         กฎกติกาและของรางวัล
@@ -3386,7 +3386,7 @@ class Challenges extends Component {
               src={`../assets/img/challenges/champ.png`}
               className="rounded-circle mb-3"
             />
-            <h4 className="mt-1 mb-3" style={{ color: "#F45197" }}>
+            <h4 className="mt-1 mb-3" style={{ color: "#059669" }}>
               <b>คุณต้องการเข้าร่วมชาเลนจ์หรือไม่</b>
             </h4>
           </center>
@@ -3398,8 +3398,8 @@ class Challenges extends Component {
                 className="btn btn-secondary col-4"
                 style={{
                   backgroundColor: "white",
-                  color: "#F45197",
-                  borderColor: "#F45197",
+                  color: "#059669",
+                  borderColor: "#059669",
                 }}
                 onClick={() => this.closePopupJoinChallenge()}
               >
@@ -3409,7 +3409,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-danger col-4"
-                style={{ backgroundColor: "#F45197" }}
+                style={{ backgroundColor: "#059669" }}
                 onClick={() =>
                   this.props.getNumberOfTeamNotFull(this.props.user.fb_group)
                 }
@@ -3445,7 +3445,7 @@ class Challenges extends Component {
           <h4 className="mt-1 mb-4">
             <b>กฎและกติกา</b>
           </h4>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• สมาชิกในทีม</b>
           </h5>
           <h6>
@@ -3453,7 +3453,7 @@ class Challenges extends Component {
           </h6>
           <h6>หากสมาชิกหมดอายุก่อนจบ Season ระบบจะตัดออกจากกลุ่มใน 7 วัน</h6>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• การเลื่อนขั้น (Rank)</b>
           </h5>
           <h6>
@@ -3467,7 +3467,7 @@ class Challenges extends Component {
           </h6>
           <h6>โดยระบบจะทำการอัปเดตคะแนนทุกวันอาทิตย์เวลา 00.00 น.</h6>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• การสะสมคะแนน</b>
           </h5>
           <h6>
@@ -3481,12 +3481,12 @@ class Challenges extends Component {
           </h6>
           <h6>ถ้าคนในทีมทำภารกิจสำเร็จ ผู้ร่วมทีมจะได้รับคะแนนด้วยเช่นกัน</h6>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• รายละเอียดของรางวัลประจำ Season</b>
           </h5>
           <h6>สามารถติดตามของรางวัลได้ทาง Facebook Group</h6>
           <br></br>
-          {/*  <h5 style={{ color: "#F45197" }}><b>• ระยะเวลาชาเลนจ์</b></h5>
+          {/*  <h5 style={{ color: "#059669" }}><b>• ระยะเวลาชาเลนจ์</b></h5>
           <h6>เริ่มตั้งแต่วันที่ 4 ตุลาคม 2561 สิ้นสุดวันที่ 28 พฤศจิกายน 2561</h6> */}
           {this.props.statusGetNumberOfTeamNotFull !== "loading" ? (
             <div className="row mt-3">
@@ -3494,7 +3494,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-6"
-                style={{ backgroundColor: "#F45197" }}
+                style={{ backgroundColor: "#059669" }}
                 onClick={() => this.closePopupRulesAndPrizes()}
               >
                 ปิด
@@ -3528,7 +3528,7 @@ class Challenges extends Component {
           <h4 className="mt-1 mb-4">
             <b>รายละเอียดคะแนน</b>
           </h4>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• รายการชาเลนจ์แบบเดี่ยว</b>
           </h5>
           <h6>
@@ -3556,7 +3556,7 @@ class Challenges extends Component {
             <b>ทำ Random Exercise Snacks 7 ครั้ง</b> จะได้รับคะแนนพิเศษ 5 คะแนน
           </h6>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• รายการชาเลนจ์แบบทีม</b>
           </h5>
           <h6>
@@ -3588,7 +3588,7 @@ class Challenges extends Component {
             <b> - ครบ 1 วัน</b> ทั้งทีมจะได้รับ คนละ 10 คะแนน
           </h6>
           <br></br>
-          <h5 style={{ color: "#F45197" }}>
+          <h5 style={{ color: "#059669" }}>
             <b>• Bonus Rank</b>
           </h5>
           <h6>
@@ -3599,7 +3599,7 @@ class Challenges extends Component {
             คะแนน
           </h6>
           <br></br>
-          <h6 style={{ color: "#F45197" }}>
+          <h6 style={{ color: "#059669" }}>
             <b>ระบบจะทำการอัปเดตคะแนนทุกวันอาทิตย์เวลา 00.00 น.</b>
           </h6>
           {this.props.statusGetNumberOfTeamNotFull !== "loading" ? (
@@ -3608,7 +3608,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-6"
-                style={{ backgroundColor: "#F45197" }}
+                style={{ backgroundColor: "#059669" }}
                 onClick={() => this.closePopupScoreDetail()}
               >
                 ปิด

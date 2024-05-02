@@ -22,7 +22,7 @@ export default function WeightChoice({
         <div
           key={i}
           style={{
-            border: "1px solid #EF60A3",
+            border: "1px solid #059669",
             borderRadius: ".5rem",
             padding: "20px",
             background: activeColorWeight === item.id ? "#FCDEEC" : "",

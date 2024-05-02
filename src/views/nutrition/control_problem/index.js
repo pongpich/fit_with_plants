@@ -43,7 +43,7 @@ export default function ControlProblem({
       <div
         class="form-check d-flex align-items-center"
         style={{
-          border: "1px solid #EF60A3",
+          border: "1px solid #059669",
           borderRadius: ".5rem",
           padding: "20px",
           background: checkBoxValue.eatOften ? "#FCDEEC" : "",
@@ -65,7 +65,7 @@ export default function ControlProblem({
       <div
         class="form-check d-flex align-items-center"
         style={{
-          border: "1px solid #EF60A3",
+          border: "1px solid #059669",
           borderRadius: ".5rem",
           padding: "20px",
           background: checkBoxValue.dessert ? "#FCDEEC" : "",
@@ -88,7 +88,7 @@ export default function ControlProblem({
       <div
         class="form-check d-flex align-items-center"
         style={{
-          border: "1px solid #EF60A3",
+          border: "1px solid #059669",
           borderRadius: ".5rem",
           padding: "20px",
           background: checkBoxValue.bekary ? "#FCDEEC" : "",
@@ -110,7 +110,7 @@ export default function ControlProblem({
       <div
         class="form-check d-flex align-items-center"
         style={{
-          border: "1px solid #EF60A3",
+          border: "1px solid #059669",
           borderRadius: ".5rem",
           padding: "20px",
           background: checkBoxValue.oilyFood ? "#FCDEEC" : "",
@@ -132,7 +132,7 @@ export default function ControlProblem({
       <div
         class="form-check d-flex align-items-center"
         style={{
-          border: "1px solid #EF60A3",
+          border: "1px solid #059669",
           borderRadius: ".5rem",
           padding: "20px",
           background: checkBoxValue.sugarDrinks ? "#FCDEEC" : "",

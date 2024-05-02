@@ -220,7 +220,7 @@ function Nutrition() {
             <div style={{ maxHeight: "600px", overflowY: "auto" }}>
               <Table striped>
                 <thead>
-                  <tr style={{ background: "#EF60A3", color: "white" }}>
+                  <tr style={{ background: "#059669", color: "white" }}>
                     {columnsNutrients.map((item) => (
                       <th className="text-center" key={item.id}>
                         {item.title}
@@ -289,7 +289,7 @@ function Nutrition() {
             <div style={{ maxHeight: "600px", overflowY: "auto" }}>
               <Table striped>
                 <thead>
-                  <tr style={{ background: "#EF60A3", color: "white" }}>
+                  <tr style={{ background: "#059669", color: "white" }}>
                     {columnsCarb.map((item) => (
                       <th className="text-center" style={{width: "50%"}} key={item.id}>
                         {item.title}
@@ -334,7 +334,7 @@ function Nutrition() {
             <div style={{ maxHeight: "600px", overflowY: "auto" }}>
               <Table striped>
                 <thead>
-                  <tr style={{ background: "#EF60A3", color: "white" }}>
+                  <tr style={{ background: "#059669", color: "white" }}>
                     {columnsProtein.map((item) => (
                       <th className="text-center" style={{width: "50%"}} key={item.id}>
                         {item.title}
@@ -378,7 +378,7 @@ function Nutrition() {
             <div style={{ maxHeight: "600px", overflowY: "auto" }}>
               <Table striped md={2}>
                 <thead>
-                  <tr style={{ background: "#EF60A3", color: "white" }}>
+                  <tr style={{ background: "#059669", color: "white" }}>
                     {columnsFat.map((item) => (
                       <th className="text-center" key={item.id} style={{width: "50%"}}>
                         {item.title}

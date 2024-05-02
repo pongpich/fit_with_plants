@@ -259,7 +259,7 @@ const BraveAndBurn = () => {
                   className="btn d-flex justify-content-center align-items-center mb-2 mt-2"
                   style={{
                     color: "white",
-                    backgroundColor: "#EF60A3",
+                    backgroundColor: "#059669",
                     width: 330,
                     height: 55,
                     borderRadius: 50,
