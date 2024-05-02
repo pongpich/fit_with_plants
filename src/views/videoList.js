@@ -1185,7 +1185,7 @@ class VideoList extends Component {
     return (
       <div className="card-body d-flex justify-content-center">
         <form className="mt-3">
-          <span className="mr-5" style={{ fontSize: "15px", color: "#F45197" }}>
+          <span className="mr-5" style={{ fontSize: "15px", color: "#059669" }}>
             {" "}
             <h4> แก้ไขคลิปออกกำลังกาย</h4>
           </span>
@@ -1308,7 +1308,7 @@ class VideoList extends Component {
                             />
                           </div>
                           <div className="mt-1 ml-3 mb-4">
-                            <h6 style={{ color: "#F45197" }}>
+                            <h6 style={{ color: "#059669" }}>
                               <b> {item.name}</b>
                             </h6>
                           </div>
@@ -1329,8 +1329,9 @@ class VideoList extends Component {
                               marginRight: "auto",
                               display: "block",
                               width: "85%",
-                              backgroundColor: "#F45197",
+                              backgroundColor: "#059669",
                               borderRadius: "20px",
+                              borderColor: "#059669"
                             }}
                             onClick={() => this.selectEditVideo(item)}
                           >
@@ -1350,7 +1351,7 @@ class VideoList extends Component {
                           />
                         </div>
                         <div className="mt-1 ml-3 mb-4">
-                          <h6 style={{ color: "#F45197" }}>
+                          <h6 style={{ color: "#059669" }}>
                             <b> {item.name} </b>
                           </h6>
                         </div>
@@ -1371,8 +1372,9 @@ class VideoList extends Component {
                             marginRight: "auto",
                             display: "block",
                             width: "85%",
-                            backgroundColor: "#F45197",
+                            backgroundColor: "#059669",
                             borderRadius: "20px",
+                            borderColor: "#059669"
                           }}
                           onClick={() => this.selectEditVideo(item)}
                         >
@@ -1399,22 +1401,22 @@ class VideoList extends Component {
             >
               <div className="mt-3">
                 {focusDay === 0 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 1</b>
                   </h5>
                 )}
                 {focusDay === 1 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 2</b>
                   </h5>
                 )}
                 {focusDay === 2 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 3</b>
                   </h5>
                 )}
                 {focusDay === 3 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 4</b>
                   </h5>
                 )}
@@ -1426,8 +1428,8 @@ class VideoList extends Component {
                 type="button"
                 style={{
                   backgroundColor: "white",
-                  color: "#F45197",
-                  borderColor: "#F45197",
+                  color: "#059669",
+                  borderColor: "#059669",
                   fontSize: "17px",
                   cursor: "pointer",
                   borderRadius: "12px",
@@ -1444,7 +1446,7 @@ class VideoList extends Component {
                 className="btn"
                 type="button"
                 style={{
-                  backgroundColor: "#F45197",
+                  backgroundColor: "#059669",
                   color: "white",
                   fontSize: "17px",
                   cursor: "pointer",
@@ -1632,11 +1634,11 @@ class VideoList extends Component {
                                 {item.category}{" "}
                               </p>
                               {item.name.length < 17 ? (
-                                <h4 style={{ color: "#F45197" }}>
+                                <h4 style={{ color: "#059669" }}>
                                   <b>{item.name}</b>
                                 </h4>
                               ) : (
-                                <h6 style={{ color: "#F45197" }}>
+                                <h6 style={{ color: "#059669" }}>
                                   <b>{item.name}</b>
                                 </h6>
                               )}
@@ -1809,10 +1811,10 @@ class VideoList extends Component {
         >
           <div className="mb-3 col-lg-12  col-md-12 col-12">
             <center>
-              <h2 className="mt-5" style={{ color: "#F45197" }}>
+              <h2 className="mt-5" style={{ color: "#059669" }}>
                 <b>กรอกข้อมูลเบื้องต้น</b>
               </h2>
-              <h2 className="mb-4" style={{ color: "#F45197" }}>
+              <h2 className="mb-4" style={{ color: "#059669" }}>
                 <b>เพื่อเริ่มต้นการใช้งาน</b>
               </h2>
               {/* <h5>การกรอกข้อมูลจะทำให้เราสามารถออกแบบ</h5>
@@ -2009,8 +2011,8 @@ class VideoList extends Component {
                 className="btn-shadow"
                 onClick={() => this.onUpdateBasicInfo()}
                 style={{
-                  backgroundColor: "#F45197",
-                  borderColor: "#F45197",
+                  backgroundColor: "#059669",
+                  borderColor: "#059669",
                   color: "white",
                   borderRadius: "50px",
                   width: "300px",
@@ -2042,10 +2044,10 @@ class VideoList extends Component {
       >
         <div className="mt-5 mb-5 col-lg-12  col-md-12 col-12">
           <center>
-            <h2 className="" style={{ color: "#F45197" }}>
+            <h2 className="" style={{ color: "#059669" }}>
               <b>กรอกข้อมูลเบื้องต้น</b>
             </h2>
-            <h2 className="mb-4" style={{ color: "#F45197" }}>
+            <h2 className="mb-4" style={{ color: "#059669" }}>
               <b>เพื่อเริ่มต้นการใช้งาน</b>
             </h2>
             <h5>
@@ -2175,8 +2177,8 @@ class VideoList extends Component {
                         }
                         style={{
                           backgroundColor: "white",
-                          borderColor: "#F45197",
-                          color: "#F45197",
+                          borderColor: "#059669",
+                          color: "#059669",
                           borderRadius: "50px",
                           width: "200px",
                           height: "40px",
@@ -2195,8 +2197,8 @@ class VideoList extends Component {
                           })
                         }
                         style={{
-                          backgroundColor: "#F45197",
-                          borderColor: "#F45197",
+                          backgroundColor: "#059669",
+                          borderColor: "#059669",
                           color: "white",
                           borderRadius: "50px",
                           width: "200px",
@@ -2234,8 +2236,8 @@ class VideoList extends Component {
                   }
                   style={{
                     backgroundColor: "white",
-                    borderColor: "#F45197",
-                    color: "#F45197",
+                    borderColor: "#059669",
+                    color: "#059669",
                     borderRadius: "50px",
                     width: "300px",
                     height: "48px",
@@ -2254,8 +2256,8 @@ class VideoList extends Component {
                     })
                   }
                   style={{
-                    backgroundColor: "#F45197",
-                    borderColor: "#F45197",
+                    backgroundColor: "#059669",
+                    borderColor: "#059669",
                     color: "white",
                     borderRadius: "50px",
                     width: "300px",
@@ -2286,7 +2288,7 @@ class VideoList extends Component {
         >
           <div className="mb-3 col-lg-12  col-md-12 col-12">
             <center>
-              <h2 className="mt-5 mb-4" style={{ color: "#F45197" }}>
+              <h2 className="mt-5 mb-4" style={{ color: "#059669" }}>
                 <b>สรุปรายละเอียด</b>
               </h2>
               <h5>กรุณาตรวจสอบความถูกต้องของข้อมูลอีกครั้งก่อนกดยืนยัน</h5>
@@ -2454,8 +2456,8 @@ class VideoList extends Component {
                 className="btn-shadow"
                 onClick={() => this.onUpdateProfile()}
                 style={{
-                  backgroundColor: "#F45197",
-                  borderColor: "#F45197",
+                  backgroundColor: "#059669",
+                  borderColor: "#059669",
                   color: "white",
                   borderRadius: "50px",
                   width: "300px",
@@ -2575,8 +2577,8 @@ class VideoList extends Component {
         >
           {step4WeeksPrompt === 1 && (
             <div>
-              <h1 style={{ color: "#F45197" }}>ยินดีด้วยค่ะ</h1>
-              <h1 style={{ color: "#F45197" }}>
+              <h1 style={{ color: "#059669" }}>ยินดีด้วยค่ะ</h1>
+              <h1 style={{ color: "#059669" }}>
                 คุณผ่านโปรแกรมในสัปดาห์แรกได้สำเร็จ!
               </h1>
               <br></br>
@@ -2590,8 +2592,8 @@ class VideoList extends Component {
           )}
           {step4WeeksPrompt === 2 && (
             <div>
-              <h1 style={{ color: "#F45197" }}>โปรแกรม Bebe Fit Routine</h1>
-              <h1 style={{ color: "#F45197" }}>เต็มรูปแบบ (Standard)</h1>
+              <h1 style={{ color: "#059669" }}>โปรแกรม Bebe Fit Routine</h1>
+              <h1 style={{ color: "#059669" }}>เต็มรูปแบบ (Standard)</h1>
               <h3>โปรแกรมการออกกำลังกายที่ออกแบบมา</h3>
               <h3>เพื่อให้คุณได้ผลลัพธ์จากการเปลี่ยนแปลงที่ดีที่สุด</h3>
               <div style={{ textAlign: "left" }}>
@@ -2656,8 +2658,8 @@ class VideoList extends Component {
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
                   borderRadius: 30,
-                  borderColor: "#F45197",
-                  color: "#F45197",
+                  borderColor: "#059669",
+                  color: "#059669",
                 }}
                 className="mt-3"
               >
@@ -2685,8 +2687,8 @@ class VideoList extends Component {
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
                   borderRadius: 30,
-                  borderColor: "#F45197",
-                  backgroundColor: "#F45197",
+                  borderColor: "#059669",
+                  backgroundColor: "#059669",
                   color: "white",
                 }}
                 className="mt-3"
@@ -2737,7 +2739,7 @@ class VideoList extends Component {
             type="button"
             className="btn btn-light btn-sm mr-2"
             style={{
-              borderColor: "#F45197",
+              borderColor: "#059669",
               borderWidth: selectVideoPlayer === 1 ? 3 : 0,
             }}
             onClick={() => this.setState({ selectVideoPlayer: 1 })}
@@ -2750,7 +2752,7 @@ class VideoList extends Component {
             type="button"
             className="btn btn-light btn-sm mr-2"
             style={{
-              borderColor: "#F45197",
+              borderColor: "#059669",
               borderWidth: selectVideoPlayer === 2 ? 3 : 0,
             }}
             onClick={() => this.setState({ selectVideoPlayer: 2 })}
@@ -2824,7 +2826,7 @@ class VideoList extends Component {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>
+              <h4 className="ml-3 mb-3" style={{ color: "#059669" }}>
                 โปรแกรมสัปดาห์ที่ผ่านมา
               </h4>
               <nav className="nav">
@@ -2832,7 +2834,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 0 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 0 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(0)}
@@ -2846,7 +2848,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 1 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 1 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(1)}
@@ -2860,7 +2862,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 2 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 2 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(2)}
@@ -2874,7 +2876,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 3 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(3)}
@@ -2887,7 +2889,7 @@ class VideoList extends Component {
 
                 <a
                   className="nav-link ml-auto"
-                  style={{ cursor: "pointer", color: "#F45197" }}
+                  style={{ cursor: "pointer", color: "#059669" }}
                   onClick={() =>
                     this.setState({ lastWeekVDO_click: "default" })
                   }
@@ -3183,11 +3185,11 @@ class VideoList extends Component {
                                   {item.category}{" "}
                                 </p>
                                 {item.name.length < 17 ? (
-                                  <h4 style={{ color: "#F45197" }}>
+                                  <h4 style={{ color: "#059669" }}>
                                     <b>{item.name}</b>
                                   </h4>
                                 ) : (
-                                  <h6 style={{ color: "#F45197" }}>
+                                  <h6 style={{ color: "#059669" }}>
                                     <b>{item.name}</b>
                                   </h6>
                                 )}
@@ -3377,7 +3379,7 @@ class VideoList extends Component {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>
+              <h4 className="ml-3 mb-3" style={{ color: "#059669" }}>
                 โปรแกรมสัปดาห์ที่ผ่านมา
               </h4>
               <select
@@ -3398,7 +3400,7 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 0 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 0 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(0)}
@@ -3413,7 +3415,7 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 1 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 1 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(1)}
@@ -3428,7 +3430,7 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 2 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 2 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(2)}
@@ -3443,7 +3445,7 @@ class VideoList extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 3 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(3)}
@@ -3456,7 +3458,7 @@ class VideoList extends Component {
 
                 <a
                   className="nav-link ml-auto"
-                  style={{ cursor: "pointer", color: "#F45197" }}
+                  style={{ cursor: "pointer", color: "#059669" }}
                   onClick={() =>
                     this.setState({ lastWeekVDO_click: "default" })
                   }
@@ -3752,11 +3754,11 @@ class VideoList extends Component {
                                   {item.category}{" "}
                                 </p>
                                 {item.name.length < 17 ? (
-                                  <h4 style={{ color: "#F45197" }}>
+                                  <h4 style={{ color: "#059669" }}>
                                     <b>{item.name}</b>
                                   </h4>
                                 ) : (
-                                  <h6 style={{ color: "#F45197" }}>
+                                  <h6 style={{ color: "#059669" }}>
                                     <b>{item.name}</b>
                                   </h6>
                                 )}
@@ -3949,7 +3951,7 @@ class VideoList extends Component {
                   alignItems: "center",
                 }}
               >
-                <h4 className="ml-4 mb-3" style={{ color: "#F45197" }}>
+                <h4 className="ml-4 mb-3" style={{ color: "#059669" }}>
                   โปรแกรมปัจจุบัน{" "}
                   {this.props.user.fb_group !== 404 ? (
                     <span>(WEEK {this.props.week})</span>
@@ -4026,7 +4028,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${!showBarveAndBurn && focusDay === 2 ? "#F45197" : "grey"
+                      color: `${!showBarveAndBurn && focusDay === 2 ? "#059669" : "grey"
                         }`,
                       cursor: "pointer",
                     }}
@@ -4042,7 +4044,7 @@ class VideoList extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${!showBarveAndBurn && focusDay === 3 ? "#F45197" : "grey"
+                      color: `${!showBarveAndBurn && focusDay === 3 ? "#059669" : "grey"
                         }`,
                       cursor: "pointer",
                     }}
@@ -4063,7 +4065,7 @@ class VideoList extends Component {
                       }}
                     >
                       <h5>
-                        <b> Random Exercise Snack</b>
+                        <b>Body Burner</b>
                       </h5>
                     </a>
                   }
@@ -4228,7 +4230,7 @@ class VideoList extends Component {
                                     width="30px"
                                     height="30px"
                                   />
-                                  แก้ไขวิดีโอ55
+                                  แก้ไขวิดีโอ
                                 </div>
                               )}
                           </div>
@@ -4550,7 +4552,7 @@ class VideoList extends Component {
         >
           <br></br>
           <center>
-            <h5 className="mt-1 mb-3" style={{ color: "#F45197" }}>
+            <h5 className="mt-1 mb-3" style={{ color: "#059669" }}>
               <b>กรุณากรอกน้ำหนักปัจจุบันของคุณ</b>
             </h5>
           </center>
@@ -4563,7 +4565,7 @@ class VideoList extends Component {
               value={this.state.weightInDailyWeighChallenge}
               onChange={(event) => this.handleChange(event)}
             />
-            <span className="input-group-text" style={{ color: "#F45197" }}>
+            <span className="input-group-text" style={{ color: "#059669" }}>
               KG
             </span>
           </div>
@@ -4576,8 +4578,8 @@ class VideoList extends Component {
                 onClick={() => this.closePopupDailyWeighChallenge()}
                 style={{
                   backgroundColor: "white",
-                  color: "#F45197",
-                  borderColor: "#F45197",
+                  color: "#059669",
+                  borderColor: "#059669",
                 }}
               >
                 ปิด
@@ -4591,7 +4593,7 @@ class VideoList extends Component {
                     this.state.weightInDailyWeighChallenge
                   )
                 }
-                style={{ backgroundColor: "#F45197" }}
+                style={{ backgroundColor: "#059669" }}
               >
                 ยืนยัน
               </button>

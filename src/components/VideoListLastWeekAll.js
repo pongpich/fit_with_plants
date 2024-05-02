@@ -104,7 +104,7 @@ class VideoListLastWeekAll extends Component {
                 <form>
                     <div className="tab-content mt-3 mb-3" id="myTabContent" style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}>
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>โปรแกรมสัปดาห์ที่ผ่านมา</h4>
+                            <h4 className="ml-3 mb-3" style={{ color: "#059669" }}>โปรแกรมสัปดาห์ที่ผ่านมา</h4>
                             <select class="form-control ml-3 mb-3  col-10  col-sm-10 col-md-4" aria-label="Default select example" onChange={(event) => this.setState({ lastWeekStart: event.target.value })}>
                                 {
                                     weekAll && weekAll.map((number) => {
@@ -117,7 +117,7 @@ class VideoListLastWeekAll extends Component {
                                     (selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 1) &&
                                     <a
                                         className="nav-link"
-                                        style={{ color: `${focusDay === 0 ? "#F45197" : "grey"}`, cursor: "pointer" }}
+                                        style={{ color: `${focusDay === 0 ? "#059669" : "grey"}`, cursor: "pointer" }}
                                         onClick={() => this.onDayChange(0)}
                                     >
                                         <h5><b>DAY 1</b></h5>
@@ -127,7 +127,7 @@ class VideoListLastWeekAll extends Component {
                                     (selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 2) &&
                                     <a
                                         className="nav-link"
-                                        style={{ color: `${focusDay === 1 ? "#F45197" : "grey"}`, cursor: "pointer" }}
+                                        style={{ color: `${focusDay === 1 ? "#059669" : "grey"}`, cursor: "pointer" }}
                                         onClick={() => this.onDayChange(1)}
                                     >
                                         <h5><b>DAY 2</b></h5>
@@ -137,7 +137,7 @@ class VideoListLastWeekAll extends Component {
                                     (selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 3) &&
                                     <a
                                         className="nav-link"
-                                        style={{ color: `${focusDay === 2 ? "#F45197" : "grey"}`, cursor: "pointer" }}
+                                        style={{ color: `${focusDay === 2 ? "#059669" : "grey"}`, cursor: "pointer" }}
                                         onClick={() => this.onDayChange(2)}
                                     >
                                         <h5><b>DAY 3</b></h5>
@@ -147,7 +147,7 @@ class VideoListLastWeekAll extends Component {
                                     (selectExerciseVideoLastWeek && selectExerciseVideoLastWeek.length >= 4) &&
                                     <a
                                         className="nav-link"
-                                        style={{ color: `${focusDay === 3 ? "#F45197" : "grey"}`, cursor: "pointer" }}
+                                        style={{ color: `${focusDay === 3 ? "#059669" : "grey"}`, cursor: "pointer" }}
                                         onClick={() => this.onDayChange(3)}
                                     >
                                         <h5><b>DAY 4</b></h5>
@@ -156,7 +156,7 @@ class VideoListLastWeekAll extends Component {
 
                                 <a
                                     className="nav-link ml-auto"
-                                    style={{ cursor: "pointer", color: "#F45197" }}
+                                    style={{ cursor: "pointer", color: "#059669" }}
                                     onClick={() => this.setState({ lastWeekVDO_click: "default" })}
                                 >
                                     <u>ดูวีดีโอออกกำลังกายปัจจุบัน</u>

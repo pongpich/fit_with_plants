@@ -95,7 +95,7 @@ class Login extends Component {
             </div>
 
             <div className="form-side-login col-lg-6 col-12 w-100 d-flex flex-column align-items-center justify-content-center">
-              <CardTitle className="h3 mb-4 mt-5">{"เข้าสู่ระบบ"}</CardTitle>
+              <CardTitle className="h3 mb-4 mt-5"><b>เข้าสู่ระบบ</b></CardTitle>
               <Form onSubmit={(e) => this.onUserLogin(e)} className="w-100">
                 <Label className="form-group2 has-float-label mb-4">
                   {"อีเมลเข้าใช้งาน"}

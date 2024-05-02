@@ -1321,22 +1321,22 @@ class VideoList3 extends Component {
             >
               <div className="mt-3">
                 {focusDay === 0 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 1</b>
                   </h5>
                 )}
                 {focusDay === 1 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 2</b>
                   </h5>
                 )}
                 {focusDay === 2 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 3</b>
                   </h5>
                 )}
                 {focusDay === 3 && (
-                  <h5 style={{ color: "#F45197" }}>
+                  <h5 style={{ color: "#059669" }}>
                     <b>DAY 4</b>
                   </h5>
                 )}
@@ -2693,7 +2693,7 @@ class VideoList3 extends Component {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>
+              <h4 className="ml-3 mb-3" style={{ color: "#059669" }}>
                 โปรแกรมสัปดาห์ที่ผ่านมา
               </h4>
               <nav className="nav">
@@ -2701,7 +2701,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 0 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 0 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(0)}
@@ -2715,7 +2715,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 1 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 1 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(1)}
@@ -2729,7 +2729,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 2 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 2 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(2)}
@@ -2743,7 +2743,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 3 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(3)}
@@ -2756,7 +2756,7 @@ class VideoList3 extends Component {
 
                 <a
                   className="nav-link ml-auto"
-                  style={{ cursor: "pointer", color: "#F45197" }}
+                  style={{ cursor: "pointer", color: "#059669" }}
                   onClick={() =>
                     this.setState({ lastWeekVDO_click: "default" })
                   }
@@ -3216,7 +3216,7 @@ class VideoList3 extends Component {
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <h4 className="ml-3 mb-3" style={{ color: "#F45197" }}>
+              <h4 className="ml-3 mb-3" style={{ color: "#059669" }}>
                 โปรแกรมสัปดาห์ที่ผ่านมา
               </h4>
               <select
@@ -3237,7 +3237,7 @@ class VideoList3 extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 0 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 0 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(0)}
@@ -3252,7 +3252,7 @@ class VideoList3 extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 1 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 1 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(1)}
@@ -3267,7 +3267,7 @@ class VideoList3 extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 2 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 2 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(2)}
@@ -3282,7 +3282,7 @@ class VideoList3 extends Component {
                     <a
                       className="nav-link"
                       style={{
-                        color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                        color: `${focusDay === 3 ? "#059669" : "grey"}`,
                         cursor: "pointer",
                       }}
                       onClick={() => this.onDayChange(3)}
@@ -3295,7 +3295,7 @@ class VideoList3 extends Component {
 
                 <a
                   className="nav-link ml-auto"
-                  style={{ cursor: "pointer", color: "#F45197" }}
+                  style={{ cursor: "pointer", color: "#059669" }}
                   onClick={() =>
                     this.setState({ lastWeekVDO_click: "default" })
                   }
@@ -3759,7 +3759,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 0 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 0 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(0)}
@@ -3773,7 +3773,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 1 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 1 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(1)}
@@ -3787,7 +3787,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 2 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 2 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(2)}
@@ -3801,7 +3801,7 @@ class VideoList3 extends Component {
                   <a
                     className="nav-link"
                     style={{
-                      color: `${focusDay === 3 ? "#F45197" : "grey"}`,
+                      color: `${focusDay === 3 ? "#059669" : "grey"}`,
                       cursor: "pointer",
                     }}
                     onClick={() => this.onDayChange(3)}
@@ -3815,7 +3815,7 @@ class VideoList3 extends Component {
                 {this.props.week > 1 && (
                   <a
                     className="nav-link ml-auto"
-                    style={{ cursor: "pointer", color: "#F45197" }}
+                    style={{ cursor: "pointer", color: "#059669" }}
                     onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
                   >
                     <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
