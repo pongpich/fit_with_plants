@@ -150,11 +150,7 @@ class App extends Component {
     this.props.logoutUser();
     this.props.clearVideoList();
     this.props.clearChallenges();
-    // this.props.history.push("/platform");
-    /*
-   logout เเล้วไป pynk
-     const baseUrl = "http://localhost:3000/#/home";
-    window.location.href = baseUrl; */
+    window.location.replace("login");
   }
 
   renderNavbar() {
@@ -475,7 +471,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.props.user", this.props.user);
     return (
       <div className="App" style={{ backgroundColor: "#F0EEF3" }}>
         {/* {this.renderTopbar()} */}
@@ -484,7 +479,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/">
-            <Redirect to="/VideoList" />
+            <Redirect to="/videolist" />
           </Route>
           {<Route path="/login" component={Login} />}
 

@@ -43,7 +43,7 @@ const dev = {
         name: "bebe",
         endpoint:
           process.env.REACT_APP_STAGE === "dev"
-            ? "https://api.planforfit.com/preem"
+            ? "https://api.planforfit.com/fit_with_plants"
             : "http://localhost:3003",
         region: "ap-southeast-1",
       },
@@ -68,7 +68,7 @@ const prod = {
     endpoints: [
       {
         name: "bebe",
-        endpoint: "https://api.planforfit.com/preem",
+        endpoint: "https://api.planforfit.com/fit_with_plants",
         region: "ap-southeast-1",
       },
     ],

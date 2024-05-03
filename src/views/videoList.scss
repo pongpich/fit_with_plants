@@ -43,7 +43,6 @@
   border-radius: 8px;
   height: 100%;
   width: 100%;
-  background-color: white;
 
   .videoDuration {
     position: absolute;
@@ -236,13 +235,17 @@
   transform: translate(-50%, -50%) scale(0);
   background: #fff;
   border-radius: 25px;
-  width: 95%;
+  width: 90%;
   height: 87%;
   overflow: hidden;
   z-index: 2;
   padding: 20px;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
+  @media (min-width: 1200px) {
+    width: 50%;
+  }
+
 }
 
 .popup .close-btn {
@@ -720,7 +723,6 @@ input:checked + .slider:before {
     max-width: 60px;
     width: 100%;
     height: auto;
-    margin-bottom: 16px;
   }
 }
 @media (min-width: 1140px) {
@@ -728,7 +730,6 @@ input:checked + .slider:before {
     max-width: 90px;
     width: 100%;
     height: auto;
-    margin-bottom: 16px;
   }
 }
 
@@ -753,5 +754,21 @@ input:checked + .slider:before {
 }
 
 .thumbnail-box:hover {
+  cursor: pointer;
+}
+
+.property-box {
+  display: flex;
+  align-items: center;
+}
+
+.button_choose_clip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #059669;
+  border-radius: 1.5rem;
+  width: 155px;
+  height: 44px;
   cursor: pointer;
 }
