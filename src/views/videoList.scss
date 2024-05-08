@@ -245,7 +245,6 @@
   @media (min-width: 1200px) {
     width: 50%;
   }
-
 }
 
 .popup .close-btn {
@@ -641,7 +640,7 @@ input:checked + .slider:before {
 }
 
 .box-random:active {
-  background-color: #fed6e4f5;
+  background-color: #ffffff;
 }
 .head-new-video {
   font-size: 24px;
@@ -771,4 +770,54 @@ input:checked + .slider:before {
   width: 155px;
   height: 44px;
   cursor: pointer;
+}
+
+.title_body {
+  font-size: 16px;
+  font-weight: 700;
+  @media (min-width: 576px) {
+    font-size: 14px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1200px) {
+    font-size: 24px;
+  }
+}
+
+.title_btn_new_clip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 1024px) {
+    display: block;
+  }
+}
+
+.container_modal_editVDO {
+  display: flex;
+  margin-top: 16px;
+  padding-left: 28px;
+  padding-right: 28px;
+  @media (max-width: 576px) {
+    display: block;
+  }
+}
+
+.container_editVDO {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  @media (max-width: 576px) {
+    display: block;
+  }
+}
+
+.thumb_modal_left {
+  margin-right: 24px;
+  @media (max-width: 576px) {
+    margin-right: 0;
+  }
 }

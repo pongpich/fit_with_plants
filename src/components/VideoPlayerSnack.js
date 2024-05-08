@@ -17,7 +17,13 @@ import {
   updateFrequency,
 } from "../constants/defaultValues";
 
-const VideoPlayerSnack = ({ url, videoId }) => {
+const VideoPlayerSnack = ({
+  url,
+  videoId,
+  videoEnded,
+  setVideoEnded,
+  indexScore,
+}) => {
   const dispatch = useDispatch();
   const videoRef = useRef(null);
   const {
@@ -48,7 +54,6 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     setVideoSnack(videoExerciseSnack);
   }, [videoExerciseSnack]);
 
-  const [videoEnded, setVideoEnded] = useState(false); // เพิ่ม state สำหรับตรวจสอบว่าวีดีโอถูกดูจบหรือไม่
   const [videoCurrDuration, setVideoCurrDuration] = useState(0); // เพิ่ม state สำหรับเก็บระยะเวลาที่เล่นไปของวีดีโอ
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
   const [prevPlayTime, setPrevPlayTime] = useState(0);
@@ -90,9 +95,9 @@ const VideoPlayerSnack = ({ url, videoId }) => {
     let playTime = false;
     const updatedExerciseSnack =
       exerciseSnack &&
-      exerciseSnack.map((exercise) => {
-        if (exercise.play_time == 0) {
-          if (exercise.video_id === videoId) {
+      exerciseSnack.map((exercise, indexEx) => {
+        if (exercise.play_time == 0) {   
+          if (indexEx === indexScore) {
             const newDuration =
               videoCurrDuration > 0.7 * exercise.duration
                 ? exercise.duration

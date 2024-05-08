@@ -70,7 +70,7 @@ import VideoPlayerByteArk from "../components/VideoPlayer";
 import VideoPlayerListByteArk from "../components/VideoPlayerList";
 import SelectChangeVideoList from "../components/SelectChangeVideoList";
 import VideoListLastWeekAll from "../components/VideoListLastWeekAll";
-import VideoExerciseSnack from "./videoExerciseSnack";
+import VideoBodyBurner from "./videoBodyBurner";
 import Modal from "../modals/modal";
 import Modal_Form from "../modals/modal_form";
 import Success_Modal from "../modals/success_modal";
@@ -79,6 +79,8 @@ import Nutrition from "./nutrition/nutrition";
 import Bg_login from "../assets/img/bg_login.png";
 import arrow_circle from "../assets/img/arrow_circle.png";
 import Union from "../assets/img/Union.png";
+import play_button from "../assets/img/play_button.png";
+
 class VideoList extends Component {
   constructor(props) {
     super(props);
@@ -215,7 +217,7 @@ class VideoList extends Component {
       this.props.checkProgramLevel(user.user_id);
       this.props.check4WeeksPrompt(user.user_id);
       this.props.checkRenewPrompt(user.user_id);
-
+      this.props.createExerciseSnack(user && user.user_id);
       this.props.getAllExerciseActivity(user.user_id);
 
       /*  */
@@ -1556,7 +1558,10 @@ class VideoList extends Component {
                 </div>
               </div>
             )}
-            <table className="table table-responsive">
+            <table
+              className="table table-responsive"
+              style={{ overflow: "hidden" }}
+            >
               <div>
                 <div>
                   <div className="tabletitle row mb-4">
@@ -3391,7 +3396,7 @@ class VideoList extends Component {
     }
 
     return (
-      <div className="card-body d-flex justify-content-center">
+      <div>
         <form>
           <div
             className="tab-content mt-3 mb-3"
@@ -3629,7 +3634,7 @@ class VideoList extends Component {
                   </div>
                 </div>
               </div>
-              <tbody>
+              <div>
                 {selectExerciseVideoLastWeek &&
                   todayExercise.map((item, index) => {
                     const itemsArray = item.muscle.split(",");
@@ -3638,8 +3643,8 @@ class VideoList extends Component {
                         ? convertFormatTime(item.duration)
                         : convertSecondsToMinutes(item.duration);
                     return (
-                      <div className="row" key={index}>
-                        <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
+                      <Row key={index}>
+                        <Col xs="2" lg="2">
                           {index === 0 && (
                             <h6 className="firstVideoStartText">
                               เริ่มกันเลย!
@@ -3706,196 +3711,169 @@ class VideoList extends Component {
                           {index === todayExercise.length - 1 && (
                             <h6 className="lastVideoEndText">สำเร็จ!</h6>
                           )}
-                        </div>
-                        <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10">
-                          <div className="videoItem border shadow">
-                            {this.state.autoPlayCheck && (
-                              <img
-                                className="play_button"
-                                src="../assets/img/thumb/play_button2.png"
-                                width="100px"
-                                onClick={() => this.toggleListLastWeek(index)}
-                              ></img>
-                            )}
-                            {!this.state.autoPlayCheck && (
-                              <img
-                                className="play_button"
-                                src="../assets/img/thumb/play_button2.png"
-                                width="100px"
-                                onClick={() => this.toggle(item)}
-                              ></img>
-                            )}
-                            <div className="videoThumb">
-                              <div className="containerThumb">
-                                {item.thumbnail ? (
-                                  <img
-                                    className="img-fluid"
-                                    src={`${item.thumbnail}`}
-                                    alt=""
-                                  />
-                                ) : (
-                                  <img
-                                    className="img-fluid"
-                                    src={`../assets/img/thumb/${item.category
-                                      .toLowerCase()
-                                      .split(" ")
-                                      .join("")}_g3.jpg`}
-                                    alt=""
-                                  />
-                                )}
-                                {/* <div className="overlay" onClick={() => this.toggle(item)}>
-                                <i className="fa fa-play fa-4x" aria-hidden="true"></i>
-                                <div className="videoDuration" style={{ position: "absolute", right: "5%", bottom: "0", color: "white" }}>
-                                  <h6>
-                                    <b>{(item.duration + "").split(".")[0]}:{(item.duration + "").split(".")[1]} นาที</b>
-                                  </h6>
-                                </div>
-                              </div> */}
-                              </div>
-                            </div>
-                            <div className="videoDetail">
-                              <div className="videoDuration mt-3">
-                                <h6>
-                                  <i
-                                    className="fa fa-clock-o fa-1x mr-2"
-                                    aria-hidden="true"
-                                  ></i>
-                                  {minuteLabel} นาที
-                                </h6>
-                              </div>
-                              <hr
-                                className=""
-                                style={{ width: "100%", marginTop: "40px" }}
-                              ></hr>
-                              <div className="videoName">
-                                <p
+                        </Col>
+                        <Col xs="10" lg="10">
+                          <div className="videoItem">
+                            <Row style={{ marginBottom: 48 }}>
+                              <Col xs={12} md={5} lg={4}>
+                                <div
                                   style={{
-                                    color: "grey",
-                                    marginBottom: "0px",
-                                    marginTop: "0px",
+                                    backgroundImage: `url(${item.thumbnail})`,
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                    height: 153,
+                                    width: "100%",
+                                    maxWidth: 272,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                   }}
                                 >
-                                  {" "}
-                                  {item.category}{" "}
-                                </p>
-                                {item.name.length < 17 ? (
-                                  <h4 style={{ color: "#059669" }}>
-                                    <b>{item.name}</b>
-                                  </h4>
-                                ) : (
-                                  <h6 style={{ color: "#059669" }}>
-                                    <b>{item.name}</b>
+                                  <img
+                                    src={play_button}
+                                    style={{
+                                      width: 64,
+                                      height: 64,
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                      this.state.autoPlayCheck
+                                        ? this.toggleListLastWeek(index)
+                                        : this.toggle(item);
+                                    }}
+                                    alt="img"
+                                  />
+                                </div>
+                              </Col>
+                              <Col xs={12} md={7} lg={8}>
+                                <div className="">
+                                  <h6
+                                    style={{
+                                      color: "#828282",
+                                      marginTop: 10,
+                                    }}
+                                  >
+                                    <i
+                                      className="fa fa-clock-o fa-1x mr-2"
+                                      aria-hidden="true"
+                                    ></i>
+                                    {minuteLabel} นาที
                                   </h6>
-                                )}
-                                {this.props.member_info &&
-                                  this.props.member_info.low_impact === "yes" &&
-                                  item.tag &&
-                                  item.tag.includes("low_impact") && (
-                                    <p
+
+                                  <div className="title_btn_new_clip">
+                                    <h4 style={{ color: "#059669" }}>
+                                      <b>{item.name}</b>
+                                    </h4>
+                                  </div>
+                                  <hr
+                                    style={{
+                                      width: "100%",
+                                    }}
+                                  />
+                                  <div className="property-box">
+                                    <span
                                       style={{
-                                        color: "grey",
-                                        marginBottom: "0px",
-                                        marginTop: "-10px",
+                                        color: "#828282",
+                                        fontSize: 15,
                                       }}
                                     >
-                                      {" "}
-                                      {"(Low impact)"}{" "}
-                                    </p>
-                                  )}
-                              </div>
-                              <div className="property-box">
-                                {itemsArray &&
-                                  itemsArray.map((muItem, j) => {
-                                    if (muItem == "warm_up") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/Propertywarmup.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "cool_down") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/Propertycooldown.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "total_body") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/totalBody.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "core") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyCore.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "chest") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyChest.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "back") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyBack.png`}
-                                        ></img>
-                                      );
-                                      //PropertyGlute
-                                    }
-                                    if (muItem == "glute") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyGlute.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "leg") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyLeg.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "shoulder") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/PropertyShoulder.png`}
-                                        ></img>
-                                      );
-                                    }
-                                    if (muItem == "cardio") {
-                                      return (
-                                        <img
-                                          className="property-body_part ml-2"
-                                          src={`../assets/img/body_part/cardio_preem.png`}
-                                        ></img>
-                                      );
-                                    }
-                                  })}
-                              </div>
-                            </div>
+                                      สัดส่วนที่ได้ :
+                                    </span>
+                                    {itemsArray &&
+                                      itemsArray.map((muItem, j) => {
+                                        if (muItem == "warm_up") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/Propertywarmup.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "cool_down") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/Propertycooldown.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "total_body") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/totalBody.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "core") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyCore.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "chest") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyChest.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "back") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyBack.png`}
+                                            ></img>
+                                          );
+                                          //PropertyGlute
+                                        }
+                                        if (muItem == "glute") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyGlute.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "leg") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyLeg.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "shoulder") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyShoulder.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "cardio") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/cardio_preem.png`}
+                                            ></img>
+                                          );
+                                        }
+                                      })}
+                                  </div>
+                                </div>
+                              </Col>
+                            </Row>
                           </div>
-                        </div>
-                      </div>
+                        </Col>
+                      </Row>
                     );
                   })}
-              </tbody>
+              </div>
             </table>
           </div>
         </form>
@@ -4129,7 +4107,7 @@ class VideoList extends Component {
                       style={{ cursor: "pointer", color: "#059669" }}
                       onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
                     >
-                      <u>ดูวีดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
+                      <u>ดูวิดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
                     </a>
                   )}
                 </div>
@@ -4154,7 +4132,7 @@ class VideoList extends Component {
           </div>
 
           {showchallenge ? <Challenges /> : null}
-          {exerciseSnack ? <VideoExerciseSnack /> : null}
+          {exerciseSnack ? <VideoBodyBurner /> : null}
           {!showBarveAndBurn ? (
             <div className="">
               {this.state.autoPlayCheck ? (
@@ -4291,7 +4269,7 @@ class VideoList extends Component {
                     </div>
                   </div>
 
-                  <tbody>
+                  <div>
                     {this.props.exerciseVideo &&
                       todayExercise.map((item, index) => {
                         const itemsArray = item.muscle.split(",");
@@ -4301,8 +4279,8 @@ class VideoList extends Component {
                             ? convertFormatTime(item.duration)
                             : convertSecondsToMinutes(item.duration);
                         return (
-                          <div className="row" key={index}>
-                            <div className="checkCompleteVideo mt-3 col-lg-2 col-md-1 col-2">
+                          <Row key={index}>
+                            <Col xs="2" lg="2">
                               {index === 0 && (
                                 <h6 className="firstVideoStartText">
                                   เริ่มกันเลย!
@@ -4369,51 +4347,49 @@ class VideoList extends Component {
                               {index === todayExercise.length - 1 && (
                                 <h6 className="lastVideoEndText">สำเร็จ!</h6>
                               )}
-                            </div>
-                            <div className="mt-3 mb-1 col-lg-8 col-md-11 col-10 mb-5">
-                              <div className="videoItem_new">
-                                {this.state.autoPlayCheck && (
-                                  <img
-                                    className="play_button"
-                                    src="../assets/img/thumb/play_button2.png"
-                                    width="100px"
-                                    onClick={() => this.toggleList(index)}
-                                  ></img>
-                                )}
-                                {/* {!this.state.autoPlayCheck && (
-                                  <img
-                                    className="play_button"
-                                    src="../assets/img/thumb/play_button2.png"
-                                    width="100px"
-                                    onClick={() => this.toggle(item)}
-                                  ></img>
-                                )} */}
-                                <Row>
-                                  <Col className="" xs="12" md="6" lg="6">
-                                    <div className="">
+                            </Col>
+                            <Col xs="10" lg="10">
+                              <div className="videoItem">
+                                <Row style={{ marginBottom: 48 }}>
+                                  <Col xs={12} md={5} lg={4}>
+                                    <div
+                                      style={{
+                                        backgroundImage: `url(${item.thumbnail})`,
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        backgroundPosition: "center",
+                                        height: 153,
+                                        width: "100%",
+                                        maxWidth: 272,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                      }}
+                                    >
                                       <img
-                                        className="img-fluid"
+                                        src={play_button}
                                         style={{
-                                          borderRadius: "1.5rem",
+                                          width: 64,
+                                          height: 64,
                                           cursor: "pointer",
                                         }}
-                                        src={`${item.thumbnail}`}
-                                        alt=""
-                                        onClick={() => this.toggle(item)}
+                                        onClick={() =>
+                                          this.state.autoPlayCheck
+                                            ? this.toggleList(index)
+                                            : this.toggle(item)
+                                        }
+                                        alt="img"
                                       />
                                     </div>
                                   </Col>
-                                  <Col className="" xs="12" md="6" lg="6">
-                                    <div
-                                      className="videoDetail"
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "space-between",
-                                        height: "100%",
-                                      }}
-                                    >
-                                      <h6 style={{ color: "#828282" }}>
+                                  <Col xs={12} md={7} lg={8}>
+                                    <div className="">
+                                      <h6
+                                        style={{
+                                          color: "#828282",
+                                          marginTop: 10,
+                                        }}
+                                      >
                                         <i
                                           className="fa fa-clock-o fa-1x mr-2"
                                           aria-hidden="true"
@@ -4421,23 +4397,13 @@ class VideoList extends Component {
                                         {minuteLabel} นาที
                                       </h6>
 
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "space-between",
-                                        }}
-                                      >
-                                        {item.name.length < 17 ? (
-                                          <h4 style={{ color: "#059669" }}>
-                                            <b>{item.name}</b>
-                                          </h4>
-                                        ) : (
-                                          <h6 style={{ color: "#059669" }}>
-                                            <b>{item.name}</b>
-                                          </h6>
-                                        )}
-                                        <buton
-                                          className="button_choose_clip"
+                                      <div className="title_btn_new_clip">
+                                        <h4 style={{ color: "#059669" }}>
+                                          <b>{item.name}</b>
+                                        </h4>
+
+                                        <div
+                                          className="box-random"
                                           onClick={() => {
                                             this.showModalEditVDO(
                                               item.video_id,
@@ -4453,7 +4419,9 @@ class VideoList extends Component {
                                             style={{
                                               width: 16,
                                               height: 16,
+                                              marginRight: 8,
                                             }}
+                                            alt=""
                                           />
                                           <span
                                             style={{
@@ -4465,7 +4433,7 @@ class VideoList extends Component {
                                           >
                                             เลือกคลิปใหม่
                                           </span>
-                                        </buton>
+                                        </div>
                                       </div>
                                       <hr
                                         style={{
@@ -4570,11 +4538,11 @@ class VideoList extends Component {
                                   </Col>
                                 </Row>
                               </div>
-                            </div>
-                          </div>
+                            </Col>
+                          </Row>
                         );
                       })}
-                  </tbody>
+                  </div>
                 </table>
               )}
             </div>
@@ -4589,8 +4557,8 @@ class VideoList extends Component {
           <div
             className="overlay"
             onClick={() => this.closeTogglePopupSelectEditVideo()}
-          ></div>
-          <div className="content">
+          />
+          <div className="content" style={{ overflowY: "auto" }}>
             <span>เลือกคลิปใหม่</span>
             <div
               className="close-btn"
@@ -4598,355 +4566,155 @@ class VideoList extends Component {
             >
               &times;
             </div>
-            <div className="selectEditPlaylist" style={{ marginTop: -30 }}>
+            <div>
               {this.state.selectChangeVideoList.map((item, index) => {
-                if (item.category == "Flexibility") {
-                  let weekFlexibility =
-                    this.props.week <= 4
-                      ? ["00004", "00005", "00006", "00007"]
-                      : ["00008", "00009", "00010", "00011"];
-                  if (weekFlexibility.includes(item.video_id)) {
-                    return (
-                      <div
+                return (
+                  <div className="container_modal_editVDO">
+                    <div className="thumb_modal_left">
+                      {/* <SelectChangeVideoList
+                      thumbnail={item.thumbnail}
+                      category={item.category}
+                      url={item.url}
+                    /> */}
+                      <img
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
+                          borderRadius: "1rem",
                           width: "100%",
-                          marginBottom: 10,
-                          border: "1px solid #DDDDDD",
-                          padding: 16,
+                          height: 153,
+                          maxWidth: 272,
                         }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                          }}
-                        >
-                          <div style={{ width: 200 }}>
-                            {/* <SelectChangeVideoList
-                            thumbnail={item.thumbnail}
-                            category={item.category}
-                            url={item.url}
-                          /> */}
-                            <img
-                              className="img-fluid"
-                              style={{
-                                borderRadius: "1rem",
-                              }}
-                              src={`${item.thumbnail}`}
-                              alt={`${item.thumbnail}`}
-                            />
-                          </div>
-                          <div
+                        src={`${item.thumbnail}`}
+                        alt={`${item.thumbnail}`}
+                      />
+                    </div>
+                    <div className="container_editVDO">
+                      <div>
+                        <div className="">
+                          <h4 style={{ color: "#059669" }}>
+                            <b> {item.name} </b>
+                          </h4>
+                        </div>
+                        <div className="property-box">
+                          <span
                             style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              width: "100%",
-                              flexWrap: "wrap",
+                              color: "#828282",
+                              fontSize: 15,
                             }}
                           >
-                            <div style={{ marginLeft: 24 }}>
-                              <div className="">
-                                <h4 style={{ color: "#059669" }}>
-                                  <b> {item.name} </b>
-                                </h4>
-                              </div>
-                              <div className="property-box">
-                                <span
-                                  style={{
-                                    color: "#828282",
-                                    fontSize: 15,
-                                  }}
-                                >
-                                  สัดส่วนที่ได้ :
-                                </span>
-                                {item.muscle.split(",").map((muItem, j) => {
-                                  if (muItem == "warm_up") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/Propertywarmup.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "cool_down") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/Propertycooldown.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "total_body") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/totalBody.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "core") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyCore.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "chest") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyChest.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "back") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyBack.png`}
-                                      ></img>
-                                    );
-                                    //PropertyGlute
-                                  }
-                                  if (muItem == "glute") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyGlute.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "leg") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyLeg.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "shoulder") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/PropertyShoulder.png`}
-                                      ></img>
-                                    );
-                                  }
-                                  if (muItem == "cardio") {
-                                    return (
-                                      <img
-                                        className="property-body_part ml-2"
-                                        src={`../assets/img/body_part/cardio_preem.png`}
-                                      ></img>
-                                    );
-                                  }
-                                })}
-                              </div>
-                            </div>
-                            <div style={{ marginRight: 47 }}>
-                              <button
-                                className="btn btn-danger"
-                                type="button"
-                                style={{
-                                  fontSize: "15px",
-                                  cursor: "pointer",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  width: 64,
-                                  height: 64,
-                                  backgroundColor: "#059669",
-                                  borderRadius: "1rem",
-                                  borderColor: "#059669",
-                                }}
-                                onClick={() => this.selectEditVideo(item)}
-                              >
+                            สัดส่วนที่ได้ :
+                          </span>
+                          {item.muscle.split(",").map((muItem, j) => {
+                            if (muItem == "warm_up") {
+                              return (
                                 <img
-                                  src={Union}
-                                  style={{ width: 25, height: 25 }}
-                                  alt="union"
-                                />
-                              </button>
-                            </div>
-                          </div>
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/Propertywarmup.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "cool_down") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/Propertycooldown.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "total_body") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/totalBody.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "core") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyCore.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "chest") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyChest.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "back") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyBack.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "glute") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyGlute.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "leg") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyLeg.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "shoulder") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/PropertyShoulder.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "cardio") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/cardio_preem.png`}
+                                ></img>
+                              );
+                            }
+                          })}
                         </div>
                       </div>
-                    );
-                  }
-                } else {
-                  return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "100%",
-                        marginBottom: 10,
-                        border: "1px solid #DDDDDD",
-                        padding: 16,
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                        }}
-                      >
-                        <div style={{ width: 200 }}>
-                          {/* <SelectChangeVideoList
-                            thumbnail={item.thumbnail}
-                            category={item.category}
-                            url={item.url}
-                          /> */}
-                          <img
-                            className="img-fluid"
-                            style={{
-                              borderRadius: "1rem",
-                            }}
-                            src={`${item.thumbnail}`}
-                            alt={`${item.thumbnail}`}
-                          />
-                        </div>
-                        <div
+                      <div>
+                        <button
+                          className="btn btn-danger"
+                          type="button"
                           style={{
+                            fontSize: "15px",
+                            cursor: "pointer",
                             display: "flex",
-                            justifyContent: "space-between",
+                            justifyContent: "center",
                             alignItems: "center",
-                            width: "100%",
-                            flexWrap: "wrap",
+                            width: 64,
+                            height: 64,
+                            backgroundColor: "#059669",
+                            borderRadius: "1rem",
+                            borderColor: "#059669",
                           }}
+                          onClick={() => this.selectEditVideo(item)}
                         >
-                          <div style={{ marginLeft: 24 }}>
-                            <div className="">
-                              <h4 style={{ color: "#059669" }}>
-                                <b> {item.name} </b>
-                              </h4>
-                            </div>
-                            <div className="property-box">
-                              <span
-                                style={{
-                                  color: "#828282",
-                                  fontSize: 15,
-                                }}
-                              >
-                                สัดส่วนที่ได้ :
-                              </span>
-                              {item.muscle.split(",").map((muItem, j) => {
-                                if (muItem == "warm_up") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/Propertywarmup.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "cool_down") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/Propertycooldown.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "total_body") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/totalBody.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "core") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyCore.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "chest") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyChest.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "back") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyBack.png`}
-                                    ></img>
-                                  );
-                                  //PropertyGlute
-                                }
-                                if (muItem == "glute") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyGlute.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "leg") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyLeg.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "shoulder") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/PropertyShoulder.png`}
-                                    ></img>
-                                  );
-                                }
-                                if (muItem == "cardio") {
-                                  return (
-                                    <img
-                                      className="property-body_part ml-2"
-                                      src={`../assets/img/body_part/cardio_preem.png`}
-                                    ></img>
-                                  );
-                                }
-                              })}
-                            </div>
-                          </div>
-                          <div style={{ marginRight: 47 }}>
-                            <button
-                              className="btn btn-danger"
-                              type="button"
-                              style={{
-                                fontSize: "15px",
-                                cursor: "pointer",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                width: 64,
-                                height: 64,
-                                backgroundColor: "#059669",
-                                borderRadius: "1rem",
-                                borderColor: "#059669",
-                              }}
-                              onClick={() => this.selectEditVideo(item)}
-                            >
-                              <img
-                                src={Union}
-                                style={{ width: 25, height: 25 }}
-                                alt="union"
-                              />
-                            </button>
-                          </div>
-                        </div>
+                          <img
+                            src={Union}
+                            style={{ width: 25, height: 25 }}
+                            alt="union"
+                          />
+                        </button>
                       </div>
                     </div>
-                  );
-                }
+                  </div>
+                );
               })}
             </div>
           </div>

@@ -83,7 +83,15 @@ export const types = {
   CREATE_EVENT_LOG_SNACK_SUCCESS: "CREATE_EVENT_LOG_SNACK_SUCCESS",
   CREATE_EVENT_LOG_SNACK_FALE: "CREATE_EVENT_LOG_SNACK_FALE",
   SNACK_COUNT: "SNACK_COUNT",
+  SAVE_SCORE_BURNER_TEN: "SAVE_SCORE_BURNER_TEN",
 };
+
+export const saveModalScoreBurnerTen = (data) => ({
+  type: types.SAVE_SCORE_BURNER_TEN,
+  payload: {
+    data,
+  },
+});
 
 export const updateFbShareStatusBraveAndBurn = (user_id) => ({
   type: types.UPDATE_FB_SHARE_STATUS_BRAVE_AND_BURN,
@@ -1354,7 +1362,6 @@ function* createCustomWeekForUserSaga({ payload }) {
 function* createExerciseSnackSaga({ payload }) {
   const { user_id } = payload;
   const apiResult = yield call(createExerciseSnackSagaAsync, user_id);
-
   try {
     yield put({
       type: types.CREATE_EXERCISE_SNACK_SUCCESS,
@@ -1602,6 +1609,7 @@ const INIT_STATE = {
   statsVideoExerciseSnackAll: "default",
   videoExerciseSnackAll: null,
   snackNumber: 0,
+  saveScoreBurnerTen: false,
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1880,6 +1888,11 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         hideVideoPopUpSnack: action.payload.status,
+      };
+    case types.SAVE_SCORE_BURNER_TEN:
+      return {
+        ...state,
+        saveScoreBurnerTen: action.payload.data,
       };
     case types.CLEAR_EXERCISE_SNACK:
       return {

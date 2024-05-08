@@ -146,11 +146,12 @@ class App extends Component {
     }
   }
 
-  onUserLogout(event) {
+  onUserLogout() {
     this.props.logoutUser();
     this.props.clearVideoList();
     this.props.clearChallenges();
-    window.location.replace("login");
+    this.props.history.push("/login");
+    localStorage.removeItem("persist:root");
   }
 
   renderNavbar() {
@@ -481,7 +482,7 @@ class App extends Component {
           <Route exact path="/">
             <Redirect to="/videolist" />
           </Route>
-          {<Route path="/login" component={Login} />}
+          <Route path="/login" component={Login} />
 
           <Route path="/test_gps" component={TestGPS_Permission} />
           <Route path="/test_gps_success" component={TestGPS} />
@@ -490,7 +491,7 @@ class App extends Component {
           <Route path="/import-Members" component={ImportMembers} />
           {/* <Route path="/Challenges" component={Challenges} /> */}
           <Route path="/Dashboard" component={Dashboard} />
-          <Route path="/VideoList" component={VideoList} refresh="true" />
+          <Route path="/VideoList" component={VideoList} />
           <Route path="/VideoList2" component={VideoList2} />
           <Route path="/BonusChallenge" component={BonusChallenge} />
           {/* <Route path='/platform' component={Platform} />
