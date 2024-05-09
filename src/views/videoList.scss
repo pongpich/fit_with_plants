@@ -624,6 +624,7 @@ input:checked + .slider:before {
 .box-random {
   color: #059669;
   width: auto;
+  max-width: 200px;
   height: auto;
   max-height: 44px;
   align-items: center;
