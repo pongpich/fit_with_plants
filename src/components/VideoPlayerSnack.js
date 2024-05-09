@@ -17,13 +17,7 @@ import {
   updateFrequency,
 } from "../constants/defaultValues";
 
-const VideoPlayerSnack = ({
-  url,
-  videoId,
-  videoEnded,
-  setVideoEnded,
-  indexScore,
-}) => {
+const VideoPlayerSnack = ({ url, videoId, indexScore }) => {
   const dispatch = useDispatch();
   const videoRef = useRef(null);
   const {
@@ -35,6 +29,8 @@ const VideoPlayerSnack = ({
     exerciseVideos ? exerciseVideos : ""
   );
   const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
+
+  const [videoEnded, setVideoEnded] = useState(false);
 
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
@@ -96,7 +92,7 @@ const VideoPlayerSnack = ({
     const updatedExerciseSnack =
       exerciseSnack &&
       exerciseSnack.map((exercise, indexEx) => {
-        if (exercise.play_time == 0) {   
+        if (exercise.play_time == 0) {
           if (indexEx === indexScore) {
             const newDuration =
               videoCurrDuration > 0.7 * exercise.duration

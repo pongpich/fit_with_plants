@@ -49,7 +49,6 @@ const VideoBodyBurner = () => {
   );
   const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
 
-  const [videoEnded, setVideoEnded] = useState(false);
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
       ? JSON.parse(videoExerciseSnack[0].video)
@@ -60,9 +59,13 @@ const VideoBodyBurner = () => {
   );
   const [weekSnack, setWeekSnack] = useState(week);
   const [autoPlayCheck, setAutoPlayCheck] = useState(true);
-  const [indexScore, setIndexScore] = useState(false);
+  const [indexScore, setIndexScore] = useState(0);
   const [modalTen, setModalTen] = useState(false);
   const [modalTwo, setModalTwo] = useState(false);
+  const [dataModalTwo, setDataModalTwo] = useState(() => {
+    const storedData = localStorage.getItem("modalTwo");
+    return storedData ? JSON.parse(storedData) : [];
+  });
 
   const [url, setUrl] = useState(null);
   const [videoId, setVideoId] = useState(null);
@@ -119,7 +122,7 @@ const VideoBodyBurner = () => {
 
   const toggleTen = () => {
     setModalTen(false);
-    dispatch(saveModalScoreBurnerTen(true));
+    localStorage.setItem("modalTen", true);
   };
 
   const closeBtnTen = (
@@ -127,10 +130,11 @@ const VideoBodyBurner = () => {
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
+  const [arrVal, setArrVal] = useState([]);
 
   const toggleTwo = () => {
+    setDataModalTwo([...dataModalTwo, indexScore]);
     setModalTwo(false);
-    // dispatch(saveModalScoreBurnerTen(true));
   };
 
   const closeBtnTwo = (
@@ -218,8 +222,8 @@ const VideoBodyBurner = () => {
   };
 
   useMemo(() => {
-    if (!exerciseSnack || exerciseSnack.length === 0) {
-      setModalTen(false);
+    // for check open score modal
+    if (!exerciseSnack || exerciseSnack.length === 0 || indexScore == 0) {
       return;
     }
 
@@ -228,21 +232,25 @@ const VideoBodyBurner = () => {
     const isBodyBurnnerDone = exerciseSnackTop.every(
       (val) => val.play_time > 0
     );
-    console.log("save", saveScoreBurnerTen);
+    const getModalTen = localStorage.getItem("modalTen");
+    const arrGetModalTwo = JSON.parse(localStorage.getItem("modalTwo")) ?? [];
+    const isFoundArrModalTwo = arrGetModalTwo?.some((val) => val == indexScore);
 
-    const isBodyBurnnerBottomDone = exerciseSnack.filter(
-      (_, i) => i == indexScore
+    const isBodyBurnnerBottomDone = exerciseSnackBottom.filter(
+      (_, i) => i + 3 == indexScore
     );
-    console.log("isBodyBurnnerBottomDone", isBodyBurnnerBottomDone);
-    if (isBodyBurnnerDone && !saveScoreBurnerTen) {
+
+    if (isBodyBurnnerDone && getModalTen == null) {
       setModalTen(true);
     }
-
-    if (isBodyBurnnerBottomDone[0].play_time > 0) {
-      //openTwo
-      // setModalTwo(true);
+    if (isBodyBurnnerBottomDone[0]?.play_time > 0 && !isFoundArrModalTwo) {
+      setModalTwo(true);
     }
-  }, [exerciseSnack]);
+  }, [exerciseSnack, indexScore]);
+
+  useMemo(() => {
+    localStorage.setItem("modalTwo", JSON.stringify(dataModalTwo));
+  }, [dataModalTwo]);
 
   const renewId = (index, id) => {
     setRe_id(index);
@@ -265,8 +273,6 @@ const VideoBodyBurner = () => {
               url={url}
               videoId={videoId}
               indexScore={indexScore}
-              setVideoEnded={setVideoEnded}
-              videoEnded={videoEnded}
             />
           </div>
         </div>

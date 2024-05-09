@@ -473,7 +473,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" style={{ backgroundColor: "#F0EEF3" }}>
+      <div className="App">
         {/* {this.renderTopbar()} */}
         {this.renderNavbar()}
         {this.props.user && this.renderHeader()}

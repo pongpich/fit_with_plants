@@ -885,7 +885,7 @@ class Challenges extends Component {
           </div>
         ) : (
           <div
-            className="card shadow col-lg-7 col-md-12"
+            className="card shadow col-lg-7 col-md-12 mb-5 mb-lg-0"
             style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             {membersOfTeam.length > 0 ? ( //membersOfTeam.length > 0 คือ ผู้ใช้มีทีมแล้ว

@@ -3016,7 +3016,10 @@ class VideoList extends Component {
                 </div>
               </div>
             )}
-            <table className="table table-responsive">
+            <table
+              className="table table-responsive"
+              style={{ overflowX: "hidden" }}
+            >
               <div>
                 <div>
                   <div className="row">
@@ -3585,7 +3588,10 @@ class VideoList extends Component {
                 </div>
               </div>
             )}
-            <table className="table table-responsive">
+            <table
+              className="table table-responsive"
+              style={{ overflowX: "hidden" }}
+            >
               <div>
                 <div>
                   <div className="row">
@@ -4197,7 +4203,10 @@ class VideoList extends Component {
                   <BraveAndBurn />
                 </div>
               ) : (
-                <table className="table table-responsive">
+                <table
+                  className="table table-responsive"
+                  style={{ overflow: "hidden" }}
+                >
                   <div>
                     <div>
                       <div className="row">
