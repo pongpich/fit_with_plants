@@ -34,6 +34,7 @@ import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
 import Cookie from "js-cookie";
 
+
 const VideoBodyBurner = () => {
   const dispatch = useDispatch();
   const {
