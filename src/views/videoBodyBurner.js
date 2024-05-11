@@ -32,6 +32,7 @@ import arrow_circle from "../assets/img/arrow_circle.png";
 import Union from "../assets/img/Union.png";
 import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
+import Cookie from "js-cookie";
 
 const VideoBodyBurner = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const VideoBodyBurner = () => {
   const [modalTen, setModalTen] = useState(false);
   const [modalTwo, setModalTwo] = useState(false);
   const [dataModalTwo, setDataModalTwo] = useState(() => {
-    const storedData = localStorage.getItem("modalTwo");
+    const storedData = Cookie.get("modalTwo");
     return storedData ? JSON.parse(storedData) : [];
   });
 
@@ -122,7 +123,7 @@ const VideoBodyBurner = () => {
 
   const toggleTen = () => {
     setModalTen(false);
-    localStorage.setItem("modalTen", true);
+    Cookie.set("modalTen", true);
   };
 
   const closeBtnTen = (
@@ -223,7 +224,7 @@ const VideoBodyBurner = () => {
 
   useMemo(() => {
     // for check open score modal
-    // save in localStorage show just first time
+    // save in Cookie show just first time
     if (!exerciseSnack || exerciseSnack.length === 0 || indexScore == 0) {
       return;
     }
@@ -233,8 +234,8 @@ const VideoBodyBurner = () => {
     const isBodyBurnnerDone = exerciseSnackTop.every(
       (val) => val.play_time > 0
     );
-    const getModalTen = localStorage.getItem("modalTen");
-    const arrGetModalTwo = JSON.parse(localStorage.getItem("modalTwo")) ?? [];
+    const getModalTen = Cookie.get("modalTen");
+    const arrGetModalTwo = JSON.parse(Cookie.get("modalTwo")) ?? [];
     const isFoundArrModalTwo = arrGetModalTwo?.some((val) => val == indexScore);
 
     const isBodyBurnnerBottomDone = exerciseSnackBottom.filter(
@@ -250,7 +251,7 @@ const VideoBodyBurner = () => {
   }, [exerciseSnack, indexScore]);
 
   useMemo(() => {
-    localStorage.setItem("modalTwo", JSON.stringify(dataModalTwo));
+    Cookie.set("modalTwo", JSON.stringify(dataModalTwo));
   }, [dataModalTwo]);
 
   const renewId = (index, id) => {
