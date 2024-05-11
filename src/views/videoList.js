@@ -159,6 +159,7 @@ class VideoList extends Component {
     this.showSuccessModal = this.showSuccessModal.bind(this);
     this.hideSuccessModal = this.hideSuccessModal.bind(this);
     this.showModalEditVDO = this.showModalEditVDO.bind(this);
+    this.autoPlayCheck = this.autoPlayCheck.bind(this);
   }
 
   showModal = () => {
@@ -212,8 +213,13 @@ class VideoList extends Component {
   }
 
   async componentDidMount() {
-    const { user, statsCreateExerciseSnack, week } = this.props;
-
+    const {
+      user,
+      statsCreateExerciseSnack,
+      week,
+      all_exercise_activity,
+      statusGetAllExAct,
+    } = this.props;
     this.props.setEndedVideoPlayerList(false);
 
     if (user) {
@@ -223,11 +229,11 @@ class VideoList extends Component {
       this.props.checkRenewPrompt(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
       this.props.getAllExerciseActivity(user.user_id);
-
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
     }
-    if (this.props.user && this.props.user.other_attributes) {
+
+    if (user && user.other_attributes) {
       this.props.videoListForUser(
         this.props.user.user_id,
         // this.props.user.other_attributes = "{"age": 32, "hip": 41, "sex": "female", "chest": 38, "waist": 31, "height": 175, "weight": 79}"
@@ -268,6 +274,7 @@ class VideoList extends Component {
           : JSON.parse(user.other_attributes).hip,
       });
     }
+
     if (user === null) {
       this.props.history.push("/login");
     }
@@ -345,39 +352,10 @@ class VideoList extends Component {
       }
     }
 
-    if (
-      prevProps.statusGetAllExAct !== statusGetAllExAct &&
-      statusGetAllExAct == "success"
-    ) {
-      const maxWeek = all_exercise_activity.reduce((max, week) => {
-        return week.week_in_program > max ? week.week_in_program : max;
-      }, 0);
-      if (maxWeek > 1) {
-        // เอาไว้เช็ค week ล่า สุด  โดน -1 ตลอด
-        this.setState({ lastWeekStart: maxWeek });
-        this.selectVideoLastWeek(maxWeek - 1);
-      } else {
-        this.setState({ lastWeekStart: 1 });
-        this.selectVideoLastWeek(1);
-      }
-
-      // เเสดง  select week ทั้ง หมด โดยไม่เอา week ล่าสุด
-      const result = all_exercise_activity.map((week) => {
-        if (week.week_in_program <= maxWeek) {
-          return week.week_in_program;
-        }
-      });
-
-      const weekAll = result.sort((a, b) => b - a);
-      const filteredWeekAll = weekAll.filter(Boolean);
-      this.setState({ weekAll: filteredWeekAll });
-    }
-
     if (prevState.lastWeekStart !== lastWeekStart) {
       // ทำสิ่งที่คุณต้องการเมื่อ lastWeekStart เปลี่ยนค่า
       this.selectVideoLastWeek(lastWeekStart);
-
-      //this.props.getAllExerciseActivity(user.user_id);
+      // this.props.getAllExerciseActivity(user.user_id);
     }
 
     if (
@@ -473,6 +451,35 @@ class VideoList extends Component {
         tempPlaylist: playlist,
       });
     }
+    
+    if (
+      prevProps.statusGetAllExAct !== statusGetAllExAct &&
+      statusGetAllExAct === "success"
+    ) {
+      const maxWeek = all_exercise_activity.reduce((max, week) => {
+        return week.week_in_program > max ? week.week_in_program : max;
+      }, 0);
+      if (maxWeek > 1) {
+        // เอาไว้เช็ค week ล่า สุด  โดน -1 ตลอด
+        this.setState({ lastWeekStart: maxWeek });
+        this.selectVideoLastWeek(maxWeek - 1);
+      } else {
+        this.setState({ lastWeekStart: 1 });
+        this.selectVideoLastWeek(1);
+      }
+
+      // เเสดง  select week ทั้ง หมด โดยไม่เอา week ล่าสุด
+      const result = all_exercise_activity.map((week) => {
+        if (week.week_in_program <= maxWeek) {
+          return week.week_in_program;
+        }
+      });
+
+      const weekAll = result.sort((a, b) => b - a);
+      const filteredWeekAll = weekAll.filter(Boolean);
+      this.setState({ weekAll: filteredWeekAll });
+    }
+
     if (prevProps.exerciseVideo !== exerciseVideo) {
       //เพื่อ update playtime ของ renderEditVDO
       const { focusDay } = this.state;
@@ -481,7 +488,9 @@ class VideoList extends Component {
       this.setState({
         tempPlaylist: tempPlaylist,
       });
+      this.props.getAllExerciseActivity(user.user_id);
     }
+
     if (prevProps.videos !== this.props.videos) {
       const videos = this.props.videos;
       this.setState({
@@ -561,7 +570,6 @@ class VideoList extends Component {
           /*    validation_displayname: false, */
           checkDisplayName: "success",
         });
-        console.log("statusDisplayName", statusDisplayName);
       } else if (statusDisplayName === "fail") {
         if (displayName3 && displayName3 === displayName2) {
           this.setState({
@@ -608,7 +616,6 @@ class VideoList extends Component {
   }
 
   toggleListLastWeek(index) {
-    console.log("OPEN VIDEO", index);
     const { focusDay, lastWeekVDOAll } = this.state;
 
     if (!lastWeekVDOAll) {
@@ -787,6 +794,7 @@ class VideoList extends Component {
     this.setState({
       exerciseSnack: true,
       showchallenge: false,
+      autoPlayCheck: false,
       showBarveAndBurn: true,
     });
   };
@@ -795,6 +803,7 @@ class VideoList extends Component {
     this.setState({
       shownutrition: false,
       exerciseSnack: false,
+      autoPlayCheck: false,
       showBarveAndBurn: true,
       showchallenge: true,
     });
@@ -871,12 +880,15 @@ class VideoList extends Component {
     });
   }
 
-  autoPlayCheck() {
-    if (document.getElementById("autoPlayCheck").checked === true) {
-      this.setState({ autoPlayCheck: true });
-    } else {
-      this.setState({ autoPlayCheck: false });
-    }
+  autoPlayCheck(e) {
+    this.setState({
+      autoPlayCheck: e.target.checked,
+    });
+    // if (document.getElementById("autoPlayCheck").checked === true) {
+    //   this.setState({ autoPlayCheck: true });
+    // } else {
+    //   this.setState({ autoPlayCheck: false });
+    // }
   }
 
   toggleList(index) {
@@ -1259,7 +1271,6 @@ class VideoList extends Component {
                       <div className="property-box">
                         {itemsArray &&
                           itemsArray.map((muItem, j) => {
-                            console.log("muItem", muItem);
                             if (muItem == "warm_up") {
                               return (
                                 <img
@@ -3073,14 +3084,13 @@ class VideoList extends Component {
                           >
                             เล่นอัตโนมัติ
                           </span>
-                          <label
-                            className="switch"
-                            onClick={() => this.autoPlayCheck()}
-                          >
+                          <label className="switch">
                             <input
                               type="checkbox"
                               className="danger"
                               id="autoPlayCheck"
+                              checked={this.state.autoPlayCheck}
+                              onChange={this.autoPlayCheck}
                             ></input>
                             <span className="slider round"></span>
                           </label>
@@ -3386,7 +3396,6 @@ class VideoList extends Component {
     const todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
     let allMinute = [];
     let allSecond = [];
-
     /*  const selectExerciseVideoLastWeek = exerciseVideoLastWeek */
     if (selectExerciseVideoLastWeek) {
       todayExercise.map((item) =>
@@ -3642,14 +3651,13 @@ class VideoList extends Component {
                           >
                             เล่นอัตโนมัติ
                           </span>
-                          <label
-                            className="switch"
-                            onClick={() => this.autoPlayCheck()}
-                          >
+                          <label className="switch">
                             <input
                               type="checkbox"
                               className="danger"
                               id="autoPlayCheck"
+                              checked={this.state.autoPlayCheck}
+                              onChange={this.autoPlayCheck}
                             ></input>
                             <span className="slider round"></span>
                           </label>
@@ -3924,24 +3932,43 @@ class VideoList extends Component {
       weekAll,
       shownutrition,
     } = this.state;
-
-    const { exerciseVideo } = this.props;
+    const {
+      user,
+      exerciseVideo,
+      statusGetAllExAct,
+      week,
+      all_exercise_activity,
+    } = this.props;
     const numbDayExercise = exerciseVideo.length;
     const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
     // const todayExercise = this.exerciseDaySelection(focusDay);
-    const todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
+    // const todayExerciseLastWeek =
+    //   this.selectExerciseDaySelectionLastWeek(focusDay);
     const findCurrentWeek = Math.max(...weekAll) == lastWeekStart;
-
     let allMinute = [];
     let allSecond = [];
-    if (selectExerciseVideoLastWeek) {
-      todayExercise.map((item) =>
+    let todayData = [];
+
+    if (exerciseVideo && findCurrentWeek) {
+      todayData = this.exerciseDaySelection(focusDay);
+      todayData.map((item) =>
         allMinute.push(Number(item.duration.toFixed(2).split(".")[0]))
       );
-      todayExercise.map((item) =>
+      todayData.map((item) =>
         allSecond.push(Number(item.duration.toFixed(2).split(".")[1]))
       );
     }
+
+    if (!findCurrentWeek && selectExerciseVideoLastWeek) {
+      todayData = this.selectExerciseDaySelectionLastWeek(focusDay);
+      todayData.map((item) =>
+        allMinute.push(Number(item.duration.toFixed(2).split(".")[0]))
+      );
+      todayData.map((item) =>
+        allSecond.push(Number(item.duration.toFixed(2).split(".")[1]))
+      );
+    }
+
     let sumMinute = allMinute
       .reduce((acc, curr) => (acc += curr), 0)
       .toFixed(0);
@@ -3964,7 +3991,7 @@ class VideoList extends Component {
     }
 
     return (
-      <div className="card-body">
+      <div className="">
         <form>
           <div
             className="tab-content mt-3 mb-3"
@@ -4003,9 +4030,11 @@ class VideoList extends Component {
                     className="form-control"
                     style={{ width: 121, marginRight: 30, marginLeft: 15 }}
                     aria-label="Default select example"
-                    onChange={(event) =>
-                      this.setState({ lastWeekStart: event.target.value })
-                    }
+                    onChange={(event) => {
+                      this.setState({
+                        lastWeekStart: event.target.value,
+                      });
+                    }}
                   >
                     {this.state.weekAll &&
                       this.state.weekAll.map((number) => {
@@ -4141,7 +4170,7 @@ class VideoList extends Component {
                         }}
                       >
                         <h5>
-                          <b> CHALLENGE</b>
+                          <b> Challenge</b>
                         </h5>
                       </a>
                     }
@@ -4159,16 +4188,16 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   } */}
-
-                    {/* {this.props.week > 1 && (
-                    <a
-                      className="nav-link ml-auto"
-                      style={{ cursor: "pointer", color: "#059669" }}
-                      onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
-                    >
-                      <u>ดูวิดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
-                    </a>
-                  )} */}
+                    {/* 
+                    {this.props.week > 1 && (
+                      <a
+                        className="nav-link ml-auto"
+                        style={{ cursor: "pointer", color: "#059669" }}
+                        onClick={() => this.videoWeekAll()} //(this.setState({ lastWeekVDO_click: "show" })
+                      >
+                        <u>ดูวิดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
+                      </a>
+                    )} */}
                   </div>
                 </nav>
               </div>
@@ -4210,6 +4239,7 @@ class VideoList extends Component {
                         selectExerciseVideoLastWeek={
                           selectExerciseVideoLastWeek
                         }
+                        isCurrentWeek={findCurrentWeek}
                       />
                     }
                   </div>
@@ -4229,6 +4259,7 @@ class VideoList extends Component {
                         selectExerciseVideoLastWeek={
                           selectExerciseVideoLastWeek
                         }
+                        isCurrentWeek={findCurrentWeek}
                       />
                     ) : (
                       <>
@@ -4261,10 +4292,10 @@ class VideoList extends Component {
                   className="table table-responsive"
                   style={{ overflow: "hidden" }}
                 >
-                  <div>
+                  <div style={{ marginTop: 32, marginBottom: 48 }}>
                     <div>
                       <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-12 col-md-6">
                           <div className="">
                             <span
                               className="mr-5 ml-3"
@@ -4301,31 +4332,28 @@ class VideoList extends Component {
                               )} */}
                           </div>
                         </div>
-                        <div className="col-lg-6">
-                          <div className="col-lg-12 col-md-4 col-12">
-                            <div className="mt-1" style={{ float: "right" }}>
-                              <span
-                                className="mr-2"
-                                style={{
-                                  fontSize: "18px",
-                                  fontWeight: "bold",
-                                  color: "grey",
-                                }}
-                              >
-                                เล่นอัตโนมัติ
-                              </span>
-                              <label
-                                className="switch"
-                                onClick={() => this.autoPlayCheck()}
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="danger"
-                                  id="autoPlayCheck"
-                                ></input>
-                                <span className="slider round"></span>
-                              </label>
-                            </div>
+                        <div className="col-12 col-md-6">
+                          <div className="" style={{ float: "right" }}>
+                            <span
+                              className="mr-2"
+                              style={{
+                                fontSize: "18px",
+                                fontWeight: "bold",
+                                color: "grey",
+                              }}
+                            >
+                              เล่นอัตโนมัติ
+                            </span>
+                            <label className="switch">
+                              <input
+                                type="checkbox"
+                                className="danger"
+                                id="autoPlayCheck"
+                                checked={this.state.autoPlayCheck}
+                                onChange={this.autoPlayCheck}
+                              ></input>
+                              <span className="slider round"></span>
+                            </label>
                           </div>
                         </div>
                       </div>
@@ -4333,8 +4361,8 @@ class VideoList extends Component {
                   </div>
 
                   <div>
-                    {selectExerciseVideoLastWeek ? (
-                      todayExercise.map((item, index) => {
+                    {statusGetAllExAct !== "loading" && exerciseVideo ? (
+                      todayData.map((item, index) => {
                         const itemsArray = item.muscle.split(",");
 
                         const minuteLabel =
@@ -4383,7 +4411,7 @@ class VideoList extends Component {
                                   </h3>
                                 </span>
                               )}
-                              {index === todayExercise.length - 1 ? (
+                              {index === todayData.length - 1 ? (
                                 <div
                                   className={
                                     item.play_time &&
@@ -4407,7 +4435,7 @@ class VideoList extends Component {
                                   }
                                 ></div>
                               )}
-                              {index === todayExercise.length - 1 && (
+                              {index === todayData.length - 1 && (
                                 <h6 className="lastVideoEndText">สำเร็จ!</h6>
                               )}
                             </Col>
@@ -4907,6 +4935,7 @@ class VideoList extends Component {
               user && user.other_attributes && statusVideoList !== "no_video"
                 ? "white"
                 : "#F0EEF3",
+            marginTop: -15,
           }}
         >
           <div className="container">

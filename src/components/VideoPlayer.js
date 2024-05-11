@@ -22,6 +22,7 @@ const VideoPlayerByteArk = ({
   lastWeekVDOAll,
   lastWeekStart,
   selectExerciseVideoLastWeek,
+  isCurrentWeek,
 }) => {
   const dispatch = useDispatch();
   const hidePopUpVideoPlayer = useSelector(({ exerciseVideos }) =>
@@ -43,7 +44,6 @@ const VideoPlayerByteArk = ({
   const [videoDuration, setVideoDuration] = useState(0); // เพิ่ม state สำหรับเก็บความยาวของวีดีโอ
   const [prevPlayTime, setPrevPlayTime] = useState(0);
 
-  console.log('url', url)
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
@@ -129,6 +129,7 @@ const VideoPlayerByteArk = ({
             tempExerciseVideoLastWeek
           )
         );
+        console.log("lastWeekStart 1", lastWeekStart);
       } else {
         //updatePlayTime ของผู้ใช้ต่ออายุดูย้อนหลัง
         const tempExerciseVideoLastWeekSelect = [
@@ -142,7 +143,7 @@ const VideoPlayerByteArk = ({
         };
         tempExerciseVideoLastWeekAll[lastWeekStart - 1].activities =
           JSON.stringify(tempExerciseVideoLastWeekSelect);
-
+        console.log("lastWeekStart 2", lastWeekStart);
         dispatch(
           updatePlaytimeLastWeekSelected(
             user.user_id,
@@ -158,26 +159,54 @@ const VideoPlayerByteArk = ({
         );
       }
     } else {
-      //updatePlayTime ของผู้ใช้ต่ออายุดูคลิปปัจจุบัน
-      const tempExerciseVideo = [...exerciseVideo];
-      tempExerciseVideo[day_number][video_number] = {
-        ...tempExerciseVideo[day_number][video_number],
-        play_time: videoDuration,
-        duration: videoDuration,
-      };
+      if (!isCurrentWeek) {
+        //updatePlayTime ของผู้ใช้ต่ออายุดูย้อนหลัง
+        const tempExerciseVideoLastWeekSelect = [
+          ...selectExerciseVideoLastWeek,
+        ];
+        const tempExerciseVideoLastWeekAll = [...all_exercise_activity];
+        tempExerciseVideoLastWeekSelect[day_number][video_number] = {
+          ...tempExerciseVideoLastWeekSelect[day_number][video_number],
+          play_time: videoDuration,
+          duration: videoDuration,
+        };
+        tempExerciseVideoLastWeekAll[lastWeekStart - 1].activities =
+          JSON.stringify(tempExerciseVideoLastWeekSelect);
+        dispatch(
+          updatePlaytimeLastWeekSelected(
+            user.user_id,
+            user.start_date,
+            user.expire_date,
+            day_number,
+            video_number,
+            videoDuration,
+            videoDuration,
+            tempExerciseVideoLastWeekAll,
+            lastWeekStart
+          )
+        );
+      } else {
+        //updatePlayTime ของผู้ใช้ต่ออายุดูคลิปปัจจุบัน
+        const tempExerciseVideo = [...exerciseVideo];
+        tempExerciseVideo[day_number][video_number] = {
+          ...tempExerciseVideo[day_number][video_number],
+          play_time: videoDuration,
+          duration: videoDuration,
+        };
 
-      dispatch(
-        updatePlaytime(
-          user.user_id,
-          user.start_date,
-          user.expire_date,
-          day_number,
-          video_number,
-          videoDuration,
-          videoDuration,
-          tempExerciseVideo
-        )
-      );
+        dispatch(
+          updatePlaytime(
+            user.user_id,
+            user.start_date,
+            user.expire_date,
+            day_number,
+            video_number,
+            videoDuration,
+            videoDuration,
+            tempExerciseVideo
+          )
+        );
+      }
     }
   };
 

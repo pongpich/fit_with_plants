@@ -223,6 +223,7 @@ const VideoBodyBurner = () => {
 
   useMemo(() => {
     // for check open score modal
+    // save in localStorage show just first time
     if (!exerciseSnack || exerciseSnack.length === 0 || indexScore == 0) {
       return;
     }

@@ -24,6 +24,7 @@ const VideoPlayerListByteArk = ({
   lastWeekVDOAll,
   lastWeekStart,
   selectExerciseVideoLastWeek,
+  isCurrentWeek,
 }) => {
   const dispatch = useDispatch();
   const hidePopUpVideoPlayer = useSelector(({ exerciseVideos }) =>
@@ -50,21 +51,16 @@ const VideoPlayerListByteArk = ({
 
   useEffect(() => {
     addEventListenerVideo();
+
     setVideoCurrDuration(0);
+    setVideoEnded(false);
     dispatch(setEndedVideoPlayerList(false));
-  }, [selectedVDO]);
+  }, [selectedVDO, dispatch]);
 
   const addEventListenerVideo = () => {
     const video = videoRef.current;
 
     if (video && selectedVDO) {
-      const filterVideoAutoPlayEachDay = exerciseVideo
-        .filter((innerArray) =>
-          innerArray.some((obj) =>
-            obj.name.toLowerCase().includes(selectedVDO.name.toLowerCase())
-          )
-        )
-        .flat();
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(selectedVDO.url); // ใช้ URL ที่ถูกส่งเข้ามาใน props
@@ -80,8 +76,7 @@ const VideoPlayerListByteArk = ({
       }
 
       video.addEventListener("ended", () => {
-        setVideoEnded(true); // กำหนดว่าวีดีโอถูกดูจบ
-        dispatch(setEndedVideoPlayerList(true));
+        // setVideoEnded(true); // กำหนดว่าวีดีโอถูกดูจบ
       });
 
       video.addEventListener("loadedmetadata", () => {
@@ -111,14 +106,12 @@ const VideoPlayerListByteArk = ({
     if (videoCurrDuration / videoDuration >= 0.999) {
       setVideoEnded(true);
     }
-
     //ทำการหน่วงเวลาตาม updateFrequency เพื่อยิง updatePlayTime
     const diffTime = Math.abs(videoCurrDuration - prevPlayTime);
     if (diffTime < updateFrequency) {
       return;
     }
     setPrevPlayTime(videoCurrDuration);
-
     //เช็คว่าถ้าดูวีดีโอยังไม่ถึง minimumVideoPlayPercentage ไม่ต้อง updatePlayTime
     //เช็คว่าถ้าเคยดูคลิปนั้นจบแล้ว ไม่ต้อง updatePlayTime
     if (
@@ -128,61 +121,35 @@ const VideoPlayerListByteArk = ({
     ) {
       return;
     }
-
     updatePlayTime();
   }, [videoCurrDuration]);
 
   const updatePlayTime = () => {
-    if (lastWeekVDO_click === "show") {
-      if (!lastWeekVDOAll) {
-        //updatePlayTime ของผู้ใช้หมดอายุดูย้อนหลัง
-        const tempExerciseVideoLastWeek = [...exerciseVideoLastWeek];
-        tempExerciseVideoLastWeek[day_number][video_number] = {
-          ...tempExerciseVideoLastWeek[day_number][video_number],
-          play_time: videoDuration,
-          duration: videoDuration,
-        };
+    if (!isCurrentWeek) {
+      //updatePlayTime ของผู้ใช้ต่ออายุดูย้อนหลัง
+      const tempExerciseVideoLastWeekSelect = [...selectExerciseVideoLastWeek];
+      const tempExerciseVideoLastWeekAll = [...all_exercise_activity];
+      tempExerciseVideoLastWeekSelect[day_number][video_number] = {
+        ...tempExerciseVideoLastWeekSelect[day_number][video_number],
+        play_time: videoDuration,
+        duration: videoDuration,
+      };
+      tempExerciseVideoLastWeekAll[lastWeekStart - 1].activities =
+        JSON.stringify(tempExerciseVideoLastWeekSelect);
 
-        dispatch(
-          updatePlaytimeLastWeek(
-            user.user_id,
-            user.start_date,
-            user.expire_date,
-            day_number,
-            video_number,
-            videoDuration,
-            videoDuration,
-            tempExerciseVideoLastWeek
-          )
-        );
-      } else {
-        //updatePlayTime ของผู้ใช้ต่ออายุดูย้อนหลัง
-        const tempExerciseVideoLastWeekSelect = [
-          ...selectExerciseVideoLastWeek,
-        ];
-        const tempExerciseVideoLastWeekAll = [...all_exercise_activity];
-        tempExerciseVideoLastWeekSelect[day_number][video_number] = {
-          ...tempExerciseVideoLastWeekSelect[day_number][video_number],
-          play_time: videoDuration,
-          duration: videoDuration,
-        };
-        tempExerciseVideoLastWeekAll[lastWeekStart - 1].activities =
-          JSON.stringify(tempExerciseVideoLastWeekSelect);
-
-        dispatch(
-          updatePlaytimeLastWeekSelected(
-            user.user_id,
-            user.start_date,
-            user.expire_date,
-            day_number,
-            video_number,
-            videoDuration,
-            videoDuration,
-            tempExerciseVideoLastWeekAll,
-            lastWeekStart
-          )
-        );
-      }
+      dispatch(
+        updatePlaytimeLastWeekSelected(
+          user.user_id,
+          user.start_date,
+          user.expire_date,
+          day_number,
+          video_number,
+          videoDuration,
+          videoDuration,
+          tempExerciseVideoLastWeekAll,
+          lastWeekStart
+        )
+      );
     } else {
       //updatePlayTime ของผู้ใช้ต่ออายุดูคลิปปัจจุบัน
       const tempExerciseVideo = [...exerciseVideo];
@@ -209,8 +176,12 @@ const VideoPlayerListByteArk = ({
 
   const handleVideoClose = () => {
     const video = videoRef.current;
+    const hls = new Hls();
+
     if (video) {
       video.pause();
+      hls.destroy();
+      selectedVDO = null;
       // และอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อปิดวีดีโอ
     }
 
