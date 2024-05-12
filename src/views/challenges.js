@@ -514,7 +514,7 @@ class Challenges extends Component {
           {!this.state.challengePeriod ? (
             <>
               <div
-                className="card shadow col-lg-4 col-md-12"
+                className="card shadow col-xl-4 col-md-12"
                 style={{ borderRadius: "25px", border: "1px solid #059669" }}
               >
                 <div className="card-body">
@@ -585,7 +585,7 @@ class Challenges extends Component {
               </div>
 
               <div
-                className="card shadow col-lg-4 col-md-12"
+                className="card shadow col-xl-4 col-md-12"
                 style={{ borderRadius: "25px", border: "1px solid #059669" }}
               >
                 <div className="card-body">
@@ -640,7 +640,7 @@ class Challenges extends Component {
             </div>
           )}
           <div
-            className="card shadow col-lg-3 col-md-12"
+            className="card shadow col-xl-3 col-md-12"
             style={{ borderRadius: "25px", border: "1px solid #059669" }}
           >
             <div className="card-body">
@@ -2973,7 +2973,7 @@ class Challenges extends Component {
                   className="d-flex"
                   style={{
                     gap: "18px",
-                    height: 44,
+                    minHeight: 44,
                     overflowX: "auto",
                     marginBottom: 37,
                   }}

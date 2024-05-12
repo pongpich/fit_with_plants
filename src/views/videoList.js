@@ -451,7 +451,7 @@ class VideoList extends Component {
         tempPlaylist: playlist,
       });
     }
-    
+
     if (
       prevProps.statusGetAllExAct !== statusGetAllExAct &&
       statusGetAllExAct === "success"
@@ -4063,11 +4063,15 @@ class VideoList extends Component {
                         style={{
                           color: `${
                             !showBarveAndBurn && focusDay === 0
-                              ? "#059669"
-                              : "grey"
+                              ? "#000000"
+                              : "#ACACAC"
                           }`,
                           cursor: "pointer",
-                          // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                          borderBottom:
+                            !showBarveAndBurn && focusDay === 0
+                              ? "5px solid #059669"
+                              : "none",
+                          paddingBottom: 0,
                         }}
                         onClick={() => this.onDayChange(0)}
                       >
@@ -4082,11 +4086,15 @@ class VideoList extends Component {
                         style={{
                           color: `${
                             !showBarveAndBurn && focusDay === 1
-                              ? "#059669"
-                              : "grey"
+                              ? "#000000"
+                              : "#ACACAC"
                           }`,
                           cursor: "pointer",
-                          // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                          borderBottom:
+                            !showBarveAndBurn && focusDay === 1
+                              ? "5px solid #059669"
+                              : "none", // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                          paddingBottom: 0,
                         }}
                         onClick={() => this.onDayChange(1)}
                       >
@@ -4102,11 +4110,15 @@ class VideoList extends Component {
                           style={{
                             color: `${
                               !showBarveAndBurn && focusDay === 2
-                                ? "#059669"
-                                : "grey"
+                                ? "#000000"
+                                : "#ACACAC"
                             }`,
                             cursor: "pointer",
-                            // borderBottom: !showBarveAndBurn && focusDay === 0 ? "5px solid #059669" : "none"  // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                            borderBottom:
+                              !showBarveAndBurn && focusDay === 2
+                                ? "5px solid #059669"
+                                : "none", // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                            paddingBottom: 0,
                           }}
                           onClick={() => this.onDayChange(2)}
                         >
@@ -4151,7 +4163,11 @@ class VideoList extends Component {
                         className="nav-link"
                         onClick={() => this.onExerciseSnackChange()}
                         style={{
-                          color: `${exerciseSnack ? "#059669" : "grey"}`,
+                          color: `${exerciseSnack ? "#000000" : "#ACACAC"}`,
+                          borderBottom: exerciseSnack
+                            ? "5px solid #059669"
+                            : "none", // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                          paddingBottom: 0,
                           cursor: "pointer",
                         }}
                       >
@@ -4165,7 +4181,11 @@ class VideoList extends Component {
                         className="nav-link"
                         onClick={() => this.onChallengeChange()}
                         style={{
-                          color: `${showchallenge ? "#059669" : "grey"}`,
+                          color: `${showchallenge ? "#000000" : "#ACACAC"}`,
+                          borderBottom: showchallenge
+                            ? "5px solid #059669"
+                            : "none", // เส้นใต้จะแสดงเมื่อเงื่อนไขเป็นจริง
+                          paddingBottom: 0,
                           cursor: "pointer",
                         }}
                       >
