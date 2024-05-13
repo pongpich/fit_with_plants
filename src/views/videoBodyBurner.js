@@ -673,32 +673,34 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                       <b>{item.name} </b>
                                     </h4>
 
-                                    <div
-                                      className="box-random"
-                                      onClick={() =>
-                                        renewId(index, item.video_id)
-                                      }
-                                    >
-                                      <img
-                                        src={arrow_circle}
-                                        style={{
-                                          width: 16,
-                                          height: 16,
-                                          marginRight: 8,
-                                        }}
-                                        alt=""
-                                      />
-                                      <span
-                                        style={{
-                                          color: "#059669",
-                                          fontSize: 15,
-                                          fontWeight: 700,
-                                          marginLeft: 8,
-                                        }}
+                                    {week == weekSelect && (
+                                      <div
+                                        className="box-random"
+                                        onClick={() =>
+                                          renewId(index, item.video_id)
+                                        }
                                       >
-                                        เลือกคลิปใหม่
-                                      </span>
-                                    </div>
+                                        <img
+                                          src={arrow_circle}
+                                          style={{
+                                            width: 16,
+                                            height: 16,
+                                            marginRight: 8,
+                                          }}
+                                          alt=""
+                                        />
+                                        <span
+                                          style={{
+                                            color: "#059669",
+                                            fontSize: 15,
+                                            fontWeight: 700,
+                                            marginLeft: 8,
+                                          }}
+                                        >
+                                          เลือกคลิปใหม่
+                                        </span>
+                                      </div>
+                                    )}
                                   </div>
                                   <hr />
 
