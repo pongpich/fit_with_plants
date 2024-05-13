@@ -26,6 +26,7 @@ import {
   ModalBody,
   ModalHeader,
   Row,
+  Spinner,
 } from "reactstrap";
 import star_icon from "../../src/assets/img/star.png";
 import arrow_circle from "../assets/img/arrow_circle.png";
@@ -33,7 +34,6 @@ import Union from "../assets/img/Union.png";
 import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
 import Cookie from "js-cookie";
-
 
 const VideoBodyBurner = () => {
   const dispatch = useDispatch();
@@ -334,7 +334,7 @@ const VideoBodyBurner = () => {
           </Alert>
 
           <div>
-            {exerciseSnack &&
+            {exerciseSnack ? (
               exerciseSnack
                 .map((item, index) => {
                   const minuteLabel =
@@ -515,7 +515,10 @@ const VideoBodyBurner = () => {
                     </Row>
                   );
                 })
-                .slice(0, 3)}
+                .slice(0, 3)
+            ) : (
+              <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+            )}
           </div>
         </table>
 
@@ -549,7 +552,7 @@ const VideoBodyBurner = () => {
             />
           </Alert>
           <div>
-            {exerciseSnack &&
+            {exerciseSnack ? (
               exerciseSnack
                 .map((item, index) => {
                   const minuteLabel =
@@ -721,7 +724,10 @@ const VideoBodyBurner = () => {
                     </Row>
                   );
                 })
-                .slice(3)}
+                .slice(3)
+            ) : (
+              <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+            )}
           </div>
         </table>
       </div>
