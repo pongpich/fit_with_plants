@@ -3948,7 +3948,7 @@ class VideoList extends Component {
     let allMinute = [];
     let allSecond = [];
     let todayData = [];
-
+    console.log("lastWeekStart", lastWeekStart);
     if (exerciseVideo && findCurrentWeek) {
       todayData = this.exerciseDaySelection(focusDay);
       todayData.map((item) =>
@@ -4036,6 +4036,7 @@ class VideoList extends Component {
                       });
                     }}
                   >
+                    {/* //EDIT */}
                     {this.state.weekAll &&
                       this.state.weekAll.map((number) => {
                         return <option value={number}>Week {number}</option>;
@@ -4241,7 +4242,9 @@ class VideoList extends Component {
           </div>
 
           {showchallenge ? <Challenges /> : null}
-          {exerciseSnack ? <VideoBodyBurner /> : null}
+          {exerciseSnack ? (
+            <VideoBodyBurner weekSelect={this.state.lastWeekStart} />
+          ) : null}
           {!showBarveAndBurn ? (
             <div className="">
               {this.state.autoPlayCheck ? (

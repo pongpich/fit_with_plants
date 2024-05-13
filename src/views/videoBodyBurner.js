@@ -35,7 +35,7 @@ import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
 import Cookie from "js-cookie";
 
-const VideoBodyBurner = () => {
+const VideoBodyBurner = ({ weekSelect }) => {
   const dispatch = useDispatch();
   const {
     videoExerciseSnack,
@@ -75,9 +75,9 @@ const VideoBodyBurner = () => {
 
   useEffect(() => {
     dispatch(setHidePopupVideoPlayerSnack(false));
-    dispatch(getExerciseSnack(user.user_id, week));
-    dispatch(getVideoSnack(user && user.user_id, week));
-  }, []);
+    dispatch(getExerciseSnack(user.user_id, weekSelect));
+    dispatch(getVideoSnack(user && user.user_id, weekSelect));
+  }, [weekSelect]);
 
   useEffect(() => {
     setVideoAll(videoExerciseSnackAll ? videoExerciseSnackAll : null);
