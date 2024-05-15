@@ -2,7 +2,9 @@
   // background: url("/src/assets/img/bg_login.png") no-repeat center bottom;
   padding:10% 10%;
   background-size: cover; /* สำหรับปรับขนาด background ให้เต็มพื้นที่ */
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-card {

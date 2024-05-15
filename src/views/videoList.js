@@ -16,6 +16,7 @@ import {
   updateProfile,
   logoutUser,
   checkUpdateMaxFriends,
+  loginUser
 } from "../redux/auth";
 import {
   getCheckDisplayName,
@@ -229,6 +230,7 @@ class VideoList extends Component {
       this.props.checkRenewPrompt(user.user_id);
       this.props.createExerciseSnack(user && user.user_id);
       this.props.getAllExerciseActivity(user.user_id);
+      this.props.loginUser(user && user.email);
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
     }
@@ -312,6 +314,33 @@ class VideoList extends Component {
       week,
       exercise_day,
     } = this.props;
+
+    if (user && prevProps.user.start_date !== user.start_date) {
+      //todo when got start_date new only
+      this.setState({
+        other_attributes: user.other_attributes,
+      });
+      this.props.videoListForUser(
+        this.props.user.user_id,
+        user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
+        this.props.user.start_date,
+        this.props.user.expire_date,
+        this.props.user.offset
+      );
+      this.props.videoListForUserLastWeek(
+        this.props.user.user_id,
+        user.other_attributes.weight, //ไม่ต้อง JSON.parse เพราะผ่านการ UPDATE_PROFILE_SUCCESS
+        this.props.user.start_date,
+        this.props.user.expire_date,
+        this.props.user.offset
+      );
+      if (
+        this.props.user.other_attributes &&
+        this.props.statusVideoList !== "no_video"
+      ) {
+        this.addEventToVideo();
+      }
+    }
 
     if (
       prevProps.statusGetBraveAndBurn !== statusGetBraveAndBurn &&
@@ -5074,6 +5103,7 @@ const mapActionsToProps = {
   createCustomWeekForUser,
   videoListForUser,
   logoutUser,
+  loginUser,
   updatePlaytime,
   updatePlaylist,
   randomVideo,
