@@ -384,8 +384,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -396,8 +396,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -477,7 +477,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                   </span>
                                   <img
                                     className="property-body_part ml-2"
-                                    src={`../assets/img/body_part/chip.png`}
+                                    src={`../assets/img/body_part/cardio_preem.png`}
                                     alt="img"
                                   />
                                 </div>
@@ -599,8 +599,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -611,8 +611,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
