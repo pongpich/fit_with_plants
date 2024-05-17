@@ -16,7 +16,7 @@ import {
   updateProfile,
   logoutUser,
   checkUpdateMaxFriends,
-  loginUser
+  loginUser,
 } from "../redux/auth";
 import {
   getCheckDisplayName,
@@ -423,7 +423,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-      statusPostDailyWeighChallenge &&
+        statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -509,6 +509,10 @@ class VideoList extends Component {
       this.setState({ weekAll: filteredWeekAll });
     }
 
+    if (prevProps.week !== week) {
+      this.props.getAllExerciseActivity(user.user_id);
+    }
+
     if (prevProps.exerciseVideo !== exerciseVideo) {
       //เพื่อ update playtime ของ renderEditVDO
       const { focusDay } = this.state;
@@ -517,7 +521,6 @@ class VideoList extends Component {
       this.setState({
         tempPlaylist: tempPlaylist,
       });
-      this.props.getAllExerciseActivity(user.user_id);
     }
 
     if (prevProps.videos !== this.props.videos) {
@@ -1057,7 +1060,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-      completeVideoPlayPercentage
+        completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1963,8 +1966,8 @@ class VideoList extends Component {
                         item.category !== "Challenge" &&
                         ((item.category === "Warm Up" ||
                           item.category === "Cool Down") &&
-                          member_info &&
-                          member_info.program_level === "bfr_lv1" ? (
+                        member_info &&
+                        member_info.program_level === "bfr_lv1" ? (
                           <div></div>
                         ) : (
                           <div
@@ -2884,17 +2887,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                      this.setState({
-                        step4WeeksPrompt: step4WeeksPrompt + 1,
-                      })
+                        this.setState({
+                          step4WeeksPrompt: step4WeeksPrompt + 1,
+                        })
                     : () =>
-                      this.props.updateProgramPromptLog(
-                        user.user_id,
-                        !statusCheckRenewPrompt
-                          ? "4 weeks prompt"
-                          : "renew prompt",
-                        "level up"
-                      )
+                        this.props.updateProgramPromptLog(
+                          user.user_id,
+                          !statusCheckRenewPrompt
+                            ? "4 weeks prompt"
+                            : "renew prompt",
+                          "level up"
+                        )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -3266,8 +3269,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3303,8 +3306,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                  item.duration &&
-                                  item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3315,8 +3318,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                  item.duration &&
-                                  item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3889,8 +3892,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                            item.duration &&
-                            item.play_time / item.duration >=
+                          item.duration &&
+                          item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3926,8 +3929,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                  item.duration &&
-                                  item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3938,8 +3941,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                  item.duration &&
-                                  item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -4258,7 +4261,7 @@ class VideoList extends Component {
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-          // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+            // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
           >
             <div
               className="tab-pane fade show active"
@@ -4324,10 +4327,11 @@ class VideoList extends Component {
                       <a
                         className="nav-link"
                         style={{
-                          color: `${!showBarveAndBurn && focusDay === 0
-                            ? "#000000"
-                            : "#ACACAC"
-                            }`,
+                          color: `${
+                            !showBarveAndBurn && focusDay === 0
+                              ? "#000000"
+                              : "#ACACAC"
+                          }`,
                           cursor: "pointer",
                           borderBottom:
                             !showBarveAndBurn && focusDay === 0
@@ -4346,10 +4350,11 @@ class VideoList extends Component {
                       <a
                         className="nav-link"
                         style={{
-                          color: `${!showBarveAndBurn && focusDay === 1
-                            ? "#000000"
-                            : "#ACACAC"
-                            }`,
+                          color: `${
+                            !showBarveAndBurn && focusDay === 1
+                              ? "#000000"
+                              : "#ACACAC"
+                          }`,
                           cursor: "pointer",
                           borderBottom:
                             !showBarveAndBurn && focusDay === 1
@@ -4369,10 +4374,11 @@ class VideoList extends Component {
                         <a
                           className="nav-link"
                           style={{
-                            color: `${!showBarveAndBurn && focusDay === 2
-                              ? "#000000"
-                              : "#ACACAC"
-                              }`,
+                            color: `${
+                              !showBarveAndBurn && focusDay === 2
+                                ? "#000000"
+                                : "#ACACAC"
+                            }`,
                             cursor: "pointer",
                             borderBottom:
                               !showBarveAndBurn && focusDay === 2
@@ -4643,7 +4649,7 @@ class VideoList extends Component {
                   </div>
 
                   <div>
-                    {statusGetAllExAct !== "loading" && exerciseVideo ? (
+                    {statusGetAllExAct == "success" && exerciseVideo ? (
                       todayData.map((item, index) => {
                         const itemsArray = item.muscle.split(",");
 
@@ -4660,8 +4666,8 @@ class VideoList extends Component {
                                 </h6>
                               )}
                               {item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage ? (
                                 <span
                                   className="dot"
@@ -4697,8 +4703,8 @@ class VideoList extends Component {
                                 <div
                                   className={
                                     item.play_time &&
-                                      item.duration &&
-                                      item.play_time / item.duration >=
+                                    item.duration &&
+                                    item.play_time / item.duration >=
                                       completeVideoPlayPercentage
                                       ? `vl`
                                       : `vl_done`
@@ -4709,8 +4715,8 @@ class VideoList extends Component {
                                 <div
                                   className={
                                     item.play_time &&
-                                      item.duration &&
-                                      item.play_time / item.duration >=
+                                    item.duration &&
+                                    item.play_time / item.duration >=
                                       completeVideoPlayPercentage
                                       ? `vl`
                                       : `vl_done`
@@ -4737,7 +4743,7 @@ class VideoList extends Component {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        borderRadius: "16px"
+                                        borderRadius: "16px",
                                       }}
                                     >
                                       <img
@@ -4964,7 +4970,6 @@ class VideoList extends Component {
                                                 ></img>
                                               );
                                             }
-
                                           })}
                                       </div>
                                     </div>
@@ -4976,7 +4981,12 @@ class VideoList extends Component {
                         );
                       })
                     ) : (
-                      <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+                      <div
+                        className="d-flex align-items-center justify-content-center"
+                        style={{ height: 200 }}
+                      >
+                        <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+                      </div>
                     )}
                   </div>
                 </table>
@@ -5003,211 +5013,222 @@ class VideoList extends Component {
               &times;
             </div>
             <div>
-              {this.state.selectChangeVideoList.map((item, index) => {
-                return (
-                  <div className="container_modal_editVDO">
-                    <div className="thumb_modal_left">
-                      {/* <SelectChangeVideoList
+              {this.state.selectChangeVideoList.length == 0 ? (
+                <div>
+                  <div
+                    className="d-flex align-items-center justify-content-center"
+                    style={{ height: 200 }}
+                  >
+                    <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+                  </div>
+                </div>
+              ) : (
+                this.state.selectChangeVideoList.map((item, index) => {
+                  return (
+                    <div className="container_modal_editVDO">
+                      <div className="thumb_modal_left">
+                        {/* <SelectChangeVideoList
                       thumbnail={item.thumbnail}
                       category={item.category}
                       url={item.url}
                     /> */}
-                      <img
-                        style={{
-                          borderRadius: "16px",
-                          width: "100%",
-                          height: "auto",
-                          maxWidth: 192,
-                        }}
-                        src={`${item.thumbnail}`}
-                        alt={`${item.thumbnail}`}
-                      />
-                    </div>
-                    <div className="container_editVDO">
-                      <div>
-                        <div className="">
-                          <h4 style={{ color: "#059669" }}>
-                            <b> {item.name} </b>
-                          </h4>
-                        </div>
-                        <div className="property-box">
-                          <span
-                            style={{
-                              color: "#828282",
-                              fontSize: 15,
-                            }}
-                          >
-                            สัดส่วนที่ได้ :
-                          </span>
-                          {item.muscle.split(",").map((muItem, j) => {
-                            if (muItem == "warm_up") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/Propertywarmup.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "cool_down") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/Propertycooldown.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "total_body") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/totalBody.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "core") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyCore.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "chest") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyChest.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "back") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyBack.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "glute") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyGlute.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "leg") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyLeg.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "shoulder") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/PropertyShoulder.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "cardio") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/cardio_preem.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "ham") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/ham.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "quad") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/quad.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "triceps") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/triceps.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "biceps") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/biceps.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "gluteus") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/gluteus.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "full_body") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/full_body.png`}
-                                ></img>
-                              );
-                            }
-                            if (muItem == "abs") {
-                              return (
-                                <img
-                                  className="property-body_part ml-2"
-                                  src={`../assets/img/body_part/abs.png`}
-                                ></img>
-                              );
-                            }
-                          })}
-                        </div>
-                      </div>
-                      <div>
-                        <button
-                          className="btn btn-danger"
-                          type="button"
+                        <img
                           style={{
-                            fontSize: "15px",
-                            cursor: "pointer",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: 64,
-                            height: 64,
-                            backgroundColor: "#059669",
-                            borderRadius: "1rem",
-                            borderColor: "#059669",
+                            borderRadius: "16px",
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: 192,
                           }}
-                          onClick={() => this.selectEditVideo(item)}
-                        >
-                          <img
-                            src={Union}
-                            style={{ width: 25, height: 25 }}
-                            alt="union"
-                          />
-                        </button>
+                          src={`${item.thumbnail}`}
+                          alt={`${item.thumbnail}`}
+                        />
+                      </div>
+                      <div className="container_editVDO">
+                        <div>
+                          <div className="">
+                            <h4 style={{ color: "#059669" }}>
+                              <b> {item.name} </b>
+                            </h4>
+                          </div>
+                          <div className="property-box">
+                            <span
+                              style={{
+                                color: "#828282",
+                                fontSize: 15,
+                              }}
+                            >
+                              สัดส่วนที่ได้ :
+                            </span>
+                            {item.muscle.split(",").map((muItem, j) => {
+                              if (muItem == "warm_up") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/Propertywarmup.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "cool_down") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/Propertycooldown.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "total_body") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/totalBody.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "core") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyCore.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "chest") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyChest.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "back") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyBack.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "glute") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyGlute.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "leg") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyLeg.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "shoulder") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/PropertyShoulder.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "cardio") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/cardio_preem.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "ham") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/ham.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "quad") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/quad.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "triceps") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/triceps.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "biceps") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/biceps.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "gluteus") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/gluteus.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "full_body") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/full_body.png`}
+                                  ></img>
+                                );
+                              }
+                              if (muItem == "abs") {
+                                return (
+                                  <img
+                                    className="property-body_part ml-2"
+                                    src={`../assets/img/body_part/abs.png`}
+                                  ></img>
+                                );
+                              }
+                            })}
+                          </div>
+                        </div>
+                        <div>
+                          <button
+                            className="btn btn-danger"
+                            type="button"
+                            style={{
+                              fontSize: "15px",
+                              cursor: "pointer",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              width: 64,
+                              height: 64,
+                              backgroundColor: "#059669",
+                              borderRadius: "1rem",
+                              borderColor: "#059669",
+                            }}
+                            onClick={() => this.selectEditVideo(item)}
+                          >
+                            <img
+                              src={Union}
+                              style={{ width: 25, height: 25 }}
+                              alt="union"
+                            />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
@@ -5340,21 +5361,21 @@ class VideoList extends Component {
               <Modal_Form modal_show={this.state.modal_show} handleClose={this.hideModalForm} handleSuccess={this.showSuccessModal} />
               <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
               {this.props.user &&
-                this.props.user.other_attributes &&
-                this.props.statusVideoList !== "no_video"
+              this.props.user.other_attributes &&
+              this.props.statusVideoList !== "no_video"
                 ? editVDO_click === "show"
                   ? this.renderEditVDO()
                   : lastWeekVDO_click === "show"
-                    ? lastWeekVDOAll === true
-                      ? this.renderVideoListLastWeekAll()
-                      : this.renderVideoListLastWeek()
-                    : this.renderVideoList()
+                  ? lastWeekVDOAll === true
+                    ? this.renderVideoListLastWeekAll()
+                    : this.renderVideoListLastWeek()
+                  : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                statusGetCheckRenewPrompt !== "loading" &&
-                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                  statusGetCheckRenewPrompt !== "loading" &&
+                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                  ? this.render4WeeksPrompt()
-                  : this.renderOtherAttribute())}
+                    ? this.render4WeeksPrompt()
+                    : this.renderOtherAttribute())}
             </div>
           </div>
         </div>
