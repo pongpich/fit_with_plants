@@ -3962,6 +3962,7 @@ class VideoList extends Component {
                                     backgroundPosition: "center",
                                     height: 153,
                                     width: "100%",
+                                    borderRadius: "16px",
                                     maxWidth: 272,
                                     display: "flex",
                                     alignItems: "center",
@@ -4736,6 +4737,7 @@ class VideoList extends Component {
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
+                                        borderRadius: "16px"
                                       }}
                                     >
                                       <img
@@ -5012,10 +5014,10 @@ class VideoList extends Component {
                     /> */}
                       <img
                         style={{
-                          borderRadius: "1rem",
+                          borderRadius: "16px",
                           width: "100%",
-                          height: 153,
-                          maxWidth: 272,
+                          height: "auto",
+                          maxWidth: 192,
                         }}
                         src={`${item.thumbnail}`}
                         alt={`${item.thumbnail}`}
