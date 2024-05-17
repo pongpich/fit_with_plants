@@ -4780,7 +4780,7 @@ class VideoList extends Component {
                                             onClick={() => {
                                               this.showModalEditVDO(
                                                 item.video_id,
-                                                item.category,
+                                                item.muscle,
                                                 item.type,
                                                 index,
                                                 item.exr_position
