@@ -423,7 +423,7 @@ class VideoList extends Component {
     }
     if (
       prevProps.statusPostDailyWeighChallenge !==
-        statusPostDailyWeighChallenge &&
+      statusPostDailyWeighChallenge &&
       statusPostDailyWeighChallenge === "success"
     ) {
       this.props.history.push("/challenges");
@@ -1057,7 +1057,7 @@ class VideoList extends Component {
       !video.duration ||
       video.currentTime / video.duration < minimumVideoPlayPercentage ||
       selectedVDO.play_time / selectedVDO.duration >=
-        completeVideoPlayPercentage
+      completeVideoPlayPercentage
     ) {
       return;
     }
@@ -1370,6 +1370,70 @@ class VideoList extends Component {
                                 <img
                                   className="property-body_part ml-2"
                                   src={`../assets/img/body_part/PropertyShoulder.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "cardio") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/cardio_preem.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "ham") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/ham.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "quad") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/quad.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "triceps") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/triceps.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "biceps") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/biceps.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "gluteus") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/gluteus.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "full_body") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/full_body.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "abs") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/abs.png`}
                                 ></img>
                               );
                             }
@@ -1834,6 +1898,62 @@ class VideoList extends Component {
                                       ></img>
                                     );
                                   }
+                                  if (muItem == "ham") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/ham.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "quad") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/quad.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "triceps") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/triceps.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "biceps") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/biceps.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "gluteus") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/gluteus.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "full_body") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/full_body.png`}
+                                      ></img>
+                                    );
+                                  }
+                                  if (muItem == "abs") {
+                                    return (
+                                      <img
+                                        className="property-body_part ml-2"
+                                        src={`../assets/img/body_part/abs.png`}
+                                      ></img>
+                                    );
+                                  }
                                 })}
                             </div>
                           </div>
@@ -1843,8 +1963,8 @@ class VideoList extends Component {
                         item.category !== "Challenge" &&
                         ((item.category === "Warm Up" ||
                           item.category === "Cool Down") &&
-                        member_info &&
-                        member_info.program_level === "bfr_lv1" ? (
+                          member_info &&
+                          member_info.program_level === "bfr_lv1" ? (
                           <div></div>
                         ) : (
                           <div
@@ -2764,17 +2884,17 @@ class VideoList extends Component {
                 onClick={
                   step4WeeksPrompt < 3
                     ? () =>
-                        this.setState({
-                          step4WeeksPrompt: step4WeeksPrompt + 1,
-                        })
+                      this.setState({
+                        step4WeeksPrompt: step4WeeksPrompt + 1,
+                      })
                     : () =>
-                        this.props.updateProgramPromptLog(
-                          user.user_id,
-                          !statusCheckRenewPrompt
-                            ? "4 weeks prompt"
-                            : "renew prompt",
-                          "level up"
-                        )
+                      this.props.updateProgramPromptLog(
+                        user.user_id,
+                        !statusCheckRenewPrompt
+                          ? "4 weeks prompt"
+                          : "renew prompt",
+                        "level up"
+                      )
                 }
                 style={{
                   width: step4WeeksPrompt < 3 ? 250 : 300,
@@ -3146,8 +3266,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                          item.duration &&
-                          item.play_time / item.duration >=
+                            item.duration &&
+                            item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3183,8 +3303,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                                  item.duration &&
+                                  item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3195,8 +3315,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                                  item.duration &&
+                                  item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3384,6 +3504,62 @@ class VideoList extends Component {
                                         <img
                                           className="property-body_part ml-2"
                                           src={`../assets/img/body_part/cardio_preem.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "ham") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/ham.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "quad") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/quad.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "triceps") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/triceps.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "biceps") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/biceps.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "gluteus") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/gluteus.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "full_body") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/full_body.png`}
+                                        ></img>
+                                      );
+                                    }
+                                    if (muItem == "abs") {
+                                      return (
+                                        <img
+                                          className="property-body_part ml-2"
+                                          src={`../assets/img/body_part/abs.png`}
                                         ></img>
                                       );
                                     }
@@ -3713,8 +3889,8 @@ class VideoList extends Component {
                             </h6>
                           )}
                           {item.play_time &&
-                          item.duration &&
-                          item.play_time / item.duration >=
+                            item.duration &&
+                            item.play_time / item.duration >=
                             completeVideoPlayPercentage ? (
                             <span
                               className="dot"
@@ -3750,8 +3926,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                                  item.duration &&
+                                  item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3762,8 +3938,8 @@ class VideoList extends Component {
                             <div
                               className={
                                 item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                                  item.duration &&
+                                  item.play_time / item.duration >=
                                   completeVideoPlayPercentage
                                   ? `vl`
                                   : `vl_done`
@@ -3925,6 +4101,62 @@ class VideoList extends Component {
                                             ></img>
                                           );
                                         }
+                                        if (muItem == "ham") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/ham.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "quad") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/quad.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "triceps") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/triceps.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "biceps") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/biceps.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "gluteus") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/gluteus.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "full_body") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/full_body.png`}
+                                            ></img>
+                                          );
+                                        }
+                                        if (muItem == "abs") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/abs.png`}
+                                            ></img>
+                                          );
+                                        }
                                       })}
                                   </div>
                                 </div>
@@ -4025,7 +4257,7 @@ class VideoList extends Component {
           <div
             className="tab-content mt-3 mb-3"
             id="myTabContent"
-            // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
+          // style={{ borderBottom: "3px solid #4F4F4F", paddingBottom: "0px" }}
           >
             <div
               className="tab-pane fade show active"
@@ -4091,11 +4323,10 @@ class VideoList extends Component {
                       <a
                         className="nav-link"
                         style={{
-                          color: `${
-                            !showBarveAndBurn && focusDay === 0
-                              ? "#000000"
-                              : "#ACACAC"
-                          }`,
+                          color: `${!showBarveAndBurn && focusDay === 0
+                            ? "#000000"
+                            : "#ACACAC"
+                            }`,
                           cursor: "pointer",
                           borderBottom:
                             !showBarveAndBurn && focusDay === 0
@@ -4114,11 +4345,10 @@ class VideoList extends Component {
                       <a
                         className="nav-link"
                         style={{
-                          color: `${
-                            !showBarveAndBurn && focusDay === 1
-                              ? "#000000"
-                              : "#ACACAC"
-                          }`,
+                          color: `${!showBarveAndBurn && focusDay === 1
+                            ? "#000000"
+                            : "#ACACAC"
+                            }`,
                           cursor: "pointer",
                           borderBottom:
                             !showBarveAndBurn && focusDay === 1
@@ -4138,11 +4368,10 @@ class VideoList extends Component {
                         <a
                           className="nav-link"
                           style={{
-                            color: `${
-                              !showBarveAndBurn && focusDay === 2
-                                ? "#000000"
-                                : "#ACACAC"
-                            }`,
+                            color: `${!showBarveAndBurn && focusDay === 2
+                              ? "#000000"
+                              : "#ACACAC"
+                              }`,
                             cursor: "pointer",
                             borderBottom:
                               !showBarveAndBurn && focusDay === 2
@@ -4430,8 +4659,8 @@ class VideoList extends Component {
                                 </h6>
                               )}
                               {item.play_time &&
-                              item.duration &&
-                              item.play_time / item.duration >=
+                                item.duration &&
+                                item.play_time / item.duration >=
                                 completeVideoPlayPercentage ? (
                                 <span
                                   className="dot"
@@ -4467,8 +4696,8 @@ class VideoList extends Component {
                                 <div
                                   className={
                                     item.play_time &&
-                                    item.duration &&
-                                    item.play_time / item.duration >=
+                                      item.duration &&
+                                      item.play_time / item.duration >=
                                       completeVideoPlayPercentage
                                       ? `vl`
                                       : `vl_done`
@@ -4479,8 +4708,8 @@ class VideoList extends Component {
                                 <div
                                   className={
                                     item.play_time &&
-                                    item.duration &&
-                                    item.play_time / item.duration >=
+                                      item.duration &&
+                                      item.play_time / item.duration >=
                                       completeVideoPlayPercentage
                                       ? `vl`
                                       : `vl_done`
@@ -4677,6 +4906,63 @@ class VideoList extends Component {
                                                 ></img>
                                               );
                                             }
+                                            if (muItem == "ham") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/ham.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "quad") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/quad.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "triceps") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/triceps.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "biceps") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/biceps.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "gluteus") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/gluteus.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "full_body") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/full_body.png`}
+                                                ></img>
+                                              );
+                                            }
+                                            if (muItem == "abs") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/abs.png`}
+                                                ></img>
+                                              );
+                                            }
+
                                           })}
                                       </div>
                                     </div>
@@ -4829,6 +5115,62 @@ class VideoList extends Component {
                                 <img
                                   className="property-body_part ml-2"
                                   src={`../assets/img/body_part/cardio_preem.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "ham") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/ham.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "quad") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/quad.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "triceps") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/triceps.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "biceps") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/biceps.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "gluteus") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/gluteus.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "full_body") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/full_body.png`}
+                                ></img>
+                              );
+                            }
+                            if (muItem == "abs") {
+                              return (
+                                <img
+                                  className="property-body_part ml-2"
+                                  src={`../assets/img/body_part/abs.png`}
                                 ></img>
                               );
                             }
@@ -4996,21 +5338,21 @@ class VideoList extends Component {
               <Modal_Form modal_show={this.state.modal_show} handleClose={this.hideModalForm} handleSuccess={this.showSuccessModal} />
               <Success_Modal success_modal_show={this.state.success_modal_show} handleClose={this.hideSuccessModal} /> */}
               {this.props.user &&
-              this.props.user.other_attributes &&
-              this.props.statusVideoList !== "no_video"
+                this.props.user.other_attributes &&
+                this.props.statusVideoList !== "no_video"
                 ? editVDO_click === "show"
                   ? this.renderEditVDO()
                   : lastWeekVDO_click === "show"
-                  ? lastWeekVDOAll === true
-                    ? this.renderVideoListLastWeekAll()
-                    : this.renderVideoListLastWeek()
-                  : this.renderVideoList()
+                    ? lastWeekVDOAll === true
+                      ? this.renderVideoListLastWeekAll()
+                      : this.renderVideoListLastWeek()
+                    : this.renderVideoList()
                 : statusGetCheck4WeeksPrompt !== "loading" &&
-                  statusGetCheckRenewPrompt !== "loading" &&
-                  ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
+                statusGetCheckRenewPrompt !== "loading" &&
+                ((statusCheck4WeeksPrompt || statusCheckRenewPrompt) &&
                   step4WeeksPrompt < 4 //ปัจจุบัน (4weeks, renew) Prompt ใช้ render เดียวกัน
-                    ? this.render4WeeksPrompt()
-                    : this.renderOtherAttribute())}
+                  ? this.render4WeeksPrompt()
+                  : this.renderOtherAttribute())}
             </div>
           </div>
         </div>
