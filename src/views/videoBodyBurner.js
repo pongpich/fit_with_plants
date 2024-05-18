@@ -350,9 +350,9 @@ const VideoBodyBurner = ({ weekSelect }) => {
 
   const handleShowModalTen = () => {
     const dataScoreCookie = Cookie.get("modalScore");
-    const exerciseSnackTop = exerciseSnack.slice(0, 3);
-    const isAllTopDone = exerciseSnackTop.every((val) => val.play_time > 0);
-
+    const exerciseSnackTop = exerciseSnack && exerciseSnack.slice(0, 3);
+    const isAllTopDone =
+      exerciseSnackTop && exerciseSnackTop.every((val) => val.play_time > 0);
     if (dataScoreCookie !== undefined) {
       const getModalScore = JSON.parse(Cookie.get("modalScore"));
       const currentWeek = weekSelect;
@@ -376,14 +376,10 @@ const VideoBodyBurner = ({ weekSelect }) => {
 
   const handleShowModalTwo = () => {
     const dataScoreCookie = Cookie.get("modalScore");
-    const exerciseSnackBottom = exerciseSnack.slice(3);
-    const videoBottom = exerciseSnackBottom.filter(
-      (_, i) => i + 3 == indexScore
-    );
-
-    if (videoBottom[0]?.play_time > 0) {
-      setModalTwo(true);
-    }
+    const exerciseSnackBottom = exerciseSnack && exerciseSnack.slice(3);
+    const videoBottom =
+      exerciseSnackBottom &&
+      exerciseSnackBottom.filter((_, i) => i + 3 == indexScore);
 
     if (dataScoreCookie !== undefined) {
       const getModalScore = JSON.parse(Cookie.get("modalScore"));
@@ -391,13 +387,24 @@ const VideoBodyBurner = ({ weekSelect }) => {
       const findCurrentWeek = getModalScore.find(
         (item) => item.week == +currentWeek
       );
+      const indexToPropertyMap = {
+        4: "video4",
+        5: "video5",
+        6: "video6",
+        7: "video7",
+      };
+      const isCurrentVideoDone =
+        findCurrentWeek[indexToPropertyMap[indexScore + 1]];
       if (
-        findCurrentWeek?.video4 &&
-        findCurrentWeek?.video5 &&
-        findCurrentWeek?.video6 &&
-        findCurrentWeek?.video7
+        isCurrentVideoDone !== undefined &&
+        videoBottom &&
+        videoBottom[0]?.play_time > 0
       ) {
         setModalTwo(false);
+      }
+
+      if (videoBottom && videoBottom[0]?.play_time > 0 && !isCurrentVideoDone) {
+        setModalTwo(true);
       }
     }
   };
