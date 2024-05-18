@@ -128,7 +128,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const closeBtnTen = (
-    <button type="button" class="btn-close" onClick={toggleTen}>
+    <button type="button" className="btn-close" onClick={toggleTen}>
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
@@ -140,7 +140,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const closeBtnTwo = (
-    <button type="button" class="btn-close" onClick={toggleTwo}>
+    <button type="button" className="btn-close" onClick={toggleTwo}>
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
@@ -149,8 +149,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
     if (statsUpdateVideoSnack == "success") {
       document.getElementById("btn-close") &&
         document.getElementById("btn-close").click();
-      dispatch(getExerciseSnack(user.user_id, week));
-      dispatch(getVideoSnack(user.user_id, week));
+      dispatch(getExerciseSnack(user.user_id, weekSelect));
+      dispatch(getVideoSnack(user.user_id, weekSelect));
     }
   }, [statsUpdateVideoSnack]);
 
@@ -219,7 +219,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
         `Exercise with video_id ${re_id} not found in exerciseSnack.`
       );
     }
-
     dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
   };
 
@@ -384,8 +383,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -396,8 +395,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -599,8 +598,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -611,8 +610,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
                           <div
                             className={
                               item.play_time &&
-                                item.duration &&
-                                item.play_time / item.duration >=
+                              item.duration &&
+                              item.play_time / item.duration >=
                                 completeVideoPlayPercentage
                                 ? `vl`
                                 : `vl_done`
@@ -737,7 +736,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
       <div
         className="modal fade"
         id="exampleModalSnack"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -770,6 +769,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                   if (item.video_id != re_id) {
                     return (
                       <div
+                        key={index}
                         className="row"
                         style={{
                           justifyContent: "space-between",
@@ -851,7 +851,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
       <button
         type="button"
         style={{ display: "none" }}
-        class="btn btn-primary"
+        className="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#exampleModalSnack"
         id="example-snack"
@@ -865,7 +865,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
 
       <Modal isOpen={modalTen} toggle={toggleTen} centered>
         <ModalHeader toggle={toggleTen} close={closeBtnTen}>
-          <div class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-title fs-5" id="exampleModalLabel">
             <img
               src="../assets/img/snackSuccess.png"
               className="snack-success"
@@ -884,7 +884,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
 
       <Modal isOpen={modalTwo} toggle={toggleTwo} centered>
         <ModalHeader toggle={toggleTwo} close={closeBtnTwo}>
-          <div class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-title fs-5" id="exampleModalLabel">
             <img
               src="../assets/img/snackSuccess.png"
               className="snack-success"

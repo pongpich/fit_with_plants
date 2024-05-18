@@ -1391,8 +1391,6 @@ function* createEventLogSnacksSaga({ payload }) {
 function* updateVideoSnackSaga({ payload }) {
   const { data, id } = payload;
   const apiResult = yield call(updateVideoSnackSagaAsync, data, id);
-
-  console.log("apiResult  555");
   try {
     yield put({
       type: types.UPDATE_VIDEO_SNACK_SUCCESS,

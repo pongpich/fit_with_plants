@@ -4195,6 +4195,7 @@ class VideoList extends Component {
       exerciseSnack,
       showchallenge,
       weekAll,
+      indexPlaylist,
       shownutrition,
     } = this.state;
     const {
@@ -4213,7 +4214,6 @@ class VideoList extends Component {
     let allMinute = [];
     let allSecond = [];
     let todayData = [];
-    console.log("lastWeekStart", lastWeekStart);
     if (exerciseVideo && findCurrentWeek) {
       todayData = this.exerciseDaySelection(focusDay);
       todayData.map((item) =>
@@ -4656,7 +4656,7 @@ class VideoList extends Component {
                         const minuteLabel =
                           item.duration < 20
                             ? convertFormatTime(item.duration)
-                            : convertSecondsToMinutes(item.duration);
+                            : convertSecondsToMinutes(item.duration);                   
                         return (
                           <Row key={index}>
                             <Col xs="2" lg="2">

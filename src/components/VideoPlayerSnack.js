@@ -117,7 +117,6 @@ const VideoPlayerSnack = ({ url, videoId, indexScore }) => {
       if (diffTime < 0.5) {
         return;
       } */
-
       dispatch(
         updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id)
       );
