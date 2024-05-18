@@ -35,6 +35,89 @@ import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
 import Cookie from "js-cookie";
 
+const defaultModalScore = [
+  {
+    week: 1,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 2,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 3,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 4,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 5,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 6,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 7,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+  {
+    week: 8,
+    video1: false,
+    video2: false,
+    video3: false,
+    video4: false,
+    video5: false,
+    video6: false,
+    video7: false,
+  },
+];
+
 const VideoBodyBurner = ({ weekSelect }) => {
   const dispatch = useDispatch();
   const {
@@ -67,6 +150,11 @@ const VideoBodyBurner = ({ weekSelect }) => {
   const [dataModalTwo, setDataModalTwo] = useState(() => {
     const storedData = Cookie.get("modalTwo");
     return storedData ? JSON.parse(storedData) : [];
+  });
+
+  const [dataStoreModal, setDataStoreModal] = useState(() => {
+    const storedData = Cookie.get("modalScore");
+    return storedData ? JSON.parse(storedData) : defaultModalScore;
   });
 
   const [url, setUrl] = useState(null);
@@ -123,8 +211,27 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const toggleTen = () => {
-    setModalTen(false);
-    Cookie.set("modalTen", true);
+    const weekMapValue = {
+      1: "video1",
+      2: "video2",
+      3: "video3",
+    };
+    const currentWeek = weekSelect;
+    const findCurrentWeekIndex = dataStoreModal.findIndex(
+      (item) => item.week == currentWeek
+    );
+
+    if (findCurrentWeekIndex !== -1) {
+      const updatedDataStoreModal = [...dataStoreModal];
+      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[1]] = true;
+      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[2]] = true;
+      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[3]] = true;
+      setDataStoreModal(updatedDataStoreModal);
+      Cookie.set("modalScore", JSON.stringify(updatedDataStoreModal));
+      setModalTen(false);
+    } else {
+      console.error(`Week ${currentWeek} not found in dataStoreModal`);
+    }
   };
 
   const closeBtnTen = (
@@ -132,11 +239,29 @@ const VideoBodyBurner = ({ weekSelect }) => {
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
-  const [arrVal, setArrVal] = useState([]);
 
   const toggleTwo = () => {
-    setDataModalTwo([...dataModalTwo, indexScore]);
-    setModalTwo(false);
+    const weekMapValue = {
+      4: "video4",
+      5: "video5",
+      6: "video6",
+      7: "video7",
+    };
+    const currentWeek = weekSelect;
+    const findCurrentWeekIndex = dataStoreModal.findIndex(
+      (item) => item.week == currentWeek
+    );
+    if (findCurrentWeekIndex !== -1) {
+      const updatedDataStoreModal = [...dataStoreModal];
+      updatedDataStoreModal[findCurrentWeekIndex][
+        weekMapValue[indexScore + 1]
+      ] = true;
+      setDataStoreModal(updatedDataStoreModal);
+      Cookie.set("modalScore", JSON.stringify(updatedDataStoreModal));
+      setModalTwo(false);
+    } else {
+      console.error(`Week ${currentWeek} not found in dataStoreModal`);
+    }
   };
 
   const closeBtnTwo = (
@@ -177,6 +302,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
   // เพิ่ม event listener เพื่อตรวจจับการเปลี่ยนขนาดหน้าจอ
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+    Cookie.set("modalScore", JSON.stringify(dataStoreModal));
 
     // ถอด event listener เมื่อ component ถูก unmount
     return () => {
@@ -222,37 +348,64 @@ const VideoBodyBurner = ({ weekSelect }) => {
     dispatch(updateVideoSnack(updatedExerciseSnack, videoExerciseSnack[0].id));
   };
 
-  useMemo(() => {
-    // for check open score modal
-    // save in Cookie show just first time
-    if (!exerciseSnack || exerciseSnack.length === 0 || indexScore == 0) {
-      return;
-    }
-
+  const handleShowModalTen = () => {
+    const dataScoreCookie = Cookie.get("modalScore");
     const exerciseSnackTop = exerciseSnack.slice(0, 3);
-    const exerciseSnackBottom = exerciseSnack.slice(3);
-    const isBodyBurnnerDone = exerciseSnackTop.every(
-      (val) => val.play_time > 0
-    );
-    const getModalTen = Cookie.get("modalTen");
-    const arrGetModalTwo = JSON.parse(Cookie.get("modalTwo")) ?? [];
-    const isFoundArrModalTwo = arrGetModalTwo?.some((val) => val == indexScore);
+    const isAllTopDone = exerciseSnackTop.every((val) => val.play_time > 0);
 
-    const isBodyBurnnerBottomDone = exerciseSnackBottom.filter(
+    if (dataScoreCookie !== undefined) {
+      const getModalScore = JSON.parse(Cookie.get("modalScore"));
+      const currentWeek = weekSelect;
+      const findCurrentWeek = getModalScore.find(
+        (item) => item.week == +currentWeek
+      );
+      const isTopVideoAllDone =
+        findCurrentWeek?.video1 &&
+        findCurrentWeek?.video2 &&
+        findCurrentWeek?.video3;
+
+      if (isTopVideoAllDone) {
+        setModalTen(false);
+        return;
+      }
+      if (isAllTopDone) {
+        setModalTen(true);
+      }
+    }
+  };
+
+  const handleShowModalTwo = () => {
+    const dataScoreCookie = Cookie.get("modalScore");
+    const exerciseSnackBottom = exerciseSnack.slice(3);
+    const videoBottom = exerciseSnackBottom.filter(
       (_, i) => i + 3 == indexScore
     );
 
-    if (isBodyBurnnerDone && getModalTen == null) {
-      setModalTen(true);
-    }
-    if (isBodyBurnnerBottomDone[0]?.play_time > 0 && !isFoundArrModalTwo) {
+    if (videoBottom[0]?.play_time > 0) {
       setModalTwo(true);
     }
-  }, [exerciseSnack, indexScore]);
+
+    if (dataScoreCookie !== undefined) {
+      const getModalScore = JSON.parse(Cookie.get("modalScore"));
+      const currentWeek = weekSelect;
+      const findCurrentWeek = getModalScore.find(
+        (item) => item.week == +currentWeek
+      );
+      if (
+        findCurrentWeek?.video4 &&
+        findCurrentWeek?.video5 &&
+        findCurrentWeek?.video6 &&
+        findCurrentWeek?.video7
+      ) {
+        setModalTwo(false);
+      }
+    }
+  };
 
   useMemo(() => {
-    Cookie.set("modalTwo", JSON.stringify(dataModalTwo));
-  }, [dataModalTwo]);
+    handleShowModalTen();
+    handleShowModalTwo();
+  }, [exerciseSnack, indexScore]);
 
   const renewId = (index, id) => {
     setRe_id(index);
