@@ -484,13 +484,15 @@ class Challenges extends Component {
       videoExerciseSnack,
     } = this.props;
     const isExerciseCompleted = this.isExerciseCompleted(exerciseVideo);
-    const exerciseSnack = JSON.parse(videoExerciseSnack[0].video) ?? [];
-    const videoBurnnerTopDone = exerciseSnack
-      .slice(0, 3)
-      .filter((item) => item.play_time > 0);
-    const videoBurnnerBottomDone = exerciseSnack
-      .slice(3)
-      .filter((item) => item.play_time > 0);
+    const exerciseSnack = videoExerciseSnack?.[0]
+      ? JSON.parse(videoExerciseSnack?.[0]?.video)
+      : [];
+    const videoBurnnerTopDone =
+      exerciseSnack &&
+      exerciseSnack.slice(0, 3).filter((item) => item.play_time > 0);
+    const videoBurnnerBottomDone =
+      exerciseSnack &&
+      exerciseSnack.slice(3).filter((item) => item.play_time > 0);
     var { scoreInWeek } = this.state;
     if (logWeightCount >= 2) {
       scoreInWeek += 10;
@@ -507,6 +509,12 @@ class Challenges extends Component {
     if (dailyTeamWeightBonusCount > 0) {
       scoreInWeek += dailyTeamWeightBonusCount * 10;
     } //ในแต่ละวันมีสมาชิกชั่งน้ำหนัก
+    if (videoBurnnerTopDone?.length == 3) {
+      scoreInWeek += 10;
+    }
+    if (videoBurnnerBottomDone?.length > 0) {
+      scoreInWeek += 2.5 * videoBurnnerBottomDone?.length;
+    }
     if (scoreInWeek > 41) {
       scoreInWeek = 41;
     } //เพื่อไม่ให้เกินหลอด
@@ -629,13 +637,13 @@ class Challenges extends Component {
                   <p className="card-text">
                     ทำ Body Burner ครบ 3 คลิป
                     <span style={{ float: "right", color: "#059669" }}>
-                      {videoBurnnerTopDone.length}/3
+                      {videoBurnnerTopDone?.length || 0}/3
                     </span>
                   </p>
                   <p className="card-text">
                     ทำ Body Burner เพิ่มเติม
                     <span style={{ float: "right", color: "#059669" }}>
-                      {videoBurnnerBottomDone.length}/4
+                      {videoBurnnerBottomDone?.length || 0}/4
                     </span>
                   </p>
                 </div>
@@ -681,13 +689,15 @@ class Challenges extends Component {
                 </h3>
                 <div
                   class="progress"
-                  style={{ width: "70%", borderRadius: "25px" }}
+                  style={{
+                    width: "70%",
+                    borderRadius: "25px",
+                  }}
                 >
                   <div
                     class="progress-bar"
                     style={{
                       width: `${(scoreInWeek / 41) * 100}%`,
-                      backgroundColor: "#059669",
                     }}
                   ></div>
                 </div>
@@ -1522,7 +1532,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-6"
-                style={{ backgroundColor: "#059669" }}
+                style={{ backgroundColor: "#059669", borderRadius: "50px" }}
                 onClick={() => this.closePopupMaxFriendsDetail()}
               >
                 ปิด
@@ -1769,8 +1779,10 @@ class Challenges extends Component {
                   )}
                   <button
                     type="button"
-                    class="btn btn-danger mt-4 mb-4 col-12"
-                    style={{ backgroundColor: "#059669" }}
+                    className="btn_green"
+                    style={{
+                      marginTop: 16,
+                    }}
                     onClick={() =>
                       this.props.sendFriendRequest(user.user_id, emailAddFriend)
                     }
@@ -3007,7 +3019,7 @@ class Challenges extends Component {
                         selectedNavLink === "mission" ? "#059669" : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "150px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3029,7 +3041,7 @@ class Challenges extends Component {
                         selectedNavLink === "teamList" ? "#059669" : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "150px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3056,7 +3068,7 @@ class Challenges extends Component {
                           : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "150px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3080,7 +3092,7 @@ class Challenges extends Component {
                           : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "150px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3109,7 +3121,7 @@ class Challenges extends Component {
                           : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "150px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3137,7 +3149,7 @@ class Challenges extends Component {
                           : "#FFFFFF",
                       border: "1px solid #059669",
                       minWidth: "200px",
-                      borderRadius: "1rem",
+                      borderRadius: "50px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -3602,7 +3614,7 @@ class Challenges extends Component {
               <button
                 type="button"
                 className="btn btn-secondary col-6"
-                style={{ backgroundColor: "#059669", borderRadius: "1.5rem" }}
+                style={{ backgroundColor: "#059669", borderRadius: "50px" }}
                 onClick={() => this.closePopupScoreDetail()}
               >
                 ปิด

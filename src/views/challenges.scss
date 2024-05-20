@@ -1551,3 +1551,15 @@ button:not(:disabled) {
   font-family: Prompt;
   margin-bottom: 20px;
 }
+
+.btn_green {
+  background-color: #059669;
+  border-radius: 50px;
+  width: 285px;
+  height: 44px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}

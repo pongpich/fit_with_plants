@@ -84,6 +84,9 @@ export const types = {
   CREATE_EVENT_LOG_SNACK_FALE: "CREATE_EVENT_LOG_SNACK_FALE",
   SNACK_COUNT: "SNACK_COUNT",
   SAVE_SCORE_BURNER_TEN: "SAVE_SCORE_BURNER_TEN",
+  GET_MEMBER_LOG: "GET_MEMBER_LOG",
+  GET_MEMBER_LOG_SUCCESS: "GET_MEMBER_LOG_SUCCESS",
+  GET_MEMBER_LOG_FAIL: "GET_MEMBER_LOG_FAIL",
 };
 
 export const saveModalScoreBurnerTen = (data) => ({
@@ -390,11 +393,12 @@ export const createExerciseSnack = (user_id) => ({
     user_id,
   },
 });
-export const createEventLogSnacks = (user_id, snacks_number) => ({
+export const createEventLogSnacks = (user_id, snacks_number, week) => ({
   type: types.CREATE_EVENT_LOG_SNACK, //createExerciseSnacksChallenge
   payload: {
     user_id,
     snacks_number,
+    week,
   },
 });
 
@@ -417,6 +421,13 @@ export const updateVideoSnack = (data, id) => ({
 export const getVideoSnack = (user_id, week) => ({
   type: types.GET_VIDEO_SNACK,
   payload: { user_id, week },
+});
+
+export const getMemberLog = (user_id) => ({
+  type: types.GET_MEMBER_LOG,
+  payload: {
+    user_id,
+  },
 });
 
 export const clearExerciseSnack = () => ({
@@ -608,6 +619,19 @@ const videoListForUserLastWeekSagaAsync = async (
     return apiResult;
   } catch (error) {
     console.log("error :", error);
+    return { error, messsage: error.message };
+  }
+};
+
+const getMemberLogSagaAsync = async (user_id) => {
+  try {
+    const apiResult = await API.get("bebe", "/getEventMemberLog", {
+      queryStringParameters: {
+        user_id,
+      },
+    });
+    return apiResult;
+  } catch (error) {
     return { error, messsage: error.message };
   }
 };
@@ -1042,6 +1066,20 @@ function* updateBodyInfoSaga({ payload }) {
   }
 }
 
+function* getMemberLogSaga({ payload }) {
+  const { user_id } = payload;
+  try {
+    const apiResult = yield call(getMemberLogSagaAsync, user_id);
+    yield put({
+      type: types.GET_MEMBER_LOG_SUCCESS,
+      payload: apiResult.results.data,
+    });
+    return apiResult;
+  } catch (error) {
+    return { error, messsage: error.message };
+  }
+}
+
 function* selectProgramInWeekSaga({ payload }) {
   const { email } = payload;
   try {
@@ -1434,6 +1472,10 @@ export function* watchUpdatePlaytime() {
   yield takeEvery(types.UPDATE_PLAYTIME, updatePlaytimeSaga);
 }
 
+export function* watchGetmemberLog() {
+  yield takeEvery(types.GET_MEMBER_LOG, getMemberLogSaga);
+}
+
 export function* watchUpdatePlaytimeLastWeek() {
   yield takeEvery(types.UPDATE_PLAYTIME_LASTWEEK, updatePlaytimeLastWeekSaga);
 }
@@ -1569,6 +1611,7 @@ export function* saga() {
     fork(watchUpdateVideoSnackSaga),
     fork(watchGetVideoSnackSaga),
     fork(watchCreateEventLogSnacksSaga),
+    fork(watchGetmemberLog),
   ]);
 }
 
@@ -1610,6 +1653,8 @@ const INIT_STATE = {
   videoExerciseSnackAll: null,
   snackNumber: 0,
   saveScoreBurnerTen: false,
+  dataMemberLog: [],
+  statsDataMemberLog: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1695,6 +1740,22 @@ export function reducer(state = INIT_STATE, action) {
       return {
         ...state,
         statusGetAllExAct: "fail",
+      };
+    case types.GET_MEMBER_LOG:
+      return {
+        ...state,
+        statsDataMemberLog: "loading",
+      };
+    case types.GET_MEMBER_LOG_SUCCESS:
+      return {
+        ...state,
+        dataMemberLog: action.payload,
+        statsDataMemberLog: "success",
+      };
+    case types.GET_MEMBER_LOG_FAIL:
+      return {
+        ...state,
+        statsDataMemberLog: "fail",
       };
     case types.UPDATE_BODY_INFO_SUCCESS:
       return {

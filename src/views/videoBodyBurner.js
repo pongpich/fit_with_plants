@@ -10,6 +10,8 @@ import {
   updateVideoSnack,
   getVideoSnack,
   saveModalScoreBurnerTen,
+  createEventLogSnacks,
+  getMemberLog,
 } from "../redux/exerciseVideos";
 import {
   convertSecondsToMinutes,
@@ -33,90 +35,6 @@ import arrow_circle from "../assets/img/arrow_circle.png";
 import Union from "../assets/img/Union.png";
 import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
-import Cookie from "js-cookie";
-
-const defaultModalScore = [
-  {
-    week: 1,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 2,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 3,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 4,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 5,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 6,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 7,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-  {
-    week: 8,
-    video1: false,
-    video2: false,
-    video3: false,
-    video4: false,
-    video5: false,
-    video6: false,
-    video7: false,
-  },
-];
 
 const VideoBodyBurner = ({ weekSelect }) => {
   const dispatch = useDispatch();
@@ -129,11 +47,11 @@ const VideoBodyBurner = ({ weekSelect }) => {
     videoExerciseSnackAll,
     snackNumber,
     saveScoreBurnerTen,
+    dataMemberLog,
   } = useSelector(({ exerciseVideos }) =>
     exerciseVideos ? exerciseVideos : ""
   );
   const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
-
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
       ? JSON.parse(videoExerciseSnack[0].video)
@@ -147,15 +65,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
   const [indexScore, setIndexScore] = useState(0);
   const [modalTen, setModalTen] = useState(false);
   const [modalTwo, setModalTwo] = useState(false);
-  const [dataModalTwo, setDataModalTwo] = useState(() => {
-    const storedData = Cookie.get("modalTwo");
-    return storedData ? JSON.parse(storedData) : [];
-  });
-
-  const [dataStoreModal, setDataStoreModal] = useState(() => {
-    const storedData = Cookie.get("modalScore");
-    return storedData ? JSON.parse(storedData) : defaultModalScore;
-  });
 
   const [url, setUrl] = useState(null);
   const [videoId, setVideoId] = useState(null);
@@ -211,69 +120,27 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const toggleTen = () => {
-    const weekMapValue = {
-      1: "video1",
-      2: "video2",
-      3: "video3",
-    };
-    const currentWeek = weekSelect;
-    const findCurrentWeekIndex = dataStoreModal.findIndex(
-      (item) => item.week == currentWeek
-    );
-
-    if (findCurrentWeekIndex !== -1) {
-      const updatedDataStoreModal = [...dataStoreModal];
-      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[1]] = true;
-      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[2]] = true;
-      updatedDataStoreModal[findCurrentWeekIndex][weekMapValue[3]] = true;
-      setDataStoreModal(updatedDataStoreModal);
-      Cookie.set("modalScore", JSON.stringify(updatedDataStoreModal));
+    if (week == weekSelect) {
+      dispatch(createEventLogSnacks(user.user_id, 3, week));
       setModalTen(false);
-    } else {
-      console.error(`Week ${currentWeek} not found in dataStoreModal`);
     }
   };
 
   const closeBtnTen = (
-    <button
-      type="button"
-      className="btn-close"
-      onClick={() => setModalTen(false)}
-    >
+    <button type="button" className="btn-close" onClick={() => toggleTwo()}>
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
 
   const toggleTwo = () => {
-    const weekMapValue = {
-      4: "video4",
-      5: "video5",
-      6: "video6",
-      7: "video7",
-    };
-    const currentWeek = weekSelect;
-    const findCurrentWeekIndex = dataStoreModal.findIndex(
-      (item) => item.week == currentWeek
-    );
-    if (findCurrentWeekIndex !== -1) {
-      const updatedDataStoreModal = [...dataStoreModal];
-      updatedDataStoreModal[findCurrentWeekIndex][
-        weekMapValue[indexScore + 1]
-      ] = true;
-      setDataStoreModal(updatedDataStoreModal);
-      Cookie.set("modalScore", JSON.stringify(updatedDataStoreModal));
+    if (week == weekSelect) {
+      dispatch(createEventLogSnacks(user.user_id, indexScore + 1, week));
       setModalTwo(false);
-    } else {
-      console.error(`Week ${currentWeek} not found in dataStoreModal`);
     }
   };
 
   const closeBtnTwo = (
-    <button
-      type="button"
-      className="btn-close"
-      onClick={() => setModalTwo(false)}
-    >
+    <button type="button" className="btn-close" onClick={() => toggleTwo()}>
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
@@ -310,7 +177,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
   // เพิ่ม event listener เพื่อตรวจจับการเปลี่ยนขนาดหน้าจอ
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    Cookie.set("modalScore", JSON.stringify(dataStoreModal));
 
     // ถอด event listener เมื่อ component ถูก unmount
     return () => {
@@ -357,69 +223,42 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const handleShowModalTen = () => {
-    const dataScoreCookie = Cookie.get("modalScore");
-    const exerciseSnackTop = exerciseSnack && exerciseSnack.slice(0, 3);
-    const isAllTopDone =
-      exerciseSnackTop && exerciseSnackTop.every((val) => val.play_time > 0);
-    if (dataScoreCookie !== undefined) {
-      const getModalScore = JSON.parse(Cookie.get("modalScore"));
-      const currentWeek = weekSelect;
-      const findCurrentWeek = getModalScore.find(
-        (item) => item.week == +currentWeek
-      );
-      const isTopVideoAllDone =
-        findCurrentWeek?.video1 &&
-        findCurrentWeek?.video2 &&
-        findCurrentWeek?.video3;
+    if (!exerciseSnack || exerciseSnack?.length == 0) return;
+    const exerciseSnackTop = exerciseSnack.slice(0, 3);
+    const isAllTopDone = exerciseSnackTop.every((val) => val.play_time !== 0);
+    const isFoundModalTen = dataMemberLog.some((val) => val.count_snack == 3);
 
-      if (isTopVideoAllDone) {
-        setModalTen(false);
-        return;
-      }
-      if (isAllTopDone) {
-        setModalTen(true);
-      }
+    if (isFoundModalTen || week != weekSelect) {
+      setModalTen(false);
+      return;
+    }
+    if (isAllTopDone) {
+      setModalTen(true);
     }
   };
 
   const handleShowModalTwo = () => {
-    const dataScoreCookie = Cookie.get("modalScore");
-    const exerciseSnackBottom = exerciseSnack && exerciseSnack.slice(3);
-    const videoBottom =
-      exerciseSnackBottom &&
-      exerciseSnackBottom.filter((_, i) => i + 3 == indexScore);
-
-    if (dataScoreCookie !== undefined) {
-      const getModalScore = JSON.parse(Cookie.get("modalScore"));
-      const currentWeek = weekSelect;
-      const findCurrentWeek = getModalScore.find(
-        (item) => item.week == +currentWeek
-      );
-      const indexToPropertyMap = {
-        4: "video4",
-        5: "video5",
-        6: "video6",
-        7: "video7",
-      };
-      const isCurrentVideoDone =
-        findCurrentWeek[indexToPropertyMap[indexScore + 1]];
-      if (
-        isCurrentVideoDone !== undefined &&
-        videoBottom &&
-        videoBottom[0]?.play_time > 0
-      ) {
-        setModalTwo(false);
-      }
-
-      if (videoBottom && videoBottom[0]?.play_time > 0 && !isCurrentVideoDone) {
-        setModalTwo(true);
-      }
+    if (!exerciseSnack || exerciseSnack?.length == 0) return;
+    const exerciseSnackBottom = exerciseSnack.slice(3);
+    const videoBottom = exerciseSnackBottom.filter(
+      (_, i) => i + 3 == indexScore
+    );
+    const isFoundModalScre = dataMemberLog.some(
+      (val) => val.count_snack == indexScore + 1
+    );
+    if (isFoundModalScre || week != weekSelect) {
+      setModalTwo(false);
+      return;
+    }
+    if (videoBottom[0]?.play_time > 0) {
+      setModalTwo(true);
     }
   };
 
   useMemo(() => {
     handleShowModalTen();
     handleShowModalTwo();
+    dispatch(getMemberLog(user.user_id));
   }, [exerciseSnack, indexScore]);
 
   const renewId = (index, id) => {
@@ -1026,10 +865,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
       >
         EditClicp
       </button>
-
-      {/* <Button color="danger" onClick={toggleTen}>
-        Click Me Ten
-      </Button> */}
 
       <Modal isOpen={modalTen} toggle={toggleTen} centered>
         <ModalHeader toggle={toggleTen} close={closeBtnTen}>
