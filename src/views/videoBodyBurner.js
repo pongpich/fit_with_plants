@@ -226,7 +226,9 @@ const VideoBodyBurner = ({ weekSelect }) => {
     if (!exerciseSnack || exerciseSnack?.length == 0) return;
     const exerciseSnackTop = exerciseSnack.slice(0, 3);
     const isAllTopDone = exerciseSnackTop.every((val) => val.play_time !== 0);
-    const isFoundModalTen = dataMemberLog.some((val) => val.count_snack == 3);
+    const isFoundModalTen = dataMemberLog.some(
+      (val) => val.count_snack == 3 && val.log_week == week
+    );
 
     if (isFoundModalTen || week != weekSelect) {
       setModalTen(false);
@@ -244,7 +246,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
       (_, i) => i + 3 == indexScore
     );
     const isFoundModalScre = dataMemberLog.some(
-      (val) => val.count_snack == indexScore + 1
+      (val) => val.count_snack == indexScore + 1 && val.log_week == week
     );
     if (isFoundModalScre || week != weekSelect) {
       setModalTwo(false);
