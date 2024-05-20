@@ -235,7 +235,11 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const closeBtnTen = (
-    <button type="button" className="btn-close" onClick={toggleTen}>
+    <button
+      type="button"
+      className="btn-close"
+      onClick={() => setModalTen(false)}
+    >
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
@@ -265,7 +269,11 @@ const VideoBodyBurner = ({ weekSelect }) => {
   };
 
   const closeBtnTwo = (
-    <button type="button" className="btn-close" onClick={toggleTwo}>
+    <button
+      type="button"
+      className="btn-close"
+      onClick={() => setModalTwo(false)}
+    >
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );

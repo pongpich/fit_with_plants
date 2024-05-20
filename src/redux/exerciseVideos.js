@@ -825,12 +825,13 @@ const createExerciseSnackSagaAsync = async (user_id) => {
     return { error, messsage: error.message };
   }
 };
-const createEventLogSnacksSagaAsync = async (user_id, snacks_number) => {
+const createEventLogSnacksSagaAsync = async (user_id, snacks_number, week) => {
   try {
     const apiResult = await API.post("bebe", "/createEventLogSnacks", {
       body: {
         user_id,
         snacks_number,
+        week,
       },
     });
     console.log("apiResult", apiResult);
@@ -1372,11 +1373,12 @@ function* createExerciseSnackSaga({ payload }) {
   }
 }
 function* createEventLogSnacksSaga({ payload }) {
-  const { user_id, snacks_number } = payload;
+  const { user_id, snacks_number, week } = payload;
   const apiResult = yield call(
     createEventLogSnacksSagaAsync,
     user_id,
-    snacks_number
+    snacks_number,
+    week
   );
 
   try {

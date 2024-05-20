@@ -851,7 +851,9 @@ class VideoList extends Component {
 
   handleSelectedMenu = (event) => {
     const selectedValue = event.target.value;
-    this.setState({ selectedMenu: selectedValue });
+    this.setState({
+      selectedMenu: selectedValue,
+    });
     switch (selectedValue) {
       case "0":
       case "1":
@@ -4656,7 +4658,7 @@ class VideoList extends Component {
                         const minuteLabel =
                           item.duration < 20
                             ? convertFormatTime(item.duration)
-                            : convertSecondsToMinutes(item.duration);                   
+                            : convertSecondsToMinutes(item.duration);
                         return (
                           <Row key={index}>
                             <Col xs="2" lg="2">
