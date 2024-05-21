@@ -55,7 +55,7 @@ const VideoPlayerListByteArk = ({
     setVideoCurrDuration(0);
     setVideoEnded(false);
     dispatch(setEndedVideoPlayerList(false));
-  }, [selectedVDO, dispatch]);
+  }, [selectedVDO]);
 
   const addEventListenerVideo = () => {
     const video = videoRef.current;

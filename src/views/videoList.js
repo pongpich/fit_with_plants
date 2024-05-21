@@ -926,8 +926,15 @@ class VideoList extends Component {
   }
 
   toggleList(index) {
-    const { focusDay } = this.state;
-    const todayExercise = this.exerciseDaySelection(focusDay);
+    const { focusDay, weekAll, lastWeekStart } = this.state;
+    const findCurrentWeek = Math.max(...weekAll) == lastWeekStart;
+    let todayExercise = [];
+    if (findCurrentWeek) {
+      todayExercise = this.exerciseDaySelection(focusDay);
+    } else {
+      todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
+    }
+    
     const selectedVDO = todayExercise.find(
       (element) => element.order === index
     );
@@ -986,17 +993,13 @@ class VideoList extends Component {
   }
 
   onVideoEnd() {
-    const { focusDay, selectedVDO, lastWeekVDO_click, lastWeekVDOAll } =
-      this.state;
-    var todayExercise;
-    if (lastWeekVDO_click === "show") {
-      if (!lastWeekVDOAll) {
-        todayExercise = this.exerciseDaySelectionLastWeek(focusDay);
-      } else {
-        todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
-      }
-    } else {
+    const { focusDay, selectedVDO, weekAll, lastWeekStart } = this.state;
+    const findCurrentWeek = Math.max(...weekAll) == lastWeekStart;
+    let todayExercise = [];
+    if (findCurrentWeek) {
       todayExercise = this.exerciseDaySelection(focusDay);
+    } else {
+      todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
     }
 
     const nextVDO = todayExercise.find(
