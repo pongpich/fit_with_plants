@@ -56,6 +56,7 @@ import {
   getExerciseSnack,
   getVideoSnack,
   clearExerciseSnack,
+  getMemberLog,
 } from "../redux/exerciseVideos";
 import {
   completeVideoPlayPercentage,
@@ -231,6 +232,9 @@ class VideoList extends Component {
       this.props.createExerciseSnack(user && user.user_id);
       this.props.getAllExerciseActivity(user.user_id);
       this.props.loginUser(user && user.email);
+      this.props.getMemberLog(user.user_id);
+      this.props.getExerciseSnack(user.user_id, week);
+      this.props.getVideoSnack(user.user_id, week);
       /*  */
       //this.props.createBraveAndBurnChallenge(user.user_id);
     }
@@ -511,6 +515,9 @@ class VideoList extends Component {
 
     if (prevProps.week !== week) {
       this.props.getAllExerciseActivity(user.user_id);
+      this.props.getMemberLog(user.user_id);
+      this.props.getExerciseSnack(user.user_id, week);
+      this.props.getVideoSnack(user.user_id, week);
     }
 
     if (prevProps.exerciseVideo !== exerciseVideo) {
@@ -934,7 +941,7 @@ class VideoList extends Component {
     } else {
       todayExercise = this.selectExerciseDaySelectionLastWeek(focusDay);
     }
-    
+
     const selectedVDO = todayExercise.find(
       (element) => element.order === index
     );
@@ -5504,6 +5511,7 @@ const mapActionsToProps = {
   getExerciseSnack,
   getVideoSnack,
   clearExerciseSnack,
+  getMemberLog,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(VideoList);

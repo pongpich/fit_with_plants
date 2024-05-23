@@ -1647,14 +1647,15 @@ const INIT_STATE = {
   statsCreateExerciseSnack: "default",
   statsGetExerciseSnack: "default",
   statsUpdateVideoSnack: "default",
-  videoExerciseSnack: null,
+  videoExerciseSnack: [],
   hideVideoPopUpSnack: false,
   statsVideoExerciseSnackAll: "default",
-  videoExerciseSnackAll: null,
+  videoExerciseSnackAll: [],
   snackNumber: 0,
   saveScoreBurnerTen: false,
   dataMemberLog: [],
   statsDataMemberLog: "default",
+  statsEventCreateLogSnack: "default",
 };
 
 export function reducer(state = INIT_STATE, action) {
@@ -1933,17 +1934,17 @@ export function reducer(state = INIT_STATE, action) {
     case types.CREATE_EVENT_LOG_SNACK:
       return {
         ...state,
-        statsEventLogSnack: "loading",
+        statsEventCreateLogSnack: "loading",
       };
     case types.CREATE_EVENT_LOG_SNACK_SUCCESS:
       return {
         ...state,
-        statsEventLogSnack: "success",
+        statsEventCreateLogSnack: "success",
       };
     case types.CREATE_EVENT_LOG_SNACK_FALE:
       return {
         ...state,
-        statsEventLogSnack: "fail",
+        statsEventCreateLogSnack: "fail",
       };
     case types.HIDE_POPUP_VIDEO_PLAYER_SNACK:
       return {
@@ -1961,6 +1962,7 @@ export function reducer(state = INIT_STATE, action) {
         statsGetExerciseSnack: "default",
         statsUpdateVideoSnack: "default",
         statsCreateExerciseSnack: "default",
+        statsEventCreateLogSnack: "default",
       };
     case types.SNACK_COUNT:
       return {

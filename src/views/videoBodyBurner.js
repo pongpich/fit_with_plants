@@ -48,14 +48,13 @@ const VideoBodyBurner = ({ weekSelect }) => {
     snackNumber,
     saveScoreBurnerTen,
     dataMemberLog,
-  } = useSelector(({ exerciseVideos }) =>
-    exerciseVideos ? exerciseVideos : ""
-  );
+    statsEventCreateLogSnack,
+  } = useSelector(({ exerciseVideos }) => exerciseVideos && exerciseVideos);
   const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
       ? JSON.parse(videoExerciseSnack[0].video)
-      : []
+      : ""
   );
   const [videoAll, setVideoAll] = useState(
     videoExerciseSnackAll ? videoExerciseSnackAll : null
@@ -65,36 +64,11 @@ const VideoBodyBurner = ({ weekSelect }) => {
   const [indexScore, setIndexScore] = useState(0);
   const [modalTen, setModalTen] = useState(false);
   const [modalTwo, setModalTwo] = useState(false);
+  const [memberLog, setMemberLog] = useState(() => dataMemberLog);
 
   const [url, setUrl] = useState(null);
   const [videoId, setVideoId] = useState(null);
   const [re_id, setRe_id] = useState(null);
-
-  useEffect(() => {
-    dispatch(setHidePopupVideoPlayerSnack(false));
-    dispatch(getExerciseSnack(user.user_id, weekSelect));
-    dispatch(getVideoSnack(user && user.user_id, weekSelect));
-  }, [weekSelect]);
-
-  useEffect(() => {
-    setVideoAll(videoExerciseSnackAll ? videoExerciseSnackAll : null);
-  }, [videoExerciseSnackAll]);
-
-  useEffect(() => {
-    setExerciseSnack(
-      videoExerciseSnack && videoExerciseSnack.length > 0
-        ? JSON.parse(videoExerciseSnack[0].video)
-        : null
-    );
-  }, [videoExerciseSnack]);
-
-  useEffect(() => {
-    if (hideVideoPopUpSnack) {
-      var trailer = document.getElementById(`popupVDOSnack`);
-      trailer.classList.remove("active_list");
-      dispatch(setHidePopupVideoPlayerSnack(false));
-    }
-  }, [hideVideoPopUpSnack]);
 
   const toggleList = (url, video_id, index) => {
     setUrl(url);
@@ -122,8 +96,9 @@ const VideoBodyBurner = ({ weekSelect }) => {
   const toggleTen = () => {
     if (week == weekSelect) {
       dispatch(createEventLogSnacks(user.user_id, 3, week));
-      setModalTen(false);
     }
+    dispatch(clearExerciseSnack());
+    setModalTen(false);
   };
 
   const closeBtnTen = (
@@ -135,8 +110,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
   const toggleTwo = () => {
     if (week == weekSelect) {
       dispatch(createEventLogSnacks(user.user_id, indexScore + 1, week));
-      setModalTwo(false);
     }
+    setModalTwo(false);
   };
 
   const closeBtnTwo = (
@@ -144,22 +119,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
       <img src="../assets/img/close-line.png" width={24} height={24} alt="" />
     </button>
   );
-
-  useEffect(() => {
-    if (statsUpdateVideoSnack == "success") {
-      document.getElementById("btn-close") &&
-        document.getElementById("btn-close").click();
-      dispatch(getExerciseSnack(user.user_id, weekSelect));
-      dispatch(getVideoSnack(user.user_id, weekSelect));
-    }
-  }, [statsUpdateVideoSnack]);
-
-  useEffect(() => {
-    if (statsGetExerciseSnack == "success") {
-      //btn-close
-      dispatch(clearExerciseSnack());
-    }
-  }, [statsGetExerciseSnack]);
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -173,16 +132,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
       height: window.innerHeight,
     });
   };
-
-  // เพิ่ม event listener เพื่อตรวจจับการเปลี่ยนขนาดหน้าจอ
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    // ถอด event listener เมื่อ component ถูก unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const randomVideo = (id) => {
     let randomIndex;
@@ -229,7 +178,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
     const isFoundModalTen = dataMemberLog.some(
       (val) => val.count_snack == 3 && val.log_week == week
     );
-
     if (isFoundModalTen || week != weekSelect) {
       setModalTen(false);
       return;
@@ -257,12 +205,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
     }
   };
 
-  useMemo(() => {
-    handleShowModalTen();
-    handleShowModalTwo();
-    dispatch(getMemberLog(user.user_id));
-  }, [exerciseSnack, indexScore]);
-
   const renewId = (index, id) => {
     setRe_id(index);
 
@@ -274,6 +216,67 @@ const VideoBodyBurner = ({ weekSelect }) => {
     document.getElementById("example-snack") &&
       document.getElementById("example-snack").click();
   };
+
+  useEffect(() => {
+    // เพิ่ม event listener เพื่อตรวจจับการเปลี่ยนขนาดหน้าจอ
+    window.addEventListener("resize", handleResize);
+    // ถอด event listener เมื่อ component ถูก unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    dispatch(setHidePopupVideoPlayerSnack(false));
+    dispatch(getExerciseSnack(user.user_id, weekSelect));
+    dispatch(getVideoSnack(user && user.user_id, weekSelect));
+    dispatch(getMemberLog(user.user_id));
+  }, [weekSelect]);
+
+  useEffect(() => {
+    setVideoAll(videoExerciseSnackAll ? videoExerciseSnackAll : null);
+  }, [videoExerciseSnackAll]);
+
+  useEffect(() => {
+    setExerciseSnack(
+      videoExerciseSnack && videoExerciseSnack.length > 0
+        ? JSON.parse(videoExerciseSnack[0].video)
+        : null
+    );
+  }, [videoExerciseSnack]);
+
+  useEffect(() => {
+    if (hideVideoPopUpSnack) {
+      var trailer = document.getElementById(`popupVDOSnack`);
+      trailer.classList.remove("active_list");
+      dispatch(setHidePopupVideoPlayerSnack(false));
+    }
+  }, [hideVideoPopUpSnack]);
+
+  useEffect(() => {
+    handleShowModalTen();
+    handleShowModalTwo();
+  }, [exerciseSnack, indexScore]);
+
+  useEffect(() => {
+    if (statsUpdateVideoSnack == "success") {
+      document.getElementById("btn-close") &&
+        document.getElementById("btn-close").click();
+      dispatch(getExerciseSnack(user.user_id, weekSelect));
+      dispatch(getVideoSnack(user.user_id, weekSelect));
+    }
+
+    if (statsEventCreateLogSnack == "success") {
+      dispatch(getMemberLog(user.user_id));
+    }
+  }, [statsUpdateVideoSnack, statsEventCreateLogSnack]);
+
+  useEffect(() => {
+    if (statsGetExerciseSnack == "success") {
+      //btn-close
+      dispatch(clearExerciseSnack());
+    }
+  }, [statsGetExerciseSnack]);
 
   return (
     <>
@@ -525,7 +528,12 @@ const VideoBodyBurner = ({ weekSelect }) => {
                 })
                 .slice(0, 3)
             ) : (
-              <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+              <div
+                className="d-flex align-items-center justify-content-center"
+                style={{ height: 200 }}
+              >
+                <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+              </div>
             )}
           </div>
         </table>
@@ -736,7 +744,12 @@ const VideoBodyBurner = ({ weekSelect }) => {
                 })
                 .slice(3)
             ) : (
-              <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+              <div
+                className="d-flex align-items-center justify-content-center"
+                style={{ height: 200 }}
+              >
+                <Spinner style={{ color: "rgb(5, 150, 105)" }} />
+              </div>
             )}
           </div>
         </table>
@@ -797,12 +810,6 @@ const VideoBodyBurner = ({ weekSelect }) => {
                             <img
                               src={item.thumbnail}
                               className="component-4 mb-3"
-                              alt=""
-                            />
-                            <img
-                              className="play_snack"
-                              src="../assets/img/thumb/play_button2.png"
-                              width="100px"
                               alt=""
                             />
                           </div>
