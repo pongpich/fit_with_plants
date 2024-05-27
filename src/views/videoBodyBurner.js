@@ -287,6 +287,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
               url={url}
               videoId={videoId}
               indexScore={indexScore}
+              setUrl={setUrl}
             />
           </div>
         </div>

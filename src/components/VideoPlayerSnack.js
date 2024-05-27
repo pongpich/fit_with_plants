@@ -17,7 +17,7 @@ import {
   updateFrequency,
 } from "../constants/defaultValues";
 
-const VideoPlayerSnack = ({ url, videoId, indexScore }) => {
+const VideoPlayerSnack = ({ url, videoId, indexScore, setUrl }) => {
   const dispatch = useDispatch();
   const videoRef = useRef(null);
   const {
@@ -125,8 +125,10 @@ const VideoPlayerSnack = ({ url, videoId, indexScore }) => {
 
   const handleVideoClose = () => {
     const video = videoRef.current;
+
     if (video) {
       video.pause();
+      setUrl(null)
       // และอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อปิดวีดีโอ
     }
     //createEventLogSnacks
