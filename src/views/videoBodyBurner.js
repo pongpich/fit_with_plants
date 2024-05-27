@@ -488,7 +488,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                   </span>
                                   <img
                                     className="property-body_part ml-2"
-                                    src={`../assets/img/body_part/cardio_preem.png`}
+                                    src={`../assets/img/body_part/chip.png`}
                                     alt="img"
                                   />
                                 </div>
