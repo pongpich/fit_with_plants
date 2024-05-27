@@ -717,20 +717,9 @@ input:checked + .slider:before {
 .thumbnail-img {
   width: 1500px;
 }
-
-@media (max-width: 1140px) {
-  .property-body_part {
-    max-width: 60px;
-    width: 100%;
-    height: auto;
-  }
-}
-@media (min-width: 1140px) {
-  .property-body_part {
-    max-width: 90px;
-    width: 100%;
-    height: auto;
-  }
+.property-body_part {
+  width: auto;
+  height: 40px;
 }
 
 .challenges-cursor:hover {

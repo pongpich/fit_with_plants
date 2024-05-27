@@ -4036,6 +4036,14 @@ class VideoList extends Component {
                                     </span>
                                     {itemsArray &&
                                       itemsArray.map((muItem, j) => {
+                                        if (muItem == "lower") {
+                                          return (
+                                            <img
+                                              className="property-body_part ml-2"
+                                              src={`../assets/img/body_part/PropertyLower.png`}
+                                            ></img>
+                                          );
+                                        }
                                         if (muItem == "warm_up") {
                                           return (
                                             <img
@@ -4845,6 +4853,14 @@ class VideoList extends Component {
                                         </span>
                                         {itemsArray &&
                                           itemsArray.map((muItem, j) => {
+                                            if (muItem == "lower") {
+                                              return (
+                                                <img
+                                                  className="property-body_part ml-2"
+                                                  src={`../assets/img/body_part/PropertyLower.png`}
+                                                ></img>
+                                              );
+                                            }
                                             if (muItem == "warm_up") {
                                               return (
                                                 <img
