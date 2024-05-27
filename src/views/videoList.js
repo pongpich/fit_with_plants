@@ -4318,7 +4318,9 @@ class VideoList extends Component {
                     onChange={(event) => {
                       this.setState({
                         lastWeekStart: event.target.value,
+                        selectedMenu: "0",
                       });
+                      this.onDayChange(0);
                     }}
                   >
                     {/* //EDIT */}
@@ -4338,7 +4340,9 @@ class VideoList extends Component {
                     <option value={"1"}>Day 2</option>
                     <option value={"2"}>Day 3</option>
                     <option value={"exerciseSnack"}>Body Burner</option>
-                    <option value={"showchallenge"}>Challenge</option>
+                    {findCurrentWeek && (
+                      <option value={"showchallenge"}>Challenge</option>
+                    )}
                   </select>
                 </div>
                 <nav className="d-none d-lg-flex">
@@ -4462,7 +4466,7 @@ class VideoList extends Component {
                         </h5>
                       </a>
                     }
-                    {
+                    {findCurrentWeek && (
                       <a
                         className="nav-link"
                         onClick={() => this.onChallengeChange()}
@@ -4479,7 +4483,7 @@ class VideoList extends Component {
                           <b> Challenge</b>
                         </h5>
                       </a>
-                    }
+                    )}
                     {/* {
                     <a
                       className="nav-link"
