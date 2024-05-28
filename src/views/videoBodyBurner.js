@@ -19,6 +19,7 @@ import {
   calculateWeekInProgram,
 } from "../helpers/utils";
 import stylesVideo from "./videoList.scss";
+import { getChallengePeriod } from "../redux/challenges";
 import VideoPlayerSnack from "../components/VideoPlayerSnack";
 import {
   Alert,
@@ -36,6 +37,8 @@ import Union from "../assets/img/Union.png";
 import play_button from "../assets/img/play_button.png";
 import { completeVideoPlayPercentage } from "../constants/defaultValues";
 
+const filterWeek = [{ week: 1, week: 2 }];
+
 const VideoBodyBurner = ({ weekSelect }) => {
   const dispatch = useDispatch();
   const {
@@ -50,6 +53,10 @@ const VideoBodyBurner = ({ weekSelect }) => {
     dataMemberLog,
     statsEventCreateLogSnack,
   } = useSelector(({ exerciseVideos }) => exerciseVideos && exerciseVideos);
+  const { challengePeriod } = useSelector(
+    ({ challenges }) => challenges && challenges
+  );
+
   const { user } = useSelector(({ authUser }) => (authUser ? authUser : ""));
   const [exerciseSnack, setExerciseSnack] = useState(
     videoExerciseSnack && videoExerciseSnack.length > 0
@@ -227,6 +234,8 @@ const VideoBodyBurner = ({ weekSelect }) => {
   }, []);
 
   useEffect(() => {
+    console.log("videoAll", challengePeriod);
+    dispatch(getChallengePeriod());
     dispatch(setHidePopupVideoPlayerSnack(false));
     dispatch(getExerciseSnack(user.user_id, weekSelect));
     dispatch(getVideoSnack(user && user.user_id, weekSelect));
@@ -756,6 +765,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
         </table>
       </div>
 
+      {/* MODAL EDIT CLIP */}
       <div
         className="modal fade"
         id="exampleModalSnack"
@@ -788,8 +798,22 @@ const VideoBodyBurner = ({ weekSelect }) => {
             </div>
             <div className="modal-body">
               {videoAll &&
-                videoAll.map((item, index) => {
-                  if (item.video_id != re_id) {
+                videoAll
+                  .filter((item) => {
+                    if (weekSelect == 1 || weekSelect == 2) {
+                      return item.video_id == 1 || item.video_id == 2;
+                    }
+                    if (weekSelect == 3 || weekSelect == 4) {
+                      return item.video_id == 3 || item.video_id == 4;
+                    }
+                    if (weekSelect == 5 || weekSelect == 6) {
+                      return item.video_id == 5 || item.video_id == 6;
+                    }
+                    if (weekSelect == 7 || weekSelect == 8) {
+                      return item.video_id == 7 || item.video_id == 8;
+                    }
+                  })
+                  .map((item, index) => {
                     return (
                       <div
                         key={index}
@@ -858,12 +882,12 @@ const VideoBodyBurner = ({ weekSelect }) => {
                         </button>
                       </div>
                     );
-                  }
-                })}
+                  })}
             </div>
           </div>
         </div>
       </div>
+      {/* MODAL EDIT CLIP */}
 
       <button
         type="button"
@@ -876,7 +900,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
         EditClicp
       </button>
 
-      <Modal isOpen={modalTen} toggle={toggleTen} centered>
+      <Modal isOpen={modalTen && challengePeriod} toggle={toggleTen} centered>
         <ModalHeader toggle={toggleTen} close={closeBtnTen}>
           <div className="modal-title fs-5" id="exampleModalLabel">
             <img
@@ -895,7 +919,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
         </ModalBody>
       </Modal>
 
-      <Modal isOpen={modalTwo} toggle={toggleTwo} centered>
+      <Modal isOpen={modalTwo && challengePeriod} toggle={toggleTwo} centered>
         <ModalHeader toggle={toggleTwo} close={closeBtnTwo}>
           <div className="modal-title fs-5" id="exampleModalLabel">
             <img

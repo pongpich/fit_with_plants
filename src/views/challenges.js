@@ -494,6 +494,7 @@ class Challenges extends Component {
       exerciseSnack &&
       exerciseSnack.slice(3).filter((item) => item.play_time > 0);
     var { scoreInWeek } = this.state;
+
     if (logWeightCount >= 2) {
       scoreInWeek += 10;
     } //ชั่งน้ำหนักครบ 2 ครั้ง
@@ -526,7 +527,7 @@ class Challenges extends Component {
           {this.renderPopupScoreDetail()}
 
           {/* เปิดปิด event ตรงนี้อย่าลืม เอา challengePeriod2 ออกเปลี่ยนเป็น challengePeriod ธรรมดา */}
-          {!this.state.challengePeriod ? (
+          {this.props.challengePeriod ? (
             <>
               <div
                 className="card shadow col-xl-4 col-md-12"
@@ -684,7 +685,10 @@ class Challenges extends Component {
                   width="55%"
                   height="45%"
                 />
-                <h3 className="card-title" style={{ color: "#059669" }}>
+                <h3
+                  className="card-title"
+                  style={{ color: "#059669", marginBottom: 25 }}
+                >
                   <b>{rank}</b>
                 </h3>
                 <div
@@ -697,7 +701,9 @@ class Challenges extends Component {
                   <div
                     class="progress-bar"
                     style={{
-                      width: `${(scoreInWeek / 41) * 100}%`,
+                      width: challengePeriod
+                        ? `${(scoreInWeek / 41) * 100}%`
+                        : "0%",
                     }}
                   ></div>
                 </div>
@@ -705,7 +711,7 @@ class Challenges extends Component {
                   className="card-text mt-3 mb-3"
                   style={{ color: "#059669" }}
                 >
-                  {scoreInWeek}/41 คะแนน
+                  {challengePeriod ? scoreInWeek : 0}/41 คะแนน
                 </h5>
               </center>
             </div>
