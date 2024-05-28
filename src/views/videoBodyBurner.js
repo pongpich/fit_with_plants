@@ -489,7 +489,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                   </span>
                                   <img
                                     className="property-body_part ml-2"
-                                    src={`../assets/img/body_part/chip.png`}
+                                    src={`../assets/img/body_part/cardio_preem.png`}
                                     alt="img"
                                   />
                                 </div>
@@ -607,7 +607,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                 transform: "translate(-50%,-50%)",
                               }}
                             >
-                              {index + 1 - 3}
+                              {index + 1}
                             </h3>
                           </span>
                         )}
@@ -731,7 +731,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                                   </span>
                                   <img
                                     className="property-body_part ml-2"
-                                    src={`../assets/img/body_part/chip.png`}
+                                    src={`../assets/img/body_part/cardio_preem.png`}
                                     alt="img"
                                   />
                                 </div>
@@ -829,7 +829,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
                             </span>
                             <img
                               className="property-body_part ml-2"
-                              src={`../assets/img/body_part/chip.png`}
+                              src={`../assets/img/body_part/cardio_preem.png`}
                               alt="img"
                             />
                           </div>
