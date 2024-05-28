@@ -900,43 +900,47 @@ const VideoBodyBurner = ({ weekSelect }) => {
         EditClicp
       </button>
 
-      <Modal isOpen={modalTen && challengePeriod} toggle={toggleTen} centered>
-        <ModalHeader toggle={toggleTen} close={closeBtnTen}>
-          <div className="modal-title fs-5" id="exampleModalLabel">
-            <img
-              src="../assets/img/snackSuccess.png"
-              className="snack-success"
-              alt=""
-            />
-          </div>
-        </ModalHeader>
-        <ModalBody>
-          <p className="great-snack">เยี่ยมมาก! พิชิตภารกิจได้สำเร็จ</p>
-          <p className="snack-point">คุณได้รับ 10 คะแนน</p>
-          <div className="button-snack-point" onClick={toggleTen}>
-            ตกลง
-          </div>
-        </ModalBody>
-      </Modal>
+      {challengePeriod && (
+        <Modal isOpen={modalTen} toggle={toggleTen} centered>
+          <ModalHeader toggle={toggleTen} close={closeBtnTen}>
+            <div className="modal-title fs-5" id="exampleModalLabel">
+              <img
+                src="../assets/img/snackSuccess.png"
+                className="snack-success"
+                alt=""
+              />
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <p className="great-snack">เยี่ยมมาก! พิชิตภารกิจได้สำเร็จ</p>
+            <p className="snack-point">คุณได้รับ 10 คะแนน</p>
+            <div className="button-snack-point" onClick={toggleTen}>
+              ตกลง
+            </div>
+          </ModalBody>
+        </Modal>
+      )}
 
-      <Modal isOpen={modalTwo && challengePeriod} toggle={toggleTwo} centered>
-        <ModalHeader toggle={toggleTwo} close={closeBtnTwo}>
-          <div className="modal-title fs-5" id="exampleModalLabel">
-            <img
-              src="../assets/img/snackSuccess.png"
-              className="snack-success"
-              alt=""
-            />
-          </div>
-        </ModalHeader>
-        <ModalBody>
-          <p className="great-snack">เยี่ยมมาก! พิชิตภารกิจได้สำเร็จ</p>
-          <p className="snack-point">คุณได้รับ 2.5 คะแนน</p>
-          <div className="button-snack-point" onClick={toggleTwo}>
-            ตกลง
-          </div>
-        </ModalBody>
-      </Modal>
+      {challengePeriod && (
+        <Modal isOpen={modalTwo} toggle={toggleTwo} centered>
+          <ModalHeader toggle={toggleTwo} close={closeBtnTwo}>
+            <div className="modal-title fs-5" id="exampleModalLabel">
+              <img
+                src="../assets/img/snackSuccess.png"
+                className="snack-success"
+                alt=""
+              />
+            </div>
+          </ModalHeader>
+          <ModalBody>
+            <p className="great-snack">เยี่ยมมาก! พิชิตภารกิจได้สำเร็จ</p>
+            <p className="snack-point">คุณได้รับ 2.5 คะแนน</p>
+            <div className="button-snack-point" onClick={toggleTwo}>
+              ตกลง
+            </div>
+          </ModalBody>
+        </Modal>
+      )}
     </>
   );
 };
