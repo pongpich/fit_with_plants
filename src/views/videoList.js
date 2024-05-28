@@ -355,8 +355,10 @@ class VideoList extends Component {
 
     //เช็คเพื่อซ่อน popup จากไฟล์ component VideoPlayer
     if (prevProps.hidePopUpVideoPlayer !== hidePopUpVideoPlayer) {
+      console.log('click close popup');
       if (hidePopUpVideoPlayer) {
         this.toggle();
+        this.setState({ selectedVDO: null });
       }
     }
     //เช็คเพื่อซ่อน popup จากไฟล์ component VideoPlayerList
@@ -997,6 +999,7 @@ class VideoList extends Component {
   close() {
     var trailer = document.getElementById(`popupVDO`);
     trailer.classList.toggle("active");
+    console.log("click close");
   }
 
   onVideoEnd() {
@@ -4227,9 +4230,6 @@ class VideoList extends Component {
     } = this.props;
     const numbDayExercise = exerciseVideo.length;
     const videoUrl = selectedVDO && selectedVDO.url ? `${selectedVDO.url}` : "";
-    // const todayExercise = this.exerciseDaySelection(focusDay);
-    // const todayExerciseLastWeek =
-    //   this.selectExerciseDaySelectionLastWeek(focusDay);
     const findCurrentWeek = Math.max(...weekAll) == lastWeekStart;
     let allMinute = [];
     let allSecond = [];
@@ -4534,6 +4534,7 @@ class VideoList extends Component {
           {exerciseSnack ? (
             <VideoBodyBurner weekSelect={this.state.lastWeekStart} />
           ) : null}
+
           {!showBarveAndBurn ? (
             <div className="">
               {this.state.autoPlayCheck ? (
@@ -4587,7 +4588,9 @@ class VideoList extends Component {
                           alt=""
                           src="../assets/img/thumb/close.png"
                           className="close"
-                          onClick={() => this.toggle()}
+                          onClick={() => {
+                            this.toggle();
+                          }}
                         ></img>
                       </>
                     )}

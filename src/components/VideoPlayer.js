@@ -213,7 +213,7 @@ const VideoPlayerByteArk = ({
   const handleVideoClose = () => {
     const video = videoRef.current;
     if (video) {
-      video.pause();
+      video.pause();  
       // และอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อปิดวีดีโอ
     }
 
