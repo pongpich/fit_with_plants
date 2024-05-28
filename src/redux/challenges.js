@@ -1543,7 +1543,7 @@ function* getChallengePeriodSaga() {
     );
     yield put({
       type: types.GET_CHALLENGE_PERIOD_SUCCESS,
-      payload: apiResult.results
+      payload: apiResult.results.challengePeriod
     })
   } catch (error) {
     console.log("error from getChallengePeriodSaga :", error);
@@ -2022,7 +2022,7 @@ const INIT_STATE = {
   individualRank: [],
   friendsRank: [],
   statusCreateTeam: "default",
-  challengePeriod: true,
+  challengePeriod: null,
   memberEventLog: [],
   friend_list: [],
   statusGetFriendList: "default",
@@ -2384,7 +2384,7 @@ export function reducer(state = INIT_STATE, action) {
     case types.GET_CHALLENGE_PERIOD_SUCCESS:
       return {
         ...state,
-        challengePeriod: action.payload.challengePeriod
+        challengePeriod: action.payload
       }
     case types.ASSIGN_GROUP_TO_MEMBER_SUCCESS:
       return {

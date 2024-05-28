@@ -32,6 +32,7 @@ import {
 import {
   getDailyWeighChallenge,
   postDailyWeighChallenge,
+  getChallengePeriod,
 } from "../redux/challenges";
 import {
   createCustomWeekForUser,
@@ -316,6 +317,7 @@ class VideoList extends Component {
       videoExerciseSnack,
       statsGetExerciseSnack,
       week,
+      challengePeriod,
       exercise_day,
     } = this.props;
 
@@ -353,9 +355,13 @@ class VideoList extends Component {
       this.setState({ showBarveAndBurn: true });
     }
 
+    if (prevProps.challengePeriod != challengePeriod) {
+      this.props.getChallengePeriod();
+    }
+
     //เช็คเพื่อซ่อน popup จากไฟล์ component VideoPlayer
     if (prevProps.hidePopUpVideoPlayer !== hidePopUpVideoPlayer) {
-      console.log('click close popup');
+      console.log("click close popup");
       if (hidePopUpVideoPlayer) {
         this.toggle();
         this.setState({ selectedVDO: null });
@@ -5535,6 +5541,7 @@ const mapActionsToProps = {
   getVideoSnack,
   clearExerciseSnack,
   getMemberLog,
+  getChallengePeriod,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(VideoList);
