@@ -4504,8 +4504,8 @@ class VideoList extends Component {
                       </h5>
                     </a>
                   } */}
-                    {/* 
-                    {this.props.week > 1 && (
+
+                    {/* {this.props.week > 1 && (
                       <a
                         className="nav-link ml-auto"
                         style={{ cursor: "pointer", color: "#059669" }}
@@ -4513,7 +4513,7 @@ class VideoList extends Component {
                       >
                         <u>ดูวิดีโอออกกำลังกายสัปดาห์ที่ผ่านมา</u>
                       </a>
-                    )} */}
+                    )}  */}
                   </div>
                 </nav>
               </div>
@@ -4613,6 +4613,19 @@ class VideoList extends Component {
                   className="table table-responsive"
                   style={{ overflow: "hidden" }}
                 >
+                  {findCurrentWeek && (
+                    <span
+                      className="mr-5 ml-3"
+                      style={{
+                        fontSize: "15px",
+                        float: "left",
+                        color: "grey",
+                        marginTop: -5,
+                      }}
+                    >
+                      ดูโปรแกรมย้อนหลัง
+                    </span>
+                  )}
                   <div style={{ marginTop: 32, marginBottom: 48 }}>
                     <div>
                       <div className="row">
