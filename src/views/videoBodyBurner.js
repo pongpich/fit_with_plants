@@ -262,8 +262,10 @@ const VideoBodyBurner = ({ weekSelect }) => {
   }, [hideVideoPopUpSnack]);
 
   useEffect(() => {
-    handleShowModalTen();
-    handleShowModalTwo();
+    if (challengePeriod) {
+      handleShowModalTen();
+      handleShowModalTwo();
+    }
   }, [exerciseSnack, indexScore]);
 
   useEffect(() => {
@@ -899,7 +901,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
         EditClicp
       </button>
 
-      <Modal isOpen={modalTen && challengePeriod} toggle={toggleTen} centered>
+      <Modal isOpen={modalTen} toggle={toggleTen} centered>
         <ModalHeader toggle={toggleTen} close={closeBtnTen}>
           <div className="modal-title fs-5" id="exampleModalLabel">
             <img
@@ -918,7 +920,7 @@ const VideoBodyBurner = ({ weekSelect }) => {
         </ModalBody>
       </Modal>
 
-      <Modal isOpen={modalTwo && challengePeriod} toggle={toggleTwo} centered>
+      <Modal isOpen={modalTwo} toggle={toggleTwo} centered>
         <ModalHeader toggle={toggleTwo} close={closeBtnTwo}>
           <div className="modal-title fs-5" id="exampleModalLabel">
             <img

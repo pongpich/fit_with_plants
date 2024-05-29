@@ -4317,24 +4317,36 @@ class VideoList extends Component {
                 style={{ background: "#fffaf5" }}
               >
                 <div className="d-flex">
-                  <select
-                    className="form-control"
-                    style={{ width: 121, marginRight: 30, marginLeft: 15 }}
-                    aria-label="Default select example"
-                    onChange={(event) => {
-                      this.setState({
-                        lastWeekStart: event.target.value,
-                        selectedMenu: "0",
-                      });
-                      this.onDayChange(0);
-                    }}
-                  >
-                    {/* //EDIT */}
-                    {this.state.weekAll &&
-                      this.state.weekAll.map((number) => {
-                        return <option value={number}>Week {number}</option>;
-                      })}
-                  </select>
+                  <div className="mt-md-0 mt-lg-3">
+                    <select
+                      className="form-control"
+                      style={{ width: 121, marginRight: 30, marginLeft: 15 }}
+                      aria-label="Default select example"
+                      onChange={(event) => {
+                        this.setState({
+                          lastWeekStart: event.target.value,
+                          selectedMenu: "0",
+                        });
+                        this.onDayChange(0);
+                      }}
+                    >
+                      {/* //EDIT */}
+                      {this.state.weekAll &&
+                        this.state.weekAll.map((number) => {
+                          return <option value={number}>Week {number}</option>;
+                        })}
+                    </select>
+                    <span
+                      className="mr-5 ml-3 w-100"
+                      style={{
+                        fontSize: "15px",
+                        float: "left",
+                        color: "grey",
+                      }}
+                    >
+                      ดูโปรแกรมย้อนหลัง
+                    </span>
+                  </div>
                   <select
                     className="form-control d-block d-lg-none"
                     style={{ width: "auto", marginRight: 30, marginLeft: 15 }}
@@ -4613,19 +4625,6 @@ class VideoList extends Component {
                   className="table table-responsive"
                   style={{ overflow: "hidden" }}
                 >
-                  {findCurrentWeek && (
-                    <span
-                      className="mr-5 ml-3"
-                      style={{
-                        fontSize: "15px",
-                        float: "left",
-                        color: "grey",
-                        marginTop: -5,
-                      }}
-                    >
-                      ดูโปรแกรมย้อนหลัง
-                    </span>
-                  )}
                   <div style={{ marginTop: 32, marginBottom: 48 }}>
                     <div>
                       <div className="row">
