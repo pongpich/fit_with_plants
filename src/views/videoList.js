@@ -501,6 +501,7 @@ class VideoList extends Component {
       const maxWeek = all_exercise_activity.reduce((max, week) => {
         return week.week_in_program > max ? week.week_in_program : max;
       }, 0);
+
       if (maxWeek > 1) {
         // เอาไว้เช็ค week ล่า สุด  โดน -1 ตลอด
         this.setState({ lastWeekStart: maxWeek });
@@ -511,15 +512,23 @@ class VideoList extends Component {
       }
 
       // เเสดง  select week ทั้ง หมด โดยไม่เอา week ล่าสุด
+
       const result = all_exercise_activity.map((week) => {
         if (week.week_in_program <= maxWeek) {
           return week.week_in_program;
         }
       });
+      const currentDay = new Date();
+      const expireDate_User = new Date(user.expire_date);
+      const isExpireDate = currentDay > expireDate_User;
 
       const weekAll = result.sort((a, b) => b - a);
       const filteredWeekAll = weekAll.filter(Boolean);
-      this.setState({ weekAll: filteredWeekAll });
+      if (isExpireDate) {
+        this.setState({ weekAll: filteredWeekAll.slice(0, 2) });
+      } else {
+        this.setState({ weekAll: filteredWeekAll });
+      }
     }
 
     if (prevProps.week !== week) {
@@ -4241,6 +4250,7 @@ class VideoList extends Component {
     let allMinute = [];
     let allSecond = [];
     let todayData = [];
+
     if (exerciseVideo && findCurrentWeek) {
       todayData = this.exerciseDaySelection(focusDay);
       todayData.map((item) =>
