@@ -5091,12 +5091,12 @@ class VideoList extends Component {
                   return (
                     <div className="container_modal_editVDO">
                       <div className="thumb_modal_left">
-                        {/* <SelectChangeVideoList
-                      thumbnail={item.thumbnail}
-                      category={item.category}
-                      url={item.url}
-                    /> */}
-                        <img
+                        <SelectChangeVideoList
+                          thumbnail={item.thumbnail}
+                          category={item.category}
+                          url={item.url}
+                        />
+                        {/* <img
                           style={{
                             borderRadius: "16px",
                             width: "100%",
@@ -5105,7 +5105,7 @@ class VideoList extends Component {
                           }}
                           src={`${item.thumbnail}`}
                           alt={`${item.thumbnail}`}
-                        />
+                        /> */}
                       </div>
                       <div className="container_editVDO">
                         <div>
