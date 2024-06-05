@@ -4838,40 +4838,41 @@ class VideoList extends Component {
                                           <b>{item.name}</b>
                                         </h4>
 
-                                        {findCurrentWeek && (
-                                          <div
-                                            className="box-random"
-                                            onClick={() => {
-                                              this.showModalEditVDO(
-                                                item.video_id,
-                                                item.muscle,
-                                                item.type,
-                                                index,
-                                                item.exr_position
-                                              );
-                                            }}
-                                          >
-                                            <img
-                                              src={arrow_circle}
-                                              style={{
-                                                width: 16,
-                                                height: 16,
-                                                marginRight: 8,
-                                              }}
-                                              alt=""
-                                            />
-                                            <span
-                                              style={{
-                                                color: "#059669",
-                                                fontSize: 15,
-                                                fontWeight: 700,
-                                                marginLeft: 8,
+                                        {item.play_time != 0 ||
+                                          (findCurrentWeek && (
+                                            <div
+                                              className="box-random"
+                                              onClick={() => {
+                                                this.showModalEditVDO(
+                                                  item.video_id,
+                                                  item.muscle,
+                                                  item.type,
+                                                  index,
+                                                  item.exr_position
+                                                );
                                               }}
                                             >
-                                              เลือกคลิปใหม่
-                                            </span>
-                                          </div>
-                                        )}
+                                              <img
+                                                src={arrow_circle}
+                                                style={{
+                                                  width: 16,
+                                                  height: 16,
+                                                  marginRight: 8,
+                                                }}
+                                                alt=""
+                                              />
+                                              <span
+                                                style={{
+                                                  color: "#059669",
+                                                  fontSize: 15,
+                                                  fontWeight: 700,
+                                                  marginLeft: 8,
+                                                }}
+                                              >
+                                                เลือกคลิปใหม่
+                                              </span>
+                                            </div>
+                                          ))}
                                       </div>
                                       <hr
                                         style={{
